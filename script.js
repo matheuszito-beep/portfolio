@@ -1,16 +1,16 @@
 // ===== DEFAULT CONFIG =====
 const DEFAULT_CONFIG = {
   heroVideoId: 'oHrfwTFqsTg',
-  heroOpacity: 0.2,
+  heroOpacity: 0.3,
 
   theme: {
-    accentColor:    '#e50914',
-    bgColor:        '#141414',
+    accentColor:    '#990008',
+    bgColor:        '#000000',
     titleColor:     '#ffffff',
     mutedColor:     '#b3b3b3',
     btnPrimaryBg:   '#ffffff',
     btnPrimaryText: '#000000',
-    btnRedBg:       '#e50914',
+    btnRedBg:       '#990008',
     btnGreenBg:     '#25D366',
   },
 
@@ -38,8 +38,8 @@ const DEFAULT_CONFIG = {
     bio2:     'Minha especialidade está em unir técnica e criatividade — seja num hook que prende em 3 segundos ou numa campanha que fortalece uma marca.',
     stats: [
       { num: '150+', label: 'Projetos entregues' },
-      { num: '80+',  label: 'Clientes satisfeitos' },
-      { num: '5+',   label: 'Anos de experiência' },
+      { num: '30+',  label: 'Clientes satisfeitos' },
+      { num: '3+',   label: 'Anos de experiência' },
     ],
     skills:   ['After Effects', 'Premiere Pro', 'Photoshop', 'Illustrator', 'Motion Graphics', 'Color Grading', 'Sound Design'],
     photoUrl: 'assets/foto.jpg',
@@ -83,16 +83,12 @@ const DEFAULT_CONFIG = {
     {
       id: 'eventos', title: 'Eventos',
       videos: [
-        { id: 'v6', ytId: '15z7iaeOTRY', title: 'Evento Amcham Campinas', desc: 'Cobertura de evento da Câmara Americana de Comércio em Campinas.', badge: 'Evento', match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
-        { id: 'v7', ytId: '5j5CPwguo6E', title: 'Evento Corporativo',     desc: 'Cobertura audiovisual de evento corporativo.',                     badge: 'Evento', match: '95%', year: '2025', tags: ['Evento'] },
-        { id: 'v8', ytId: 'iX6ks9MoClw', title: 'Evento Corporativo 2',   desc: 'Cobertura audiovisual de evento corporativo.',                     badge: 'Evento', match: '95%', year: '2025', tags: ['Evento'] },
+        { id: 'v6', ytId: '15z7iaeOTRY', title: 'Evento Amcham Campinas', desc: 'Cobertura da Amcham Campinas.', badge: 'Evento', match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
       ]
     },
     {
       id: 'casamentos', title: 'Casamentos',
-      videos: [
-        { id: 'v9', ytId: '5ifoydf1FRM', title: 'Casamento', desc: 'Cobertura cinematográfica de casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento'] },
-      ]
+      videos: []
     }
   ]
 };
@@ -209,7 +205,7 @@ function applyContact() {
   setText('contact-subtitle', c.subtitle);
 
   const emailEl = document.getElementById('contact-email');
-  if (emailEl && c.email) { emailEl.href = `mailto:${c.email}`; emailEl.childNodes[1].textContent = ` ${c.email}`; }
+  if (emailEl && c.email) { emailEl.href = `mailto:${c.email}`; emailEl.textContent = `✉ ${c.email}`; }
 
   const waEl = document.getElementById('contact-whatsapp');
   if (waEl && c.whatsapp) waEl.href = `https://wa.me/${c.whatsapp}`;
