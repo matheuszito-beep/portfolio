@@ -9,141 +9,101 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --red: #e50914;
-      --bg: #141414;
-      --bg2: #1e1e1e;
-      --bg3: #252525;
-      --text: #ffffff;
-      --muted: #999;
-      --border: rgba(255,255,255,0.1);
-      --radius: 6px;
-      --green: #46d369;
+      --red: #e50914; --bg: #141414; --bg2: #1e1e1e; --bg3: #252525;
+      --text: #fff; --muted: #999; --border: rgba(255,255,255,0.1);
+      --radius: 6px; --green: #46d369;
     }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-    a { color: var(--red); }
 
-    /* ===== LOGIN ===== */
-    #login-screen {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh;
-    }
-    .login-box {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 48px 40px; width: 360px; text-align: center;
-    }
+    /* LOGIN */
+    #login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 48px 40px; width: 360px; text-align: center; }
     .login-logo { font-size: 32px; font-weight: 900; color: var(--red); letter-spacing: 2px; margin-bottom: 8px; }
     .login-sub { color: var(--muted); font-size: 13px; margin-bottom: 32px; }
-    .login-box input {
-      width: 100%; padding: 12px 16px; border-radius: var(--radius);
-      border: 1px solid var(--border); background: var(--bg3);
-      color: var(--text); font-size: 15px; margin-bottom: 12px;
-      font-family: inherit;
-    }
+    .login-box input { width: 100%; padding: 12px 16px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 15px; margin-bottom: 12px; font-family: inherit; }
     .login-box input:focus { outline: none; border-color: var(--red); }
     .login-error { color: var(--red); font-size: 13px; margin-top: 8px; min-height: 20px; }
 
-    /* ===== ADMIN UI ===== */
+    /* LAYOUT */
     #admin-ui { display: none; }
-    .admin-header {
-      background: #0a0a0a; border-bottom: 1px solid var(--border);
-      padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
-      position: sticky; top: 0; z-index: 50;
-    }
-    .admin-logo { font-size: 20px; font-weight: 900; color: var(--red); letter-spacing: 2px; }
-    .admin-header-actions { display: flex; gap: 10px; align-items: center; }
+    .admin-header { background: #0a0a0a; border-bottom: 1px solid var(--border); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+    .admin-logo { font-size: 18px; font-weight: 900; color: var(--red); letter-spacing: 2px; }
+    .admin-header-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .admin-body { max-width: 980px; margin: 0 auto; padding: 28px 20px 100px; }
 
-    .admin-body { max-width: 1000px; margin: 0 auto; padding: 32px 24px 80px; }
+    /* ACCORDION */
+    .acc-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+    .acc-header { padding: 14px 20px; display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; background: var(--bg3); transition: background 0.2s; }
+    .acc-header:hover { background: #2c2c2c; }
+    .acc-icon { font-size: 18px; }
+    .acc-title { font-size: 15px; font-weight: 700; flex: 1; }
+    .acc-chevron { font-size: 12px; color: var(--muted); transition: transform 0.2s; }
+    .acc-block.open .acc-chevron { transform: rotate(180deg); }
+    .acc-body { display: none; padding: 20px; border-top: 1px solid var(--border); }
+    .acc-block.open .acc-body { display: block; }
 
-    .note-box {
-      background: rgba(70,211,105,0.08); border: 1px solid rgba(70,211,105,0.25);
-      border-radius: var(--radius); padding: 12px 16px;
-      font-size: 13px; color: var(--green); margin-bottom: 32px; line-height: 1.6;
+    /* FIELDS */
+    .field-group { margin-bottom: 16px; }
+    .field-label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius);
+      color: var(--text); font-size: 13px; padding: 9px 12px; font-family: inherit;
+      transition: border-color 0.2s; width: 100%;
     }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: var(--red); }
+    textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
+    input[type=range] { width: 100%; accent-color: var(--red); cursor: pointer; }
+    input[type=color] { width: 48px; height: 36px; padding: 2px 3px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg3); cursor: pointer; }
 
-    /* ===== SECTION BLOCK ===== */
-    .section-block {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 10px; margin-bottom: 24px; overflow: hidden;
-    }
-    .section-header {
-      padding: 16px 20px; display: flex; align-items: center; gap: 12px;
-      border-bottom: 1px solid var(--border); background: var(--bg3);
-    }
-    .section-header input {
-      flex: 1; background: transparent; border: none; color: var(--text);
-      font-size: 16px; font-weight: 700; font-family: inherit;
-    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .flex-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+    .color-pair { display: flex; gap: 8px; align-items: center; }
+    .color-pair input[type=text] { flex: 1; }
+
+    /* VIDEO ITEMS */
+    .video-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+    .video-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
+    .video-item-header { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+    .video-thumb { width: 80px; height: 45px; object-fit: cover; border-radius: 4px; background: #111; flex-shrink: 0; border: 1px solid var(--border); }
+    .video-fields { flex: 1; display: grid; grid-template-columns: 140px 1fr 100px 64px 64px; gap: 8px; }
+    .video-footer { display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+    .hidden-toggle { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); cursor: pointer; }
+    .hidden-toggle input { width: auto; cursor: pointer; }
+
+    /* STATS LIST */
+    .stat-item { display: grid; grid-template-columns: 80px 1fr; gap: 8px; margin-bottom: 8px; align-items: center; }
+
+    /* NOTE */
+    .note { background: rgba(70,211,105,0.08); border: 1px solid rgba(70,211,105,0.2); border-radius: var(--radius); padding: 10px 14px; font-size: 12px; color: var(--green); line-height: 1.6; margin-bottom: 20px; }
+
+    /* SECTION BLOCK */
+    .section-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
+    .section-header { padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+    .section-header input { flex: 1; background: transparent; border: none; color: var(--text); font-size: 14px; font-weight: 700; font-family: inherit; padding: 0; }
     .section-header input:focus { outline: none; }
-    .section-tag {
-      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-      color: var(--muted); background: var(--bg); padding: 3px 10px; border-radius: 20px;
-    }
+    .section-body { padding: 12px 16px 16px; }
 
-    /* ===== VIDEO ITEM ===== */
-    .video-list { padding: 12px 16px; }
-    .video-item {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px;
-      display: grid; gap: 10px;
-    }
-    .video-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .video-item label { font-size: 11px; color: var(--muted); display: block; margin-bottom: 4px; }
-    .video-item input, .video-item textarea, .video-item select {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: var(--radius); color: var(--text);
-      font-size: 13px; padding: 8px 10px; font-family: inherit;
-      transition: border-color 0.2s;
-    }
-    .video-item input:focus, .video-item textarea:focus { outline: none; border-color: var(--red); }
-    .video-item textarea { resize: vertical; min-height: 52px; line-height: 1.4; }
-    .field-ytid { width: 140px; }
-    .field-title { flex: 1; min-width: 180px; }
-    .field-badge { width: 110px; }
-    .field-match { width: 70px; }
-    .field-year  { width: 70px; }
-    .field-tags  { flex: 1; min-width: 150px; }
-    .field-desc  { width: 100%; }
-
-    .video-actions { display: flex; gap: 6px; justify-content: flex-end; margin-top: 4px; }
-    .thumb-preview {
-      width: 80px; height: 45px; object-fit: cover;
-      border-radius: 4px; background: #111; flex-shrink: 0;
-    }
-
-    /* ===== HERO BLOCK ===== */
-    .hero-block {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 10px; padding: 20px; margin-bottom: 24px;
-    }
-    .hero-block h3 { font-size: 14px; font-weight: 700; margin-bottom: 16px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-    .hero-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
-
-    /* ===== BUTTONS ===== */
+    /* BUTTONS */
     .btn { display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; border-radius: var(--radius); font-family: inherit; font-weight: 600; transition: opacity 0.2s, transform 0.15s; }
-    .btn:hover { opacity: 0.85; transform: scale(1.02); }
-    .btn:active { transform: scale(0.98); }
-    .btn-sm { font-size: 12px; padding: 6px 12px; }
-    .btn-md { font-size: 13px; padding: 10px 18px; }
-    .btn-lg { font-size: 14px; padding: 12px 24px; }
-    .btn-primary { background: var(--text); color: #000; }
-    .btn-red    { background: var(--red); color: #fff; }
-    .btn-ghost  { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
-    .btn-danger { background: rgba(229,9,20,0.15); color: var(--red); border: 1px solid rgba(229,9,20,0.3); }
-
-    .toast {
-      position: fixed; bottom: 24px; right: 24px;
-      background: var(--green); color: #000;
-      padding: 12px 20px; border-radius: var(--radius);
-      font-size: 14px; font-weight: 700;
-      opacity: 0; transform: translateY(10px);
-      transition: opacity 0.3s, transform 0.3s;
-      pointer-events: none; z-index: 999;
-    }
-    .toast.show { opacity: 1; transform: translateY(0); }
-
-    .divider { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
+    .btn:hover { opacity: 0.85; }
+    .btn:active { transform: scale(0.97); }
+    .btn-sm  { font-size: 12px; padding: 6px 12px; }
+    .btn-md  { font-size: 13px; padding: 10px 18px; }
+    .btn-lg  { font-size: 14px; padding: 12px 26px; }
+    .btn-primary { background: #fff; color: #000; }
+    .btn-red     { background: var(--red); color: #fff; }
+    .btn-ghost   { background: rgba(255,255,255,0.07); color: var(--text); border: 1px solid var(--border); }
+    .btn-danger  { background: rgba(229,9,20,0.12); color: #ff6b6b; border: 1px solid rgba(229,9,20,0.25); }
     .yt-link { font-size: 11px; color: var(--muted); text-decoration: none; }
     .yt-link:hover { color: var(--red); }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--green); color: #000; padding: 12px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 700; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); background: rgba(255,255,255,0.07); padding: 3px 9px; border-radius: 20px; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
   </style>
 </head>
 <body>
@@ -154,7 +114,7 @@
     <div class="login-logo">MZ</div>
     <p class="login-sub">Painel de Administração</p>
     <input type="password" id="pass-input" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()" />
-    <button class="btn btn-red btn-md" style="width:100%" onclick="doLogin()">Entrar</button>
+    <button class="btn btn-red btn-md" style="width:100%;margin-top:4px" onclick="doLogin()">Entrar</button>
     <p class="login-error" id="login-error"></p>
   </div>
 </div>
@@ -165,53 +125,266 @@
     <div class="admin-logo">MZ Admin</div>
     <div class="admin-header-actions">
       <a href="index.html" class="btn btn-ghost btn-sm" target="_blank">↗ Ver site</a>
-      <button class="btn btn-ghost btn-sm" onclick="exportConfig()">⬇ Exportar</button>
-      <label class="btn btn-ghost btn-sm" style="cursor:pointer">
-        ⬆ Importar
-        <input type="file" accept=".json" style="display:none" onchange="importConfig(event)" />
-      </label>
-      <button class="btn btn-danger btn-sm" onclick="resetConfig()">↺ Resetar</button>
-      <button class="btn btn-primary btn-lg" onclick="saveConfig()">💾 Salvar</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportCfg()">⬇ Exportar</button>
+      <label class="btn btn-ghost btn-sm" style="cursor:pointer">⬆ Importar<input type="file" accept=".json" style="display:none" onchange="importCfg(event)" /></label>
+      <button class="btn btn-danger btn-sm" onclick="resetCfg()">↺ Resetar</button>
+      <button class="btn btn-primary btn-lg" onclick="saveCfg()">💾 Salvar</button>
     </div>
   </div>
 
   <div class="admin-body">
-    <div class="note-box">
-      ✓ As alterações são salvas no <strong>navegador</strong> (localStorage). Para torná-las permanentes no site ao vivo, clique <strong>Salvar</strong> e depois use o terminal para commitar.<br/>
-      Use <strong>Exportar</strong> / <strong>Importar</strong> para fazer backup ou mover configurações entre dispositivos.
+    <div class="note">
+      ✓ Clique <strong>Salvar</strong> para aplicar as alterações neste navegador. Para tornar permanente no ar, exporte o JSON e me envie para commitar.
     </div>
 
-    <!-- HERO VIDEO -->
-    <div class="hero-block">
-      <h3>🎬 Vídeo de Fundo (Hero)</h3>
-      <div class="hero-row">
-        <div>
-          <label>YouTube ID do vídeo de fundo</label>
-          <input type="text" id="hero-video-id" placeholder="ex: oHrfwTFqsTg" style="width:200px" />
+    <!-- 🎨 CORES -->
+    <div class="acc-block open" id="acc-cores">
+      <div class="acc-header" onclick="toggleAcc('acc-cores')">
+        <span class="acc-icon">🎨</span>
+        <span class="acc-title">Cores & Tema</span>
+        <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="grid-3">
+          <div class="field-group">
+            <label class="field-label">Cor de destaque (vermelho)</label>
+            <div class="color-pair">
+              <input type="color" id="c-accent" value="#e50914" oninput="syncHex(this,'ch-accent')" />
+              <input type="text" id="ch-accent" value="#e50914" maxlength="7" oninput="syncColor(this,'c-accent')" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Fundo do site</label>
+            <div class="color-pair">
+              <input type="color" id="c-bg" value="#141414" oninput="syncHex(this,'ch-bg')" />
+              <input type="text" id="ch-bg" value="#141414" maxlength="7" oninput="syncColor(this,'c-bg')" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Cor dos títulos</label>
+            <div class="color-pair">
+              <input type="color" id="c-title" value="#ffffff" oninput="syncHex(this,'ch-title')" />
+              <input type="text" id="ch-title" value="#ffffff" maxlength="7" oninput="syncColor(this,'c-title')" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Texto secundário</label>
+            <div class="color-pair">
+              <input type="color" id="c-muted" value="#b3b3b3" oninput="syncHex(this,'ch-muted')" />
+              <input type="text" id="ch-muted" value="#b3b3b3" maxlength="7" oninput="syncColor(this,'c-muted')" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Botão principal (fundo)</label>
+            <div class="color-pair">
+              <input type="color" id="c-btn-bg" value="#ffffff" oninput="syncHex(this,'ch-btn-bg')" />
+              <input type="text" id="ch-btn-bg" value="#ffffff" maxlength="7" oninput="syncColor(this,'c-btn-bg')" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Botão principal (texto)</label>
+            <div class="color-pair">
+              <input type="color" id="c-btn-txt" value="#000000" oninput="syncHex(this,'ch-btn-txt')" />
+              <input type="text" id="ch-btn-txt" value="#000000" maxlength="7" oninput="syncColor(this,'c-btn-txt')" />
+            </div>
+          </div>
         </div>
-        <a id="hero-yt-link" class="yt-link" target="_blank">▶ Ver no YouTube</a>
-        <img id="hero-thumb" class="thumb-preview" src="" alt="" />
       </div>
     </div>
 
-    <!-- CAROUSEL -->
-    <div class="section-block" id="block-carousel">
-      <div class="section-header">
-        <span class="section-tag">Carrossel</span>
-        <input type="text" id="carousel-title-input" placeholder="Título da seção" />
+    <!-- 🎬 HERO -->
+    <div class="acc-block open" id="acc-hero">
+      <div class="acc-header" onclick="toggleAcc('acc-hero')">
+        <span class="acc-icon">🎬</span>
+        <span class="acc-title">Hero — Vídeo de Fundo & Texto</span>
+        <span class="acc-chevron">▼</span>
       </div>
-      <div class="video-list" id="list-carousel"></div>
-      <div style="padding:0 16px 16px">
+      <div class="acc-body">
+        <div class="grid-2" style="margin-bottom:20px">
+          <div class="field-group">
+            <label class="field-label">YouTube ID do vídeo de fundo</label>
+            <div class="flex-row">
+              <input type="text" id="hero-video-id" placeholder="ex: oHrfwTFqsTg" style="flex:1" oninput="updateHeroPreview()" />
+              <img id="hero-thumb" style="width:80px;height:45px;object-fit:cover;border-radius:4px;background:#111;border:1px solid var(--border)" src="" alt="" />
+            </div>
+            <a id="hero-yt-link" href="#" target="_blank" class="yt-link" style="margin-top:4px;display:inline-block">▶ Ver no YouTube</a>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Opacidade do vídeo: <strong id="opacity-val">20%</strong></label>
+            <input type="range" id="hero-opacity" min="0" max="100" value="20" oninput="document.getElementById('opacity-val').textContent=this.value+'%'" style="margin-top:8px" />
+          </div>
+        </div>
+        <hr />
+        <div class="grid-2">
+          <div class="field-group">
+            <label class="field-label">Badge (ex: Disponível para projetos)</label>
+            <input type="text" id="hero-badge" placeholder="Disponível para projetos" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Logo navbar (ex: MZ)</label>
+            <input type="text" id="navbar-logo" placeholder="MZ" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Título linha 1</label>
+            <input type="text" id="hero-title1" placeholder="Matheus" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Título linha 2 (destaque)</label>
+            <input type="text" id="hero-title2" placeholder="Zito" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Subtítulo</label>
+            <input type="text" id="hero-subtitle" placeholder="Motion Designer & Editor de Vídeo" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Botão 1</label>
+            <input type="text" id="hero-btn1" placeholder="▶ Ver Projetos" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Descrição</label>
+          <textarea id="hero-desc" placeholder="Transformo ideias..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 👤 SOBRE -->
+    <div class="acc-block" id="acc-sobre">
+      <div class="acc-header" onclick="toggleAcc('acc-sobre')">
+        <span class="acc-icon">👤</span>
+        <span class="acc-title">Sobre mim</span>
+        <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="grid-2">
+          <div class="field-group">
+            <label class="field-label">Tag (ex: Sobre mim)</label>
+            <input type="text" id="about-tag" placeholder="Sobre mim" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Título da seção</label>
+            <input type="text" id="about-heading" placeholder="Por trás das câmeras" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Parágrafo 1</label>
+          <textarea id="about-bio1"></textarea>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Parágrafo 2</label>
+          <textarea id="about-bio2"></textarea>
+        </div>
+        <div class="field-group">
+          <label class="field-label">URL da foto de perfil</label>
+          <input type="text" id="about-photo" placeholder="assets/foto.jpg" />
+        </div>
+        <hr />
+        <label class="field-label" style="margin-bottom:10px">Estatísticas</label>
+        <div id="stats-list"></div>
+        <button class="btn btn-ghost btn-sm" onclick="addStat()">+ Adicionar estatística</button>
+        <hr />
+        <div class="field-group">
+          <label class="field-label">Habilidades (separadas por vírgula)</label>
+          <textarea id="about-skills" style="min-height:50px" placeholder="After Effects, Premiere Pro, ..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📞 CONTATO -->
+    <div class="acc-block" id="acc-contato">
+      <div class="acc-header" onclick="toggleAcc('acc-contato')">
+        <span class="acc-icon">📞</span>
+        <span class="acc-title">Contato</span>
+        <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="grid-2">
+          <div class="field-group">
+            <label class="field-label">Título</label>
+            <input type="text" id="contact-heading" placeholder="Vamos trabalhar juntos?" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Subtítulo</label>
+            <input type="text" id="contact-subtitle" placeholder="Aberto para projetos..." />
+          </div>
+          <div class="field-group">
+            <label class="field-label">E-mail</label>
+            <input type="text" id="contact-email" placeholder="seu@email.com" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">WhatsApp (somente números, com DDI)</label>
+            <input type="text" id="contact-whatsapp" placeholder="5511921962624" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">URL do Instagram</label>
+            <input type="text" id="contact-instagram" placeholder="https://www.instagram.com/..." />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔍 SEO & RODAPÉ -->
+    <div class="acc-block" id="acc-seo">
+      <div class="acc-header" onclick="toggleAcc('acc-seo')">
+        <span class="acc-icon">🔍</span>
+        <span class="acc-title">SEO & Rodapé</span>
+        <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="field-group">
+          <label class="field-label">Título da página (aba do navegador / Google)</label>
+          <input type="text" id="seo-title" placeholder="Matheus Zito — Portfólio" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Meta descrição (Google)</label>
+          <textarea id="seo-desc" style="min-height:50px" placeholder="Motion Designer & Editor..."></textarea>
+        </div>
+        <hr />
+        <div class="grid-2">
+          <div class="field-group">
+            <label class="field-label">Logo do rodapé</label>
+            <input type="text" id="footer-logo" placeholder="MZ" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Texto do rodapé</label>
+            <input type="text" id="footer-text" placeholder="© 2026 Matheus Zito..." />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ▶ CARROSSEL -->
+    <div class="acc-block" id="acc-carousel">
+      <div class="acc-header" onclick="toggleAcc('acc-carousel')">
+        <span class="acc-icon">▶</span>
+        <span class="acc-title">Carrossel em Destaque</span>
+        <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="field-group" style="margin-bottom:16px">
+          <label class="field-label">Título da seção</label>
+          <input type="text" id="carousel-title-input" placeholder="Vídeos em Destaque" style="max-width:320px" />
+        </div>
+        <div class="video-list" id="list-carousel"></div>
         <button class="btn btn-ghost btn-sm" onclick="addVideo('carousel')">+ Adicionar vídeo</button>
       </div>
     </div>
 
-    <!-- SECTIONS -->
-    <div id="sections-container"></div>
+    <!-- 📁 SEÇÕES -->
+    <div class="acc-block open" id="acc-sections">
+      <div class="acc-header" onclick="toggleAcc('acc-sections')">
+        <span class="acc-icon">📁</span>
+        <span class="acc-title">Seções de Vídeos</span>
+        <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body">
+        <div id="sections-container"></div>
+        <button class="btn btn-ghost btn-md" onclick="addSection()">+ Nova seção</button>
+      </div>
+    </div>
 
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-      <button class="btn btn-ghost btn-md" onclick="addSection()">+ Nova seção</button>
-      <button class="btn btn-primary btn-lg" onclick="saveConfig()">💾 Salvar alterações</button>
+    <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-lg" onclick="saveCfg()">💾 Salvar todas as alterações</button>
     </div>
   </div>
 </div>
@@ -219,53 +392,49 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== PASSWORD =====
-const ADMIN_PASS = 'port2025'; // Altere aqui para mudar a senha
+const ADMIN_PASS = 'port2025'; // ← Altere aqui para mudar a senha
 const STORAGE_KEY = 'mz-portfolio-config';
 
+// ─── DEFAULT CONFIG (espelho do script.js) ───
 const DEFAULT_CONFIG = {
   heroVideoId: 'oHrfwTFqsTg',
-  carousel: {
-    title: 'Vídeos em Destaque',
-    videos: [
-      { id: 'ch1', ytId: '194T0HeO7VM', title: 'Indústria Fox — 15 Anos', desc: 'Cobertura cinematográfica do 15º aniversário da Indústria Fox, com narrativa emocional e produção de alto nível.', badge: 'Evento', match: '98%', year: '2025' },
-      { id: 'ch2', ytId: 'oHrfwTFqsTg', title: 'WCEF 2025', desc: 'Cobertura completa do World Commerce & Contracting Event Forum 2025.', badge: 'Evento', match: '96%', year: '2025' },
-      { id: 'ch3', ytId: '5ifoydf1FRM', title: 'Casamento', desc: 'Cobertura cinematográfica de casamento.', badge: 'Casamento', match: '97%', year: '2025' },
-      { id: 'ch4', ytId: 'iX6ks9MoClw', title: 'Evento Corporativo', desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento', match: '95%', year: '2025' },
-      { id: 'ch5', ytId: '5j5CPwguo6E', title: 'Evento Corporativo 2', desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento', match: '95%', year: '2025' },
-    ]
-  },
+  heroOpacity: 0.2,
+  theme: { accentColor: '#e50914', bgColor: '#141414', titleColor: '#ffffff', mutedColor: '#b3b3b3', btnPrimaryBg: '#ffffff', btnPrimaryText: '#000000', btnRedBg: '#e50914', btnGreenBg: '#25D366' },
+  seo: { title: 'Matheus Zito — Portfólio', description: 'Motion Designer & Editor de Vídeo. Portfólio de Matheus Zito.' },
+  navbar: { logo: 'MZ' },
+  hero: { badge: 'Disponível para projetos', title1: 'Matheus', title2: 'Zito', subtitle: 'Motion Designer & Editor de Vídeo', desc: 'Transformo ideias em experiências visuais memoráveis. Especializado em motion graphics, edição cinematográfica e conteúdo digital.', btn1Text: '▶ Ver Projetos', btn2Text: '+ Sobre mim' },
+  about: { tag: 'Sobre mim', heading: 'Por trás das câmeras', bio1: 'Sou editor de vídeo e motion designer especializado em conteúdo para redes sociais, campanhas publicitárias e vídeos institucionais. Já trabalhei com marcas, criadores e agências de todo o Brasil.', bio2: 'Minha especialidade está em unir técnica e criatividade — seja num hook que prende em 3 segundos ou numa campanha que fortalece uma marca.', stats: [{num:'150+',label:'Projetos entregues'},{num:'80+',label:'Clientes satisfeitos'},{num:'5+',label:'Anos de experiência'}], skills: ['After Effects','Premiere Pro','Photoshop','Illustrator','Motion Graphics','Color Grading','Sound Design'], photoUrl: 'assets/foto.jpg' },
+  contact: { heading: 'Vamos trabalhar juntos?', subtitle: 'Aberto para projetos freelance, parcerias e colaborações criativas.', email: 'seu@email.com', whatsapp: '5511921962624', instagram: 'https://www.instagram.com/thebackstage.on/' },
+  footer: { logo: 'MZ', text: '© 2026 Matheus Zito. Todos os direitos reservados.' },
+  carousel: { title: 'Vídeos em Destaque', videos: [
+    { id:'ch1', ytId:'194T0HeO7VM', title:'Indústria Fox — 15 Anos', desc:'Cobertura cinematográfica do 15º aniversário da Indústria Fox.', badge:'Evento', match:'98%', year:'2025' },
+    { id:'ch2', ytId:'oHrfwTFqsTg', title:'WCEF 2025', desc:'Cobertura do World Commerce & Contracting Event Forum 2025.', badge:'Evento', match:'96%', year:'2025' },
+    { id:'ch3', ytId:'5ifoydf1FRM', title:'Casamento', desc:'Cobertura cinematográfica de casamento.', badge:'Casamento', match:'97%', year:'2025' },
+    { id:'ch4', ytId:'iX6ks9MoClw', title:'Evento Corporativo', desc:'Cobertura audiovisual de evento corporativo.', badge:'Evento', match:'95%', year:'2025' },
+    { id:'ch5', ytId:'5j5CPwguo6E', title:'Evento Corporativo 2', desc:'Cobertura audiovisual de evento corporativo.', badge:'Evento', match:'95%', year:'2025' },
+  ]},
   sections: [
-    {
-      id: 'anuncios', title: 'Anúncios',
-      videos: [
-        { id: 'v1', ytId: 'vhwK4yhPBzA', title: 'Parceria Fox & TudoBônus', desc: 'Anúncio de parceria estratégica com identidade visual sofisticada.', badge: 'Anúncio', match: '98%', year: '2025', tags: ['Parceria', 'Motion'] },
-        { id: 'v2', ytId: 'KiRR4Upsbrg', title: 'Atendimento TudoBônus', desc: 'Vídeo de atendimento ao cliente com narrativa envolvente.', badge: 'Institucional', match: '97%', year: '2025', tags: ['Institucional', 'Edição'] },
-        { id: 'v3', ytId: 'txQJrrwfVHk', title: 'Entrega & Garantia', desc: 'Comunicação visual sobre política de entrega e garantia da marca.', badge: 'Campanha', match: '95%', year: '2025', tags: ['Campanha', 'Motion'] },
-        { id: 'v4', ytId: 'TJBivra1fAg', title: 'Trade in TudoBônus', desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.', badge: 'Campanha', match: '96%', year: '2025', tags: ['Campanha', 'Edição'] },
-        { id: 'v5', ytId: 'x1yuS8IHdYc', title: 'Trade in TudoBonus 2', desc: 'Segunda versão da campanha com nova abordagem criativa.', badge: 'Campanha', match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
-      ]
-    },
-    {
-      id: 'eventos', title: 'Eventos',
-      videos: [
-        { id: 'v6', ytId: '15z7iaeOTRY', title: 'Evento Amcham Campinas', desc: 'Cobertura de evento da Câmara Americana de Comércio em Campinas.', badge: 'Evento', match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
-        { id: 'v7', ytId: '5j5CPwguo6E', title: 'Evento Corporativo', desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento', match: '95%', year: '2025', tags: ['Evento'] },
-        { id: 'v8', ytId: 'iX6ks9MoClw', title: 'Evento Corporativo 2', desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento', match: '95%', year: '2025', tags: ['Evento'] },
-      ]
-    },
-    {
-      id: 'casamentos', title: 'Casamentos',
-      videos: [
-        { id: 'v9', ytId: '5ifoydf1FRM', title: 'Casamento', desc: 'Cobertura cinematográfica de casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento'] },
-      ]
-    }
+    { id:'anuncios', title:'Anúncios', videos: [
+      { id:'v1', ytId:'vhwK4yhPBzA', title:'Parceria Fox & TudoBônus', desc:'Anúncio de parceria estratégica.', badge:'Anúncio', match:'98%', year:'2025', tags:['Parceria','Motion'] },
+      { id:'v2', ytId:'KiRR4Upsbrg', title:'Atendimento TudoBônus', desc:'Vídeo de atendimento ao cliente.', badge:'Institucional', match:'97%', year:'2025', tags:['Institucional','Edição'] },
+      { id:'v3', ytId:'txQJrrwfVHk', title:'Entrega & Garantia', desc:'Comunicação sobre política de entrega.', badge:'Campanha', match:'95%', year:'2025', tags:['Campanha','Motion'] },
+      { id:'v4', ytId:'TJBivra1fAg', title:'Trade in TudoBônus', desc:'Campanha de Trade-in.', badge:'Campanha', match:'96%', year:'2025', tags:['Campanha','Edição'] },
+      { id:'v5', ytId:'x1yuS8IHdYc', title:'Trade in TudoBonus 2', desc:'Segunda versão da campanha.', badge:'Campanha', match:'93%', year:'2025', tags:['Campanha','Social'] },
+    ]},
+    { id:'eventos', title:'Eventos', videos: [
+      { id:'v6', ytId:'15z7iaeOTRY', title:'Evento Amcham Campinas', desc:'Cobertura da Amcham Campinas.', badge:'Evento', match:'94%', year:'2025', tags:['Evento','Cobertura'] },
+      { id:'v7', ytId:'5j5CPwguo6E', title:'Evento Corporativo', desc:'Cobertura de evento corporativo.', badge:'Evento', match:'95%', year:'2025', tags:['Evento'] },
+      { id:'v8', ytId:'iX6ks9MoClw', title:'Evento Corporativo 2', desc:'Cobertura de evento corporativo.', badge:'Evento', match:'95%', year:'2025', tags:['Evento'] },
+    ]},
+    { id:'casamentos', title:'Casamentos', videos: [
+      { id:'v9', ytId:'5ifoydf1FRM', title:'Casamento', desc:'Cobertura cinematográfica de casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento'] },
+    ]},
   ]
 };
 
+// ─── AUTH ───
 function doLogin() {
-  const val = document.getElementById('pass-input').value;
-  if (val === ADMIN_PASS) {
+  if (document.getElementById('pass-input').value === ADMIN_PASS) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-ui').style.display = 'block';
     initAdmin();
@@ -276,294 +445,332 @@ function doLogin() {
   }
 }
 
-// ===== LOAD / SAVE CONFIG =====
-function loadConfig() {
+// ─── CONFIG ───
+function loadCfg() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+    const s = localStorage.getItem(STORAGE_KEY);
+    if (!s) return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+    return deepMerge(JSON.parse(JSON.stringify(DEFAULT_CONFIG)), JSON.parse(s));
   } catch { return JSON.parse(JSON.stringify(DEFAULT_CONFIG)); }
 }
+function deepMerge(base, over) {
+  const r = Object.assign({}, base);
+  for (const k of Object.keys(over)) {
+    if (over[k] && typeof over[k] === 'object' && !Array.isArray(over[k])) r[k] = deepMerge(base[k]||{}, over[k]);
+    else r[k] = over[k];
+  }
+  return r;
+}
 
-let CONFIG = loadConfig();
+let CFG = loadCfg();
 
-function saveConfig() {
-  const cfg = readFormIntoConfig();
+function saveCfg() {
+  const cfg = readForm();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
-  CONFIG = cfg;
-  showToast('✓ Configuração salva!');
+  CFG = cfg;
+  showToast('✓ Salvo! Atualize o site para ver as mudanças.');
 }
-
-function resetConfig() {
-  if (!confirm('Resetar para configuração padrão? Todas as alterações serão perdidas.')) return;
+function resetCfg() {
+  if (!confirm('Resetar tudo para o padrão?')) return;
   localStorage.removeItem(STORAGE_KEY);
-  CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+  CFG = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
   initAdmin();
-  showToast('↺ Configuração resetada');
+  showToast('↺ Resetado');
+}
+function exportCfg() {
+  const blob = new Blob([JSON.stringify(readForm(), null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'portfolio-config.json'; a.click();
+}
+function importCfg(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => { try { CFG = JSON.parse(ev.target.result); localStorage.setItem(STORAGE_KEY, JSON.stringify(CFG)); initAdmin(); showToast('⬆ Importado!'); } catch { alert('JSON inválido'); } };
+  r.readAsText(f); e.target.value = '';
 }
 
-function exportConfig() {
-  const cfg = readFormIntoConfig();
-  const blob = new Blob([JSON.stringify(cfg, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'portfolio-config.json';
-  a.click();
+// ─── ACCORDION ───
+function toggleAcc(id) {
+  document.getElementById(id).classList.toggle('open');
 }
 
-function importConfig(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      CONFIG = JSON.parse(e.target.result);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(CONFIG));
-      initAdmin();
-      showToast('⬆ Configuração importada!');
-    } catch { alert('Arquivo JSON inválido.'); }
-  };
-  reader.readAsText(file);
-  event.target.value = '';
-}
-
-// ===== UNIQUE ID =====
-function uid() { return 'v' + Date.now() + Math.random().toString(36).slice(2, 5); }
-
-// ===== RENDER ADMIN UI =====
+// ─── INIT ───
 function initAdmin() {
-  // Hero
-  const heroInput = document.getElementById('hero-video-id');
-  heroInput.value = CONFIG.heroVideoId || '';
-  heroInput.oninput = () => updateHeroPreview(heroInput.value.trim());
-  updateHeroPreview(heroInput.value.trim());
+  const t = CFG.theme || {};
+  setColor('c-accent','ch-accent', t.accentColor||'#e50914');
+  setColor('c-bg',    'ch-bg',     t.bgColor||'#141414');
+  setColor('c-title', 'ch-title',  t.titleColor||'#ffffff');
+  setColor('c-muted', 'ch-muted',  t.mutedColor||'#b3b3b3');
+  setColor('c-btn-bg', 'ch-btn-bg',  t.btnPrimaryBg||'#ffffff');
+  setColor('c-btn-txt','ch-btn-txt', t.btnPrimaryText||'#000000');
+
+  // Hero video
+  val('hero-video-id', CFG.heroVideoId||'');
+  updateHeroPreview();
+  const op = Math.round((CFG.heroOpacity??0.2)*100);
+  document.getElementById('hero-opacity').value = op;
+  document.getElementById('opacity-val').textContent = op + '%';
+
+  // Hero text
+  const h = CFG.hero||{};
+  val('hero-badge',    h.badge);
+  val('navbar-logo',   CFG.navbar?.logo||'MZ');
+  val('hero-title1',   h.title1);
+  val('hero-title2',   h.title2);
+  val('hero-subtitle', h.subtitle);
+  val('hero-desc',     h.desc);
+  val('hero-btn1',     h.btn1Text);
+
+  // About
+  const a = CFG.about||{};
+  val('about-tag',     a.tag);
+  val('about-heading', a.heading);
+  val('about-bio1',    a.bio1);
+  val('about-bio2',    a.bio2);
+  val('about-photo',   a.photoUrl);
+  val('about-skills',  (a.skills||[]).join(', '));
+  renderStats(a.stats||[]);
+
+  // Contact
+  const c = CFG.contact||{};
+  val('contact-heading',   c.heading);
+  val('contact-subtitle',  c.subtitle);
+  val('contact-email',     c.email);
+  val('contact-whatsapp',  c.whatsapp);
+  val('contact-instagram', c.instagram);
+
+  // SEO & footer
+  val('seo-title', CFG.seo?.title);
+  val('seo-desc',  CFG.seo?.description);
+  val('footer-logo', CFG.footer?.logo);
+  val('footer-text', CFG.footer?.text);
 
   // Carousel title
-  document.getElementById('carousel-title-input').value = CONFIG.carousel.title;
-
-  // Carousel videos
-  renderVideoList('list-carousel', CONFIG.carousel.videos, 'carousel');
+  val('carousel-title-input', CFG.carousel?.title);
+  renderVideoList('list-carousel', CFG.carousel?.videos||[], 'carousel');
 
   // Sections
-  const sectionsEl = document.getElementById('sections-container');
-  sectionsEl.innerHTML = '';
-  CONFIG.sections.forEach((sec, si) => renderSection(sec, si));
+  const sc = document.getElementById('sections-container');
+  sc.innerHTML = '';
+  (CFG.sections||[]).forEach((sec,si) => renderSection(sec,si));
 }
 
-function updateHeroPreview(ytId) {
+function val(id, v) { const e = document.getElementById(id); if (e && v !== undefined && v !== null) e.value = v; }
+function setColor(pickerId, hexId, hex) {
+  const p = document.getElementById(pickerId), h = document.getElementById(hexId);
+  if (p) p.value = hex; if (h) h.value = hex;
+}
+function syncHex(picker, hexId) { document.getElementById(hexId).value = picker.value; }
+function syncColor(hex, pickerId) { if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) document.getElementById(pickerId).value = hex.value; }
+
+// ─── HERO PREVIEW ───
+function updateHeroPreview() {
+  const id = document.getElementById('hero-video-id').value.trim();
   const link = document.getElementById('hero-yt-link');
   const thumb = document.getElementById('hero-thumb');
-  if (ytId) {
-    link.href = 'https://www.youtube.com/watch?v=' + ytId;
-    link.textContent = '▶ Ver no YouTube';
-    thumb.src = 'https://i.ytimg.com/vi/' + ytId + '/hqdefault.jpg';
-  } else {
-    link.href = '#';
-    thumb.src = '';
-  }
+  if (id) { link.href = 'https://www.youtube.com/watch?v='+id; thumb.src = 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg'; }
+  else { link.href='#'; thumb.src=''; }
 }
 
-function renderSection(sec, si) {
-  const container = document.getElementById('sections-container');
-  const block = document.createElement('div');
-  block.className = 'section-block';
-  block.id = 'block-sec-' + si;
-  block.innerHTML = `
-    <div class="section-header">
-      <span class="section-tag">Seção ${si + 1}</span>
-      <input type="text" class="sec-title" data-si="${si}" value="${esc(sec.title)}" placeholder="Nome da seção" />
-      <button class="btn btn-danger btn-sm" onclick="removeSection(${si})">✕ Remover seção</button>
-    </div>
-    <div class="video-list" id="list-sec-${si}"></div>
-    <div style="padding:0 16px 16px">
-      <button class="btn btn-ghost btn-sm" onclick="addVideo('sec-${si}')">+ Adicionar vídeo</button>
-    </div>`;
-  container.appendChild(block);
-  renderVideoList('list-sec-' + si, sec.videos, 'sec-' + si);
+// ─── STATS ───
+function renderStats(stats) {
+  const el = document.getElementById('stats-list');
+  el.innerHTML = '';
+  stats.forEach((s,i) => {
+    const row = document.createElement('div');
+    row.className = 'stat-item';
+    row.innerHTML = `
+      <input type="text" class="stat-num" value="${esc(s.num)}" placeholder="150+" />
+      <div style="display:flex;gap:8px">
+        <input type="text" class="stat-label" value="${esc(s.label)}" placeholder="Projetos entregues" style="flex:1" />
+        <button class="btn btn-danger btn-sm" onclick="removeStat(${i})">✕</button>
+      </div>`;
+    el.appendChild(row);
+  });
+}
+function addStat() {
+  const cfg = readForm();
+  cfg.about.stats.push({num:'0+',label:'Nova estatística'});
+  CFG = cfg; initAdmin();
+}
+function removeStat(i) {
+  const cfg = readForm();
+  cfg.about.stats.splice(i,1);
+  CFG = cfg; initAdmin();
 }
 
+// ─── VIDEO LIST ───
 function renderVideoList(containerId, videos, listKey) {
   const el = document.getElementById(containerId);
   el.innerHTML = '';
-  videos.forEach((v, vi) => el.appendChild(buildVideoItem(v, vi, listKey, videos.length)));
+  videos.forEach((v,vi) => el.appendChild(buildVideoItem(v, vi, listKey, videos.length)));
 }
 
 function buildVideoItem(v, vi, listKey, total) {
   const isCarousel = listKey === 'carousel';
   const item = document.createElement('div');
   item.className = 'video-item';
-  item.dataset.vi = vi;
   item.innerHTML = `
-    <div class="video-row">
-      <img class="thumb-preview" src="https://i.ytimg.com/vi/${esc(v.ytId)}/hqdefault.jpg" alt="" onerror="this.src=''" />
-      <div style="flex:1">
-        <div class="video-row" style="margin-bottom:8px">
-          <div>
-            <label>YouTube ID</label>
-            <input type="text" class="field-ytid" value="${esc(v.ytId)}" placeholder="ID do YouTube"
-              oninput="updateThumb(this)" data-thumb-target="prev-${listKey}-${vi}" />
-          </div>
-          <div style="flex:1">
-            <label>Título</label>
-            <input type="text" class="field-title" value="${esc(v.title)}" placeholder="Título do vídeo" style="width:100%" />
-          </div>
-          <div>
-            <label>Badge</label>
-            <input type="text" class="field-badge" value="${esc(v.badge || '')}" placeholder="ex: Evento" />
-          </div>
-          <div>
-            <label>Match</label>
-            <input type="text" class="field-match" value="${esc(v.match || '')}" placeholder="98%" />
-          </div>
-          <div>
-            <label>Ano</label>
-            <input type="text" class="field-year" value="${esc(v.year || '')}" placeholder="2025" />
-          </div>
-        </div>
-        <div class="video-row">
-          <div style="flex:1">
-            <label>Descrição</label>
-            <textarea class="field-desc" placeholder="Descrição breve...">${esc(v.desc || '')}</textarea>
-          </div>
-          ${!isCarousel ? `<div style="flex:1"><label>Tags (separadas por vírgula)</label><input type="text" class="field-tags" value="${esc((v.tags||[]).join(', '))}" placeholder="Motion, Edição" style="width:100%" /></div>` : ''}
-        </div>
+    <div class="video-item-header">
+      <img class="video-thumb" src="https://i.ytimg.com/vi/${esc(v.ytId)}/hqdefault.jpg" alt="" onerror="this.src=''" />
+      <div class="video-fields">
+        <div><label class="field-label">YouTube ID</label><input type="text" class="f-ytid" value="${esc(v.ytId)}" oninput="updateVThumb(this)" /></div>
+        <div><label class="field-label">Título</label><input type="text" class="f-title" value="${esc(v.title)}" /></div>
+        <div><label class="field-label">Badge</label><input type="text" class="f-badge" value="${esc(v.badge||'')}" /></div>
+        <div><label class="field-label">Match</label><input type="text" class="f-match" value="${esc(v.match||'')}" /></div>
+        <div><label class="field-label">Ano</label><input type="text" class="f-year" value="${esc(v.year||'')}" /></div>
       </div>
     </div>
-    <div class="video-actions">
+    <div><label class="field-label">Descrição</label><textarea class="f-desc" style="min-height:44px">${esc(v.desc||'')}</textarea></div>
+    ${!isCarousel ? `<div style="margin-top:8px"><label class="field-label">Tags (vírgula)</label><input type="text" class="f-tags" value="${esc((v.tags||[]).join(', '))}" /></div>` : ''}
+    <div class="video-footer">
+      <label class="hidden-toggle"><input type="checkbox" class="f-hidden" ${v.hidden?'checked':''} /> Ocultar do site</label>
       <a href="https://www.youtube.com/watch?v=${esc(v.ytId)}" target="_blank" class="yt-link">▶ YouTube</a>
       <span style="flex:1"></span>
-      ${vi > 0 ? `<button class="btn btn-ghost btn-sm" onclick="moveVideo('${listKey}',${vi},-1)">↑</button>` : ''}
-      ${vi < total - 1 ? `<button class="btn btn-ghost btn-sm" onclick="moveVideo('${listKey}',${vi},1)">↓</button>` : ''}
-      <button class="btn btn-danger btn-sm" onclick="removeVideo('${listKey}',${vi})">✕</button>
+      ${vi>0 ? `<button class="btn btn-ghost btn-sm" onclick="moveVideo('${listKey}',${vi},-1)">↑</button>` : ''}
+      ${vi<total-1 ? `<button class="btn btn-ghost btn-sm" onclick="moveVideo('${listKey}',${vi},1)">↓</button>` : ''}
+      <button class="btn btn-danger btn-sm" onclick="removeVideo('${listKey}',${vi})">✕ Remover</button>
     </div>`;
   return item;
 }
 
-// ===== READ FORM INTO CONFIG OBJECT =====
-function readFormIntoConfig() {
-  const cfg = {
-    heroVideoId: document.getElementById('hero-video-id').value.trim(),
-    carousel: {
-      title: document.getElementById('carousel-title-input').value.trim(),
-      videos: readVideoList('list-carousel', true)
-    },
-    sections: []
-  };
+function updateVThumb(input) {
+  const id = input.value.trim();
+  const item = input.closest('.video-item');
+  const thumb = item?.querySelector('.video-thumb');
+  const link  = item?.querySelector('.yt-link');
+  if (thumb) thumb.src = id ? 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg' : '';
+  if (link)  link.href  = id ? 'https://www.youtube.com/watch?v='+id : '#';
+}
 
-  const secTitles = document.querySelectorAll('.sec-title');
-  secTitles.forEach((titleEl, si) => {
-    cfg.sections.push({
-      id: CONFIG.sections[si] ? CONFIG.sections[si].id : uid(),
-      title: titleEl.value.trim(),
-      videos: readVideoList('list-sec-' + si, false)
-    });
+// ─── SECTIONS ───
+function renderSection(sec, si) {
+  const container = document.getElementById('sections-container');
+  const block = document.createElement('div');
+  block.className = 'section-block';
+  block.id = 'sec-block-'+si;
+  block.innerHTML = `
+    <div class="section-header">
+      <span class="tag">Seção ${si+1}</span>
+      <input type="text" class="sec-title" data-si="${si}" value="${esc(sec.title)}" placeholder="Nome da seção" />
+      ${si>0?`<button class="btn btn-ghost btn-sm" onclick="moveSection(${si},-1)">↑</button>`:''}
+      ${`<button class="btn btn-ghost btn-sm" onclick="moveSection(${si},1)">↓</button>`}
+      <button class="btn btn-danger btn-sm" onclick="removeSection(${si})">✕</button>
+    </div>
+    <div class="section-body">
+      <div class="video-list" id="list-sec-${si}"></div>
+      <button class="btn btn-ghost btn-sm" onclick="addVideo('sec-${si}')">+ Adicionar vídeo</button>
+    </div>`;
+  container.appendChild(block);
+  renderVideoList('list-sec-'+si, sec.videos||[], 'sec-'+si);
+}
+
+// ─── ADD / REMOVE / MOVE ───
+function uid() { return 'v'+Date.now()+Math.random().toString(36).slice(2,5); }
+const newVideo = (isC) => ({ id:uid(), ytId:'', title:'Novo vídeo', desc:'', badge:'Projeto', match:'95%', year:'2025', ...(isC?{}:{tags:[]}) });
+
+function addVideo(listKey) {
+  const cfg = readForm();
+  if (listKey==='carousel') cfg.carousel.videos.push(newVideo(true));
+  else cfg.sections[+listKey.replace('sec-','')].videos.push(newVideo(false));
+  CFG=cfg; initAdmin();
+}
+function removeVideo(listKey, vi) {
+  if (!confirm('Remover vídeo?')) return;
+  const cfg = readForm();
+  if (listKey==='carousel') cfg.carousel.videos.splice(vi,1);
+  else cfg.sections[+listKey.replace('sec-','')].videos.splice(vi,1);
+  CFG=cfg; initAdmin();
+}
+function moveVideo(listKey, vi, dir) {
+  const cfg = readForm();
+  const arr = listKey==='carousel' ? cfg.carousel.videos : cfg.sections[+listKey.replace('sec-','')].videos;
+  const t = vi+dir; if (t<0||t>=arr.length) return;
+  [arr[vi],arr[t]]=[arr[t],arr[vi]]; CFG=cfg; initAdmin();
+}
+function addSection() {
+  const cfg = readForm();
+  cfg.sections.push({id:uid(), title:'Nova Seção', videos:[]});
+  CFG=cfg; initAdmin(); showToast('Seção adicionada');
+}
+function removeSection(si) {
+  if (!confirm('Remover esta seção?')) return;
+  const cfg = readForm();
+  cfg.sections.splice(si,1); CFG=cfg; initAdmin();
+}
+function moveSection(si, dir) {
+  const cfg = readForm();
+  const t = si+dir; if (t<0||t>=cfg.sections.length) return;
+  [cfg.sections[si],cfg.sections[t]]=[cfg.sections[t],cfg.sections[si]]; CFG=cfg; initAdmin();
+}
+
+// ─── READ FORM ───
+function readForm() {
+  const g = id => { const e=document.getElementById(id); return e?e.value.trim():undefined; };
+  const hex = id => { const v=g(id); return v&&/^#[0-9a-fA-F]{3,6}$/.test(v)?v:DEFAULT_CONFIG.theme[id]||undefined; };
+
+  const stats = [];
+  document.querySelectorAll('#stats-list .stat-item').forEach(row => {
+    stats.push({ num: row.querySelector('.stat-num').value.trim(), label: row.querySelector('.stat-label').value.trim() });
   });
 
-  return cfg;
+  return {
+    heroVideoId: g('hero-video-id'),
+    heroOpacity: (parseInt(document.getElementById('hero-opacity')?.value||20)/100),
+    theme: {
+      accentColor:    document.getElementById('c-accent')?.value || '#e50914',
+      bgColor:        document.getElementById('c-bg')?.value || '#141414',
+      titleColor:     document.getElementById('c-title')?.value || '#ffffff',
+      mutedColor:     document.getElementById('c-muted')?.value || '#b3b3b3',
+      btnPrimaryBg:   document.getElementById('c-btn-bg')?.value || '#ffffff',
+      btnPrimaryText: document.getElementById('c-btn-txt')?.value || '#000000',
+      btnRedBg:       document.getElementById('c-accent')?.value || '#e50914',
+      btnGreenBg:     '#25D366',
+    },
+    seo: { title: g('seo-title'), description: g('seo-desc') },
+    navbar: { logo: g('navbar-logo') },
+    hero: { badge: g('hero-badge'), title1: g('hero-title1'), title2: g('hero-title2'), subtitle: g('hero-subtitle'), desc: g('hero-desc'), btn1Text: g('hero-btn1'), btn2Text: CFG.hero?.btn2Text },
+    about: {
+      tag: g('about-tag'), heading: g('about-heading'),
+      bio1: g('about-bio1'), bio2: g('about-bio2'),
+      photoUrl: g('about-photo'),
+      stats,
+      skills: (g('about-skills')||'').split(',').map(s=>s.trim()).filter(Boolean),
+    },
+    contact: { heading: g('contact-heading'), subtitle: g('contact-subtitle'), email: g('contact-email'), whatsapp: g('contact-whatsapp'), instagram: g('contact-instagram') },
+    footer: { logo: g('footer-logo'), text: g('footer-text') },
+    carousel: {
+      title: g('carousel-title-input'),
+      videos: readVideoList('list-carousel', true),
+    },
+    sections: (() => {
+      const titles = document.querySelectorAll('.sec-title');
+      return Array.from(titles).map((t,si) => ({
+        id: CFG.sections[si]?.id || uid(),
+        title: t.value.trim(),
+        videos: readVideoList('list-sec-'+si, false),
+      }));
+    })(),
+  };
 }
 
 function readVideoList(containerId, isCarousel) {
-  const el = document.getElementById(containerId);
-  if (!el) return [];
-  const items = el.querySelectorAll('.video-item');
-  const result = [];
-  items.forEach(item => {
-    const ytId = item.querySelector('.field-ytid').value.trim();
-    const title = item.querySelector('.field-title').value.trim();
-    const badge = item.querySelector('.field-badge').value.trim();
-    const match = item.querySelector('.field-match').value.trim();
-    const year  = item.querySelector('.field-year').value.trim();
-    const desc  = item.querySelector('.field-desc').value.trim();
-    const tagsEl = item.querySelector('.field-tags');
-    const tags = tagsEl ? tagsEl.value.split(',').map(t => t.trim()).filter(Boolean) : [];
-    if (!ytId) return;
-    const v = { id: uid(), ytId, title, desc, badge, match, year };
+  const el = document.getElementById(containerId); if (!el) return [];
+  return Array.from(el.querySelectorAll('.video-item')).map(item => {
+    const ytId = item.querySelector('.f-ytid')?.value.trim()||'';
+    const tags = isCarousel ? undefined : (item.querySelector('.f-tags')?.value||'').split(',').map(s=>s.trim()).filter(Boolean);
+    const v = { id:uid(), ytId, title:item.querySelector('.f-title')?.value.trim()||'', desc:item.querySelector('.f-desc')?.value.trim()||'', badge:item.querySelector('.f-badge')?.value.trim()||'', match:item.querySelector('.f-match')?.value.trim()||'', year:item.querySelector('.f-year')?.value.trim()||'', hidden:item.querySelector('.f-hidden')?.checked||false };
     if (!isCarousel) v.tags = tags;
-    result.push(v);
-  });
-  return result;
+    return v;
+  }).filter(v => v.ytId);
 }
 
-// ===== ADD / REMOVE / MOVE =====
-function addVideo(listKey) {
-  const cfg = readFormIntoConfig();
-  const isCarousel = listKey === 'carousel';
-  const newVideo = { id: uid(), ytId: '', title: 'Novo vídeo', desc: '', badge: 'Projeto', match: '95%', year: '2025', tags: [] };
-
-  if (isCarousel) {
-    cfg.carousel.videos.push(newVideo);
-  } else {
-    const si = parseInt(listKey.replace('sec-', ''));
-    cfg.sections[si].videos.push(newVideo);
-  }
-
-  CONFIG = cfg;
-  initAdmin();
-  showToast('Vídeo adicionado');
-}
-
-function removeVideo(listKey, vi) {
-  if (!confirm('Remover este vídeo?')) return;
-  const cfg = readFormIntoConfig();
-  const isCarousel = listKey === 'carousel';
-  if (isCarousel) {
-    cfg.carousel.videos.splice(vi, 1);
-  } else {
-    const si = parseInt(listKey.replace('sec-', ''));
-    cfg.sections[si].videos.splice(vi, 1);
-  }
-  CONFIG = cfg;
-  initAdmin();
-}
-
-function moveVideo(listKey, vi, dir) {
-  const cfg = readFormIntoConfig();
-  const isCarousel = listKey === 'carousel';
-  let arr = isCarousel ? cfg.carousel.videos : cfg.sections[parseInt(listKey.replace('sec-',''))].videos;
-  const target = vi + dir;
-  if (target < 0 || target >= arr.length) return;
-  [arr[vi], arr[target]] = [arr[target], arr[vi]];
-  CONFIG = cfg;
-  initAdmin();
-}
-
-function addSection() {
-  const cfg = readFormIntoConfig();
-  cfg.sections.push({ id: uid(), title: 'Nova Seção', videos: [] });
-  CONFIG = cfg;
-  initAdmin();
-  showToast('Seção adicionada');
-}
-
-function removeSection(si) {
-  if (!confirm('Remover esta seção e todos os seus vídeos?')) return;
-  const cfg = readFormIntoConfig();
-  cfg.sections.splice(si, 1);
-  CONFIG = cfg;
-  initAdmin();
-}
-
-function updateThumb(input) {
-  const ytId = input.value.trim();
-  const item = input.closest('.video-item');
-  if (!item) return;
-  const thumb = item.querySelector('.thumb-preview');
-  const link = item.querySelector('.yt-link');
-  if (thumb) thumb.src = ytId ? 'https://i.ytimg.com/vi/' + ytId + '/hqdefault.jpg' : '';
-  if (link) { link.href = ytId ? 'https://www.youtube.com/watch?v=' + ytId : '#'; }
-}
-
-// ===== TOAST =====
+// ─── UTILS ───
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
 }
-
-function esc(str) {
-  if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
 </script>
 </body>
 </html>
