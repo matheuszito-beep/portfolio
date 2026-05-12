@@ -4,12 +4,23 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 });
 
+// YouTube video IDs mapeados por modal ID
+const YT_VIDEOS = {
+  'modal-yt1': '194T0HeO7VM',
+};
+
 // ===== MODAL =====
 function openModal(id) {
   const modal = document.getElementById(id);
   if (!modal) return;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+  if (YT_VIDEOS[id]) {
+    const iframe = modal.querySelector('.modal-yt-iframe');
+    if (iframe && !iframe.src.includes('youtube')) {
+      iframe.src = `https://www.youtube.com/embed/${YT_VIDEOS[id]}?autoplay=1`;
+    }
+  }
 }
 
 function closeModal(event, id) {
@@ -18,6 +29,8 @@ function closeModal(event, id) {
   if (!modal) return;
   const vid = modal.querySelector('.modal-video');
   if (vid) { vid.pause(); vid.currentTime = 0; }
+  const iframe = modal.querySelector('.modal-yt-iframe');
+  if (iframe) iframe.src = '';
   modal.classList.remove('open');
   document.body.style.overflow = '';
 }
@@ -27,6 +40,8 @@ document.addEventListener('keydown', (e) => {
   document.querySelectorAll('.modal-backdrop.open').forEach(modal => {
     const vid = modal.querySelector('.modal-video');
     if (vid) { vid.pause(); vid.currentTime = 0; }
+    const iframe = modal.querySelector('.modal-yt-iframe');
+    if (iframe) iframe.src = '';
     modal.classList.remove('open');
     document.body.style.overflow = '';
   });

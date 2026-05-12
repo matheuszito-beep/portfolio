@@ -65,11 +65,14 @@
             </div>
           </div>
 
-          <!-- Slide 2 — placeholder -->
-          <div class="carousel-slide carousel-placeholder">
-            <div class="placeholder-inner">
-              <span class="placeholder-icon">+</span>
-              <span>Em breve</span>
+          <!-- Slide 2 — YouTube -->
+          <div class="carousel-slide carousel-yt" onclick="openModal('modal-yt1')">
+            <img class="carousel-thumb" src="https://i.ytimg.com/vi/194T0HeO7VM/maxresdefault.jpg" alt="Vídeo YouTube" />
+            <div class="carousel-yt-play">▶</div>
+            <div class="carousel-info">
+              <span class="carousel-badge">YouTube</span>
+              <h3>194T0HeO7VM</h3>
+              <p>Clique para assistir no player.</p>
             </div>
           </div>
 
@@ -407,6 +410,20 @@
     <div class="footer-logo">MZ</div>
     <p>© 2026 Matheus Zito. Todos os direitos reservados.</p>
   </footer>
+
+  <!-- MODAL YOUTUBE -->
+  <div class="modal-backdrop" id="modal-yt1" onclick="closeModal(event,'modal-yt1')">
+    <div class="modal modal-wide">
+      <button class="modal-close" onclick="closeModal(null,'modal-yt1')">✕</button>
+      <div class="modal-yt-container">
+        <iframe id="yt-iframe-1" class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Vídeo YouTube</h2></div>
+        <p class="modal-desc">Assista ao vídeo completo.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAIS HORIZONTAIS -->
   <div class="modal-backdrop" id="modal-h1" onclick="closeModal(event,'modal-h1')">
