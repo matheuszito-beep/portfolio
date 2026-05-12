@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matheus Zito — Portfólio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">MZ</div>
+    <ul class="nav-links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato" class="btn-contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="assets/Trade-in TudoBonus 9x16.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-content">
+      <span class="hero-tag">Disponível para projetos</span>
+      <h1 class="hero-title">Matheus<br /><span class="hero-highlight">Zito</span></h1>
+      <p class="hero-subtitle">Motion Designer & Editor de Vídeo</p>
+      <p class="hero-desc">Transformo ideias em experiências visuais memoráveis. Especializado em motion graphics, edição cinematográfica e conteúdo digital.</p>
+      <div class="hero-actions">
+        <a href="#projetos" class="btn-primary">▶ Ver Projetos</a>
+        <a href="#sobre" class="btn-secondary">+ Sobre mim</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Role para explorar</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- CARROSSEL HORIZONTAL -->
+  <section class="carousel-section" id="projetos">
+    <h2 class="row-title">Vídeos em Destaque</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Anterior">&#8249;</button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carousel-track">
+
+          <!-- Slide 1 — vídeo real -->
+          <div class="carousel-slide" onclick="openModal('modal-h1')">
+            <video class="carousel-thumb" muted preload="metadata" playsinline>
+              <source src="assets/pos evento 15 anos.mp4" type="video/mp4" />
+            </video>
+            <div class="carousel-info">
+              <span class="carousel-badge">Evento</span>
+              <h3>Pós Evento — 15 Anos</h3>
+              <p>Cobertura cinematográfica de um marco comemorativo especial.</p>
+            </div>
+          </div>
+
+          <!-- Slide 2 — placeholder -->
+          <div class="carousel-slide carousel-placeholder">
+            <div class="placeholder-inner">
+              <span class="placeholder-icon">+</span>
+              <span>Em breve</span>
+            </div>
+          </div>
+
+          <!-- Slide 3 — placeholder -->
+          <div class="carousel-slide carousel-placeholder">
+            <div class="placeholder-inner">
+              <span class="placeholder-icon">+</span>
+              <span>Em breve</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Próximo">&#8250;</button>
+    </div>
+  </section>
+
+  <!-- ROWS VERTICAIS -->
+  <main class="rows-container">
+
+    <section class="row">
+      <h2 class="row-title">Projetos Recentes — Redes Sociais</h2>
+      <div class="row-track">
+
+        <!-- 1 -->
+        <div class="card" onclick="openModal('modal-1')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/Atendimento 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/Atendimento 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Atendimento</h3>
+                <div class="card-meta"><span class="match">97%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Vídeo de atendimento com narrativa envolvente e edição dinâmica.</p>
+              <div class="card-tags"><span>Edição</span><span>Motion</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-1');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="card" onclick="openModal('modal-2')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/Entrega e garantia  9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/Entrega e garantia  9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Entrega & Garantia</h3>
+                <div class="card-meta"><span class="match">95%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Comunicação sobre política de entrega e garantia da marca.</p>
+              <div class="card-tags"><span>Institucional</span><span>Edição</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-2');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="card" onclick="openModal('modal-3')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/Trade-in TudoBonus 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/Trade-in TudoBonus 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Trade-in TudoBônus</h3>
+                <div class="card-meta"><span class="match">96%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Campanha de Trade-in com call-to-action direto.</p>
+              <div class="card-tags"><span>Campanha</span><span>Motion</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-3');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="card" onclick="openModal('modal-4')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/Trade-in TudoBonus 2 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/Trade-in TudoBonus 2 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Trade-in TudoBônus 2</h3>
+                <div class="card-meta"><span class="match">93%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Segunda versão com nova abordagem criativa e ritmo renovado.</p>
+              <div class="card-tags"><span>Campanha</span><span>Edição</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-4');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="card" onclick="openModal('modal-5')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/parceria Fox e TudoBônus 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/parceria Fox e TudoBônus 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Parceria Fox & TudoBônus</h3>
+                <div class="card-meta"><span class="match">98%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Anúncio de parceria com identidade visual sofisticada.</p>
+              <div class="card-tags"><span>Parceria</span><span>Institucional</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-5');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="card" onclick="openModal('modal-6')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/LL08S 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/LL08S 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Projeto LL08S</h3>
+                <div class="card-meta"><span class="match">91%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Produção vertical para redes sociais com edição rítmica.</p>
+              <div class="card-tags"><span>Social</span><span>Motion</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-6');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="card" onclick="openModal('modal-7')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/LP14V 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/LP14V 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Projeto LP14V</h3>
+                <div class="card-meta"><span class="match">90%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Conteúdo vertical de alto impacto para campanhas digitais.</p>
+              <div class="card-tags"><span>Campanha</span><span>Edição</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-7');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="card" onclick="openModal('modal-8')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/ACS34 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/ACS34 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Projeto ACS34</h3>
+                <div class="card-meta"><span class="match">89%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Vídeo vertical com storytelling visual e edição precisa.</p>
+              <div class="card-tags"><span>Social</span><span>Story</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-8');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="card" onclick="openModal('modal-9')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/iq8s 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/iq8s 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Projeto IQ8S</h3>
+                <div class="card-meta"><span class="match">88%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Produção para redes sociais com identidade visual marcante.</p>
+              <div class="card-tags"><span>Reels</span><span>Motion</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-9');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="card" onclick="openModal('modal-10')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/LV08B 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/LV08B 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Projeto LV08B</h3>
+                <div class="card-meta"><span class="match">87%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Conteúdo vertical otimizado para Stories e Reels.</p>
+              <div class="card-tags"><span>Stories</span><span>Edição</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-10');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="card" onclick="openModal('modal-11')">
+          <video class="card-thumb" muted preload="metadata" playsinline>
+            <source src="assets/itamaster 9x16.mp4" type="video/mp4" />
+          </video>
+          <div class="card-hover">
+            <video class="card-preview" muted preload="metadata" playsinline>
+              <source src="assets/itamaster 9x16.mp4" type="video/mp4" />
+            </video>
+            <div class="card-hover-body">
+              <div class="card-hover-top">
+                <h3>Itamaster</h3>
+                <div class="card-meta"><span class="match">94%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+              </div>
+              <p>Produção vertical para a marca Itamaster com alta qualidade.</p>
+              <div class="card-tags"><span>Brand</span><span>Motion</span></div>
+              <div class="card-actions">
+                <button class="btn-play" onclick="openModal('modal-11');event.stopPropagation()">▶</button>
+                <button class="btn-like">👍</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SOBRE -->
+  <section class="about" id="sobre">
+    <div class="about-content">
+      <div class="about-text">
+        <span class="about-tag">Sobre mim</span>
+        <h2>Por trás das câmeras</h2>
+        <p>Sou editor de vídeo e motion designer especializado em conteúdo para redes sociais, campanhas publicitárias e vídeos institucionais. Já trabalhei com marcas, criadores e agências de todo o Brasil.</p>
+        <p>Minha especialidade está em unir técnica e criatividade — seja num hook que prende em 3 segundos ou numa campanha que fortalece uma marca.</p>
+        <div class="about-stats">
+          <div class="stat"><span class="stat-num">150+</span><span class="stat-label">Projetos entregues</span></div>
+          <div class="stat"><span class="stat-num">80+</span><span class="stat-label">Clientes satisfeitos</span></div>
+          <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Anos de experiência</span></div>
+        </div>
+        <div class="about-skills">
+          <span>After Effects</span><span>Premiere Pro</span>
+          <span>Photoshop</span><span>Illustrator</span><span>Motion Graphics</span>
+          <span>Color Grading</span><span>Sound Design</span>
+        </div>
+      </div>
+      <div class="about-photo">
+        <img src="assets/foto.jpg" alt="Matheus Zito" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact" id="contato">
+    <div class="contact-content">
+      <h2>Vamos trabalhar juntos?</h2>
+      <p>Aberto para projetos freelance, parcerias e colaborações criativas.</p>
+      <div class="contact-links">
+        <a href="mailto:seu@email.com" class="btn-primary">✉ Enviar e-mail</a>
+        <a href="https://wa.me/5511999999999" class="btn-whatsapp" target="_blank">💬 WhatsApp</a>
+        <a href="https://instagram.com/seuuser" class="btn-secondary" target="_blank">Instagram</a>
+        <a href="https://linkedin.com/in/seuuser" class="btn-secondary" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">MZ</div>
+    <p>© 2026 Matheus Zito. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- MODAIS HORIZONTAIS -->
+  <div class="modal-backdrop" id="modal-h1" onclick="closeModal(event,'modal-h1')">
+    <div class="modal modal-wide">
+      <button class="modal-close" onclick="closeModal(null,'modal-h1')">✕</button>
+      <video class="modal-video" controls playsinline>
+        <source src="assets/pos evento 15 anos.mp4" type="video/mp4" />
+      </video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Pós Evento — 15 Anos</h2></div>
+        <div class="modal-meta"><span class="match">98% match</span><span class="year">2025</span></div>
+        <p class="modal-desc">Cobertura cinematográfica de um marco comemorativo especial. Produção completa com edição narrativa e colorização.</p>
+        <div class="modal-details">
+          <div><span class="detail-label">Ferramentas:</span><span>Premiere Pro, DaVinci Resolve</span></div>
+          <div><span class="detail-label">Formato:</span><span>Horizontal — Evento</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAIS VERTICAIS -->
+  <div class="modal-backdrop" id="modal-1" onclick="closeModal(event,'modal-1')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-1')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/Atendimento 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Atendimento</h2></div>
+        <div class="modal-meta"><span class="match">97%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Vídeo de atendimento ao cliente com narrativa envolvente e edição dinâmica.</p>
+        <div class="modal-details">
+          <div><span class="detail-label">Ferramentas:</span><span>Premiere Pro, After Effects</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-2" onclick="closeModal(event,'modal-2')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-2')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/Entrega e garantia  9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Entrega & Garantia</h2></div>
+        <div class="modal-meta"><span class="match">95%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Comunicação visual sobre política de entrega e garantia da marca.</p>
+        <div class="modal-details">
+          <div><span class="detail-label">Ferramentas:</span><span>Premiere Pro, After Effects</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-3" onclick="closeModal(event,'modal-3')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-3')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/Trade-in TudoBonus 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Trade-in TudoBônus</h2></div>
+        <div class="modal-meta"><span class="match">96%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Campanha de Trade-in com call-to-action direto e produção ágil.</p>
+        <div class="modal-details">
+          <div><span class="detail-label">Cliente:</span><span>TudoBônus</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-4" onclick="closeModal(event,'modal-4')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-4')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/Trade-in TudoBonus 2 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Trade-in TudoBônus 2</h2></div>
+        <div class="modal-meta"><span class="match">93%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Segunda versão da campanha com nova abordagem criativa.</p>
+        <div class="modal-details">
+          <div><span class="detail-label">Cliente:</span><span>TudoBônus</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-5" onclick="closeModal(event,'modal-5')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-5')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/parceria Fox e TudoBônus 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Parceria Fox & TudoBônus</h2></div>
+        <div class="modal-meta"><span class="match">98%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Anúncio de parceria estratégica com identidade visual sofisticada.</p>
+        <div class="modal-details">
+          <div><span class="detail-label">Clientes:</span><span>Fox & TudoBônus</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-6" onclick="closeModal(event,'modal-6')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-6')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/LL08S 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Projeto LL08S</h2></div>
+        <div class="modal-meta"><span class="match">91%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Produção vertical para redes sociais com edição rítmica e dinâmica.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-7" onclick="closeModal(event,'modal-7')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-7')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/LP14V 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Projeto LP14V</h2></div>
+        <div class="modal-meta"><span class="match">90%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Conteúdo vertical de alto impacto para campanhas digitais.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-8" onclick="closeModal(event,'modal-8')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-8')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/ACS34 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Projeto ACS34</h2></div>
+        <div class="modal-meta"><span class="match">89%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Vídeo vertical com storytelling visual e edição precisa.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-9" onclick="closeModal(event,'modal-9')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-9')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/iq8s 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Projeto IQ8S</h2></div>
+        <div class="modal-meta"><span class="match">88%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Produção para redes sociais com identidade visual marcante.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-10" onclick="closeModal(event,'modal-10')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-10')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/LV08B 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Projeto LV08B</h2></div>
+        <div class="modal-meta"><span class="match">87%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Conteúdo vertical otimizado para Stories e Reels.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-11" onclick="closeModal(event,'modal-11')">
+    <div class="modal modal-vertical">
+      <button class="modal-close" onclick="closeModal(null,'modal-11')">✕</button>
+      <video class="modal-video" controls playsinline><source src="assets/itamaster 9x16.mp4" type="video/mp4" /></video>
+      <div class="modal-body">
+        <div class="modal-header"><h2>Itamaster</h2></div>
+        <div class="modal-meta"><span class="match">94%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Produção vertical para a marca Itamaster com alta qualidade visual.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

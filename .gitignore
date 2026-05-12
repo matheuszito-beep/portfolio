@@ -1,0 +1,5 @@
+.DS_Store
+assets/*.mp4
+assets/*.mov
+assets/*.avi
+assets/*.webm
