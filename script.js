@@ -17,6 +17,24 @@ const DEFAULT_CONFIG = {
         desc: 'Cobertura completa do World Commerce & Contracting Event Forum 2025.',
         badge: 'Evento', match: '96%', year: '2025'
       },
+      {
+        id: 'ch3', ytId: '5ifoydf1FRM',
+        title: 'Casamento',
+        desc: 'Cobertura cinematográfica de casamento.',
+        badge: 'Casamento', match: '97%', year: '2025'
+      },
+      {
+        id: 'ch4', ytId: 'iX6ks9MoClw',
+        title: 'Evento Corporativo',
+        desc: 'Cobertura audiovisual de evento corporativo.',
+        badge: 'Evento', match: '95%', year: '2025'
+      },
+      {
+        id: 'ch5', ytId: '5j5CPwguo6E',
+        title: 'Evento Corporativo 2',
+        desc: 'Cobertura audiovisual de evento corporativo.',
+        badge: 'Evento', match: '95%', year: '2025'
+      },
     ]
   },
   sections: [
