@@ -6,7 +6,14 @@ window.addEventListener('scroll', () => {
 
 // YouTube video IDs mapeados por modal ID
 const YT_VIDEOS = {
-  'modal-yt1': '194T0HeO7VM',
+  'modal-h1': '194T0HeO7VM',
+  'modal-h2': 'oHrfwTFqsTg',
+  'modal-v1': 'vhwK4yhPBzA',
+  'modal-v2': 'KiRR4Upsbrg',
+  'modal-v3': 'txQJrrwfVHk',
+  'modal-v4': 'TJBivra1fAg',
+  'modal-v5': 'x1yuS8IHdYc',
+  'modal-v6': '15z7iaeOTRY',
 };
 
 // ===== MODAL =====
@@ -27,8 +34,6 @@ function closeModal(event, id) {
   if (event && event.target !== event.currentTarget) return;
   const modal = document.getElementById(id);
   if (!modal) return;
-  const vid = modal.querySelector('.modal-video');
-  if (vid) { vid.pause(); vid.currentTime = 0; }
   const iframe = modal.querySelector('.modal-yt-iframe');
   if (iframe) iframe.src = '';
   modal.classList.remove('open');
@@ -38,8 +43,6 @@ function closeModal(event, id) {
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
   document.querySelectorAll('.modal-backdrop.open').forEach(modal => {
-    const vid = modal.querySelector('.modal-video');
-    if (vid) { vid.pause(); vid.currentTime = 0; }
     const iframe = modal.querySelector('.modal-yt-iframe');
     if (iframe) iframe.src = '';
     modal.classList.remove('open');
@@ -93,7 +96,6 @@ document.addEventListener('keydown', (e) => {
 
   // Após transição, pula silenciosamente para o equivalente real se estiver num clone
   track.addEventListener('transitionend', () => {
-    const visible = slidesVisible();
     const lastReal = cloneCount + total - 1;
     const firstReal = cloneCount;
 
@@ -121,33 +123,6 @@ document.addEventListener('keydown', (e) => {
 
   goTo(current, false);
 })();
-
-// ===== HOVER VIDEO PREVIEW (7 segundos, sem som) =====
-const PREVIEW_DURATION = 7000;
-
-document.querySelectorAll('.card').forEach(card => {
-  const preview = card.querySelector('.card-preview');
-  if (!preview) return;
-
-  let previewTimeout = null;
-
-  card.addEventListener('mouseenter', () => {
-    clearTimeout(previewTimeout);
-    preview.currentTime = 0;
-    preview.muted = true;
-    preview.play().catch(() => {});
-    previewTimeout = setTimeout(() => {
-      preview.pause();
-      preview.currentTime = 0;
-    }, PREVIEW_DURATION);
-  });
-
-  card.addEventListener('mouseleave', () => {
-    clearTimeout(previewTimeout);
-    preview.pause();
-    preview.currentTime = 0;
-  });
-});
 
 // ===== SCROLL REVEAL =====
 const revealStyle = document.createElement('style');

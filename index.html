@@ -25,9 +25,10 @@
   <section class="hero" id="inicio">
     <div class="hero-bg">
       <div class="hero-overlay"></div>
-      <video class="hero-video" autoplay muted loop playsinline>
-        <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Trade-in TudoBonus 9x16.mp4" type="video/mp4" />
-      </video>
+      <!-- Vídeo de fundo via YouTube (sem controles, mudo, loop) -->
+      <div class="hero-yt-bg">
+        <iframe src="https://www.youtube.com/embed/oHrfwTFqsTg?autoplay=1&mute=1&loop=1&controls=0&playlist=oHrfwTFqsTg&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen"></iframe>
+      </div>
     </div>
     <div class="hero-content">
       <span class="hero-tag">Disponível para projetos</span>
@@ -45,7 +46,7 @@
     </div>
   </section>
 
-  <!-- CARROSSEL HORIZONTAL -->
+  <!-- CARROSSEL HORIZONTAL 16x9 -->
   <section class="carousel-section" id="projetos">
     <h2 class="row-title">Vídeos em Destaque</h2>
     <div class="carousel-wrapper">
@@ -53,26 +54,25 @@
       <div class="carousel-viewport">
         <div class="carousel-track" id="carousel-track">
 
-          <!-- Slide 1 — vídeo real -->
-          <div class="carousel-slide" onclick="openModal('modal-h1')">
-            <video class="carousel-thumb" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/pos evento 15 anos.mp4" type="video/mp4" />
-            </video>
+          <!-- Slide 1 -->
+          <div class="carousel-slide carousel-yt" onclick="openModal('modal-h1')">
+            <img class="carousel-thumb" src="https://i.ytimg.com/vi/194T0HeO7VM/maxresdefault.jpg" alt="Indústria Fox 15 anos" />
+            <div class="carousel-yt-play">▶</div>
             <div class="carousel-info">
               <span class="carousel-badge">Evento</span>
-              <h3>Pós Evento — 15 Anos</h3>
+              <h3>Indústria Fox — 15 Anos</h3>
               <p>Cobertura cinematográfica de um marco comemorativo especial.</p>
             </div>
           </div>
 
-          <!-- Slide 2 — YouTube -->
-          <div class="carousel-slide carousel-yt" onclick="openModal('modal-yt1')">
-            <img class="carousel-thumb" src="https://i.ytimg.com/vi/194T0HeO7VM/maxresdefault.jpg" alt="Vídeo YouTube" />
+          <!-- Slide 2 -->
+          <div class="carousel-slide carousel-yt" onclick="openModal('modal-h2')">
+            <img class="carousel-thumb" src="https://i.ytimg.com/vi/oHrfwTFqsTg/maxresdefault.jpg" alt="WCEF 2025" />
             <div class="carousel-yt-play">▶</div>
             <div class="carousel-info">
-              <span class="carousel-badge">YouTube</span>
-              <h3>194T0HeO7VM</h3>
-              <p>Clique para assistir no player.</p>
+              <span class="carousel-badge">Evento</span>
+              <h3>WCEF 2025</h3>
+              <p>Cobertura do World Commerce & Contracting Event Forum 2025.</p>
             </div>
           </div>
 
@@ -92,29 +92,24 @@
 
   <!-- ROWS VERTICAIS -->
   <main class="rows-container">
-
     <section class="row">
       <h2 class="row-title">Projetos Recentes — Redes Sociais</h2>
       <div class="row-track">
 
         <!-- 1 -->
-        <div class="card" onclick="openModal('modal-1')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Atendimento 9x16.mp4" type="video/mp4" />
-          </video>
+        <div class="card card-yt" onclick="openModal('modal-v1')">
+          <img class="card-thumb" src="https://i.ytimg.com/vi/vhwK4yhPBzA/hqdefault.jpg" alt="Parceria Fox e TudoBônus" />
           <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Atendimento 9x16.mp4" type="video/mp4" />
-            </video>
+            <img class="card-preview-img" src="https://i.ytimg.com/vi/vhwK4yhPBzA/hqdefault.jpg" alt="Parceria Fox e TudoBônus" />
             <div class="card-hover-body">
               <div class="card-hover-top">
-                <h3>Atendimento</h3>
-                <div class="card-meta"><span class="match">97%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+                <h3>Parceria Fox & TudoBônus</h3>
+                <div class="card-meta"><span class="match">98%</span><span class="year">2025</span><span class="duration">9×16</span></div>
               </div>
-              <p>Vídeo de atendimento com narrativa envolvente e edição dinâmica.</p>
-              <div class="card-tags"><span>Edição</span><span>Motion</span></div>
+              <p>Anúncio de parceria estratégica com identidade visual sofisticada.</p>
+              <div class="card-tags"><span>Parceria</span><span>Motion</span></div>
               <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-1');event.stopPropagation()">▶</button>
+                <button class="btn-play" onclick="openModal('modal-v1');event.stopPropagation()">▶</button>
                 <button class="btn-like">👍</button>
               </div>
             </div>
@@ -122,23 +117,19 @@
         </div>
 
         <!-- 2 -->
-        <div class="card" onclick="openModal('modal-2')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Entrega e garantia  9x16.mp4" type="video/mp4" />
-          </video>
+        <div class="card card-yt" onclick="openModal('modal-v2')">
+          <img class="card-thumb" src="https://i.ytimg.com/vi/KiRR4Upsbrg/hqdefault.jpg" alt="Atendimento TudoBônus" />
           <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Entrega e garantia  9x16.mp4" type="video/mp4" />
-            </video>
+            <img class="card-preview-img" src="https://i.ytimg.com/vi/KiRR4Upsbrg/hqdefault.jpg" alt="Atendimento TudoBônus" />
             <div class="card-hover-body">
               <div class="card-hover-top">
-                <h3>Entrega & Garantia</h3>
-                <div class="card-meta"><span class="match">95%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+                <h3>Atendimento TudoBônus</h3>
+                <div class="card-meta"><span class="match">97%</span><span class="year">2025</span><span class="duration">9×16</span></div>
               </div>
-              <p>Comunicação sobre política de entrega e garantia da marca.</p>
+              <p>Vídeo de atendimento ao cliente com narrativa envolvente.</p>
               <div class="card-tags"><span>Institucional</span><span>Edição</span></div>
               <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-2');event.stopPropagation()">▶</button>
+                <button class="btn-play" onclick="openModal('modal-v2');event.stopPropagation()">▶</button>
                 <button class="btn-like">👍</button>
               </div>
             </div>
@@ -146,23 +137,19 @@
         </div>
 
         <!-- 3 -->
-        <div class="card" onclick="openModal('modal-3')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Trade-in TudoBonus 9x16.mp4" type="video/mp4" />
-          </video>
+        <div class="card card-yt" onclick="openModal('modal-v3')">
+          <img class="card-thumb" src="https://i.ytimg.com/vi/txQJrrwfVHk/hqdefault.jpg" alt="Entrega e Garantia TudoBônus" />
           <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Trade-in TudoBonus 9x16.mp4" type="video/mp4" />
-            </video>
+            <img class="card-preview-img" src="https://i.ytimg.com/vi/txQJrrwfVHk/hqdefault.jpg" alt="Entrega e Garantia TudoBônus" />
             <div class="card-hover-body">
               <div class="card-hover-top">
-                <h3>Trade-in TudoBônus</h3>
-                <div class="card-meta"><span class="match">96%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+                <h3>Entrega & Garantia</h3>
+                <div class="card-meta"><span class="match">95%</span><span class="year">2025</span><span class="duration">9×16</span></div>
               </div>
-              <p>Campanha de Trade-in com call-to-action direto.</p>
+              <p>Comunicação visual sobre política de entrega e garantia da marca.</p>
               <div class="card-tags"><span>Campanha</span><span>Motion</span></div>
               <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-3');event.stopPropagation()">▶</button>
+                <button class="btn-play" onclick="openModal('modal-v3');event.stopPropagation()">▶</button>
                 <button class="btn-like">👍</button>
               </div>
             </div>
@@ -170,23 +157,19 @@
         </div>
 
         <!-- 4 -->
-        <div class="card" onclick="openModal('modal-4')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Trade-in TudoBonus 2 9x16.mp4" type="video/mp4" />
-          </video>
+        <div class="card card-yt" onclick="openModal('modal-v4')">
+          <img class="card-thumb" src="https://i.ytimg.com/vi/TJBivra1fAg/hqdefault.jpg" alt="Trade in TudoBônus" />
           <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Trade-in TudoBonus 2 9x16.mp4" type="video/mp4" />
-            </video>
+            <img class="card-preview-img" src="https://i.ytimg.com/vi/TJBivra1fAg/hqdefault.jpg" alt="Trade in TudoBônus" />
             <div class="card-hover-body">
               <div class="card-hover-top">
-                <h3>Trade-in TudoBônus 2</h3>
-                <div class="card-meta"><span class="match">93%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+                <h3>Trade in TudoBônus</h3>
+                <div class="card-meta"><span class="match">96%</span><span class="year">2025</span><span class="duration">9×16</span></div>
               </div>
-              <p>Segunda versão com nova abordagem criativa e ritmo renovado.</p>
+              <p>Campanha de Trade-in com call-to-action direto e produção ágil.</p>
               <div class="card-tags"><span>Campanha</span><span>Edição</span></div>
               <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-4');event.stopPropagation()">▶</button>
+                <button class="btn-play" onclick="openModal('modal-v4');event.stopPropagation()">▶</button>
                 <button class="btn-like">👍</button>
               </div>
             </div>
@@ -194,23 +177,19 @@
         </div>
 
         <!-- 5 -->
-        <div class="card" onclick="openModal('modal-5')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/parceria Fox e TudoBônus 9x16.mp4" type="video/mp4" />
-          </video>
+        <div class="card card-yt" onclick="openModal('modal-v5')">
+          <img class="card-thumb" src="https://i.ytimg.com/vi/x1yuS8IHdYc/hqdefault.jpg" alt="Trade in TudoBonus" />
           <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/parceria Fox e TudoBônus 9x16.mp4" type="video/mp4" />
-            </video>
+            <img class="card-preview-img" src="https://i.ytimg.com/vi/x1yuS8IHdYc/hqdefault.jpg" alt="Trade in TudoBonus" />
             <div class="card-hover-body">
               <div class="card-hover-top">
-                <h3>Parceria Fox & TudoBônus</h3>
-                <div class="card-meta"><span class="match">98%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+                <h3>Trade in TudoBonus</h3>
+                <div class="card-meta"><span class="match">93%</span><span class="year">2025</span><span class="duration">9×16</span></div>
               </div>
-              <p>Anúncio de parceria com identidade visual sofisticada.</p>
-              <div class="card-tags"><span>Parceria</span><span>Institucional</span></div>
+              <p>Segunda versão da campanha com nova abordagem criativa.</p>
+              <div class="card-tags"><span>Campanha</span><span>Social</span></div>
               <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-5');event.stopPropagation()">▶</button>
+                <button class="btn-play" onclick="openModal('modal-v5');event.stopPropagation()">▶</button>
                 <button class="btn-like">👍</button>
               </div>
             </div>
@@ -218,143 +197,19 @@
         </div>
 
         <!-- 6 -->
-        <div class="card" onclick="openModal('modal-6')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LL08S 9x16.mp4" type="video/mp4" />
-          </video>
+        <div class="card card-yt" onclick="openModal('modal-v6')">
+          <img class="card-thumb" src="https://i.ytimg.com/vi/15z7iaeOTRY/hqdefault.jpg" alt="Evento amcham Campinas" />
           <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LL08S 9x16.mp4" type="video/mp4" />
-            </video>
+            <img class="card-preview-img" src="https://i.ytimg.com/vi/15z7iaeOTRY/hqdefault.jpg" alt="Evento amcham Campinas" />
             <div class="card-hover-body">
               <div class="card-hover-top">
-                <h3>Projeto LL08S</h3>
-                <div class="card-meta"><span class="match">91%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-              </div>
-              <p>Produção vertical para redes sociais com edição rítmica.</p>
-              <div class="card-tags"><span>Social</span><span>Motion</span></div>
-              <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-6');event.stopPropagation()">▶</button>
-                <button class="btn-like">👍</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7 -->
-        <div class="card" onclick="openModal('modal-7')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LP14V 9x16.mp4" type="video/mp4" />
-          </video>
-          <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LP14V 9x16.mp4" type="video/mp4" />
-            </video>
-            <div class="card-hover-body">
-              <div class="card-hover-top">
-                <h3>Projeto LP14V</h3>
-                <div class="card-meta"><span class="match">90%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-              </div>
-              <p>Conteúdo vertical de alto impacto para campanhas digitais.</p>
-              <div class="card-tags"><span>Campanha</span><span>Edição</span></div>
-              <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-7');event.stopPropagation()">▶</button>
-                <button class="btn-like">👍</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8 -->
-        <div class="card" onclick="openModal('modal-8')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/ACS34 9x16.mp4" type="video/mp4" />
-          </video>
-          <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/ACS34 9x16.mp4" type="video/mp4" />
-            </video>
-            <div class="card-hover-body">
-              <div class="card-hover-top">
-                <h3>Projeto ACS34</h3>
-                <div class="card-meta"><span class="match">89%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-              </div>
-              <p>Vídeo vertical com storytelling visual e edição precisa.</p>
-              <div class="card-tags"><span>Social</span><span>Story</span></div>
-              <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-8');event.stopPropagation()">▶</button>
-                <button class="btn-like">👍</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9 -->
-        <div class="card" onclick="openModal('modal-9')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/iq8s 9x16.mp4" type="video/mp4" />
-          </video>
-          <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/iq8s 9x16.mp4" type="video/mp4" />
-            </video>
-            <div class="card-hover-body">
-              <div class="card-hover-top">
-                <h3>Projeto IQ8S</h3>
-                <div class="card-meta"><span class="match">88%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-              </div>
-              <p>Produção para redes sociais com identidade visual marcante.</p>
-              <div class="card-tags"><span>Reels</span><span>Motion</span></div>
-              <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-9');event.stopPropagation()">▶</button>
-                <button class="btn-like">👍</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 10 -->
-        <div class="card" onclick="openModal('modal-10')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LV08B 9x16.mp4" type="video/mp4" />
-          </video>
-          <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LV08B 9x16.mp4" type="video/mp4" />
-            </video>
-            <div class="card-hover-body">
-              <div class="card-hover-top">
-                <h3>Projeto LV08B</h3>
-                <div class="card-meta"><span class="match">87%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-              </div>
-              <p>Conteúdo vertical otimizado para Stories e Reels.</p>
-              <div class="card-tags"><span>Stories</span><span>Edição</span></div>
-              <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-10');event.stopPropagation()">▶</button>
-                <button class="btn-like">👍</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 11 -->
-        <div class="card" onclick="openModal('modal-11')">
-          <video class="card-thumb" muted preload="metadata" playsinline>
-            <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/itamaster 9x16.mp4" type="video/mp4" />
-          </video>
-          <div class="card-hover">
-            <video class="card-preview" muted preload="metadata" playsinline>
-              <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/itamaster 9x16.mp4" type="video/mp4" />
-            </video>
-            <div class="card-hover-body">
-              <div class="card-hover-top">
-                <h3>Itamaster</h3>
+                <h3>Evento Amcham Campinas</h3>
                 <div class="card-meta"><span class="match">94%</span><span class="year">2025</span><span class="duration">9×16</span></div>
               </div>
-              <p>Produção vertical para a marca Itamaster com alta qualidade.</p>
-              <div class="card-tags"><span>Brand</span><span>Motion</span></div>
+              <p>Cobertura de evento da Câmara Americana de Comércio em Campinas.</p>
+              <div class="card-tags"><span>Evento</span><span>Cobertura</span></div>
               <div class="card-actions">
-                <button class="btn-play" onclick="openModal('modal-11');event.stopPropagation()">▶</button>
+                <button class="btn-play" onclick="openModal('modal-v6');event.stopPropagation()">▶</button>
                 <button class="btn-like">👍</button>
               </div>
             </div>
@@ -363,7 +218,6 @@
 
       </div>
     </section>
-
   </main>
 
   <!-- SOBRE -->
@@ -386,7 +240,7 @@
         </div>
       </div>
       <div class="about-photo">
-        <img src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/foto.jpg" alt="Matheus Zito" />
+        <img src="assets/foto.jpg" alt="Matheus Zito" />
       </div>
     </div>
   </section>
@@ -398,9 +252,8 @@
       <p>Aberto para projetos freelance, parcerias e colaborações criativas.</p>
       <div class="contact-links">
         <a href="mailto:seu@email.com" class="btn-primary">✉ Enviar e-mail</a>
-        <a href="https://wa.me/5511999999999" class="btn-whatsapp" target="_blank">💬 WhatsApp</a>
-        <a href="https://instagram.com/seuuser" class="btn-secondary" target="_blank">Instagram</a>
-        <a href="https://linkedin.com/in/seuuser" class="btn-secondary" target="_blank">LinkedIn</a>
+        <a href="https://wa.me/5511921962624" class="btn-whatsapp" target="_blank">💬 WhatsApp</a>
+        <a href="https://www.instagram.com/thebackstage.on/" class="btn-secondary" target="_blank">Instagram</a>
       </div>
     </div>
   </section>
@@ -411,183 +264,116 @@
     <p>© 2026 Matheus Zito. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- MODAL YOUTUBE -->
-  <div class="modal-backdrop" id="modal-yt1" onclick="closeModal(event,'modal-yt1')">
-    <div class="modal modal-wide">
-      <button class="modal-close" onclick="closeModal(null,'modal-yt1')">✕</button>
-      <div class="modal-yt-container">
-        <iframe id="yt-iframe-1" class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-      <div class="modal-body">
-        <div class="modal-header"><h2>Vídeo YouTube</h2></div>
-        <p class="modal-desc">Assista ao vídeo completo.</p>
-      </div>
-    </div>
-  </div>
-
   <!-- MODAIS HORIZONTAIS -->
   <div class="modal-backdrop" id="modal-h1" onclick="closeModal(event,'modal-h1')">
     <div class="modal modal-wide">
       <button class="modal-close" onclick="closeModal(null,'modal-h1')">✕</button>
-      <video class="modal-video" controls playsinline>
-        <source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/pos evento 15 anos.mp4" type="video/mp4" />
-      </video>
+      <div class="modal-yt-container">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
       <div class="modal-body">
-        <div class="modal-header"><h2>Pós Evento — 15 Anos</h2></div>
+        <div class="modal-header"><h2>Indústria Fox — 15 Anos</h2></div>
         <div class="modal-meta"><span class="match">98% match</span><span class="year">2025</span></div>
-        <p class="modal-desc">Cobertura cinematográfica de um marco comemorativo especial. Produção completa com edição narrativa e colorização.</p>
-        <div class="modal-details">
-          <div><span class="detail-label">Ferramentas:</span><span>Premiere Pro, DaVinci Resolve</span></div>
-          <div><span class="detail-label">Formato:</span><span>Horizontal — Evento</span></div>
-        </div>
+        <p class="modal-desc">Cobertura cinematográfica do 15º aniversário da Indústria Fox, com narrativa emocional e produção de alto nível.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-h2" onclick="closeModal(event,'modal-h2')">
+    <div class="modal modal-wide">
+      <button class="modal-close" onclick="closeModal(null,'modal-h2')">✕</button>
+      <div class="modal-yt-container">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="modal-body">
+        <div class="modal-header"><h2>WCEF 2025</h2></div>
+        <div class="modal-meta"><span class="match">96% match</span><span class="year">2025</span></div>
+        <p class="modal-desc">Cobertura completa do World Commerce & Contracting Event Forum 2025.</p>
       </div>
     </div>
   </div>
 
   <!-- MODAIS VERTICAIS -->
-  <div class="modal-backdrop" id="modal-1" onclick="closeModal(event,'modal-1')">
+  <div class="modal-backdrop" id="modal-v1" onclick="closeModal(event,'modal-v1')">
     <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-1')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Atendimento 9x16.mp4" type="video/mp4" /></video>
-      <div class="modal-body">
-        <div class="modal-header"><h2>Atendimento</h2></div>
-        <div class="modal-meta"><span class="match">97%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Vídeo de atendimento ao cliente com narrativa envolvente e edição dinâmica.</p>
-        <div class="modal-details">
-          <div><span class="detail-label">Ferramentas:</span><span>Premiere Pro, After Effects</span></div>
-        </div>
+      <button class="modal-close" onclick="closeModal(null,'modal-v1')">✕</button>
+      <div class="modal-yt-container modal-yt-vertical">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="modal-2" onclick="closeModal(event,'modal-2')">
-    <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-2')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Entrega e garantia  9x16.mp4" type="video/mp4" /></video>
-      <div class="modal-body">
-        <div class="modal-header"><h2>Entrega & Garantia</h2></div>
-        <div class="modal-meta"><span class="match">95%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Comunicação visual sobre política de entrega e garantia da marca.</p>
-        <div class="modal-details">
-          <div><span class="detail-label">Ferramentas:</span><span>Premiere Pro, After Effects</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="modal-3" onclick="closeModal(event,'modal-3')">
-    <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-3')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Trade-in TudoBonus 9x16.mp4" type="video/mp4" /></video>
-      <div class="modal-body">
-        <div class="modal-header"><h2>Trade-in TudoBônus</h2></div>
-        <div class="modal-meta"><span class="match">96%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Campanha de Trade-in com call-to-action direto e produção ágil.</p>
-        <div class="modal-details">
-          <div><span class="detail-label">Cliente:</span><span>TudoBônus</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="modal-4" onclick="closeModal(event,'modal-4')">
-    <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-4')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/Trade-in TudoBonus 2 9x16.mp4" type="video/mp4" /></video>
-      <div class="modal-body">
-        <div class="modal-header"><h2>Trade-in TudoBônus 2</h2></div>
-        <div class="modal-meta"><span class="match">93%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Segunda versão da campanha com nova abordagem criativa.</p>
-        <div class="modal-details">
-          <div><span class="detail-label">Cliente:</span><span>TudoBônus</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="modal-5" onclick="closeModal(event,'modal-5')">
-    <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-5')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/parceria Fox e TudoBônus 9x16.mp4" type="video/mp4" /></video>
       <div class="modal-body">
         <div class="modal-header"><h2>Parceria Fox & TudoBônus</h2></div>
         <div class="modal-meta"><span class="match">98%</span><span class="year">2025</span><span class="duration">9×16</span></div>
         <p class="modal-desc">Anúncio de parceria estratégica com identidade visual sofisticada.</p>
-        <div class="modal-details">
-          <div><span class="detail-label">Clientes:</span><span>Fox & TudoBônus</span></div>
-        </div>
       </div>
     </div>
   </div>
 
-  <div class="modal-backdrop" id="modal-6" onclick="closeModal(event,'modal-6')">
+  <div class="modal-backdrop" id="modal-v2" onclick="closeModal(event,'modal-v2')">
     <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-6')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LL08S 9x16.mp4" type="video/mp4" /></video>
+      <button class="modal-close" onclick="closeModal(null,'modal-v2')">✕</button>
+      <div class="modal-yt-container modal-yt-vertical">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
       <div class="modal-body">
-        <div class="modal-header"><h2>Projeto LL08S</h2></div>
-        <div class="modal-meta"><span class="match">91%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Produção vertical para redes sociais com edição rítmica e dinâmica.</p>
+        <div class="modal-header"><h2>Atendimento TudoBônus</h2></div>
+        <div class="modal-meta"><span class="match">97%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Vídeo de atendimento ao cliente com narrativa envolvente e edição dinâmica.</p>
       </div>
     </div>
   </div>
 
-  <div class="modal-backdrop" id="modal-7" onclick="closeModal(event,'modal-7')">
+  <div class="modal-backdrop" id="modal-v3" onclick="closeModal(event,'modal-v3')">
     <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-7')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LP14V 9x16.mp4" type="video/mp4" /></video>
+      <button class="modal-close" onclick="closeModal(null,'modal-v3')">✕</button>
+      <div class="modal-yt-container modal-yt-vertical">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
       <div class="modal-body">
-        <div class="modal-header"><h2>Projeto LP14V</h2></div>
-        <div class="modal-meta"><span class="match">90%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Conteúdo vertical de alto impacto para campanhas digitais.</p>
+        <div class="modal-header"><h2>Entrega & Garantia</h2></div>
+        <div class="modal-meta"><span class="match">95%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Comunicação visual sobre política de entrega e garantia da TudoBônus.</p>
       </div>
     </div>
   </div>
 
-  <div class="modal-backdrop" id="modal-8" onclick="closeModal(event,'modal-8')">
+  <div class="modal-backdrop" id="modal-v4" onclick="closeModal(event,'modal-v4')">
     <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-8')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/ACS34 9x16.mp4" type="video/mp4" /></video>
+      <button class="modal-close" onclick="closeModal(null,'modal-v4')">✕</button>
+      <div class="modal-yt-container modal-yt-vertical">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
       <div class="modal-body">
-        <div class="modal-header"><h2>Projeto ACS34</h2></div>
-        <div class="modal-meta"><span class="match">89%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Vídeo vertical com storytelling visual e edição precisa.</p>
+        <div class="modal-header"><h2>Trade in TudoBônus</h2></div>
+        <div class="modal-meta"><span class="match">96%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Campanha de Trade-in com call-to-action direto e produção ágil.</p>
       </div>
     </div>
   </div>
 
-  <div class="modal-backdrop" id="modal-9" onclick="closeModal(event,'modal-9')">
+  <div class="modal-backdrop" id="modal-v5" onclick="closeModal(event,'modal-v5')">
     <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-9')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/iq8s 9x16.mp4" type="video/mp4" /></video>
+      <button class="modal-close" onclick="closeModal(null,'modal-v5')">✕</button>
+      <div class="modal-yt-container modal-yt-vertical">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
       <div class="modal-body">
-        <div class="modal-header"><h2>Projeto IQ8S</h2></div>
-        <div class="modal-meta"><span class="match">88%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Produção para redes sociais com identidade visual marcante.</p>
+        <div class="modal-header"><h2>Trade in TudoBonus</h2></div>
+        <div class="modal-meta"><span class="match">93%</span><span class="year">2025</span><span class="duration">9×16</span></div>
+        <p class="modal-desc">Segunda versão da campanha com nova abordagem criativa e ritmo renovado.</p>
       </div>
     </div>
   </div>
 
-  <div class="modal-backdrop" id="modal-10" onclick="closeModal(event,'modal-10')">
+  <div class="modal-backdrop" id="modal-v6" onclick="closeModal(event,'modal-v6')">
     <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-10')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/LV08B 9x16.mp4" type="video/mp4" /></video>
-      <div class="modal-body">
-        <div class="modal-header"><h2>Projeto LV08B</h2></div>
-        <div class="modal-meta"><span class="match">87%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Conteúdo vertical otimizado para Stories e Reels.</p>
+      <button class="modal-close" onclick="closeModal(null,'modal-v6')">✕</button>
+      <div class="modal-yt-container modal-yt-vertical">
+        <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="modal-11" onclick="closeModal(event,'modal-11')">
-    <div class="modal modal-vertical">
-      <button class="modal-close" onclick="closeModal(null,'modal-11')">✕</button>
-      <video class="modal-video" controls playsinline><source src="https://pub-96820082d37f4b4f8d16661b8e8f2711.r2.dev/itamaster 9x16.mp4" type="video/mp4" /></video>
       <div class="modal-body">
-        <div class="modal-header"><h2>Itamaster</h2></div>
+        <div class="modal-header"><h2>Evento Amcham Campinas</h2></div>
         <div class="modal-meta"><span class="match">94%</span><span class="year">2025</span><span class="duration">9×16</span></div>
-        <p class="modal-desc">Produção vertical para a marca Itamaster com alta qualidade visual.</p>
+        <p class="modal-desc">Cobertura de evento da Câmara Americana de Comércio em Campinas.</p>
       </div>
     </div>
   </div>
