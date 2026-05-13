@@ -58,50 +58,61 @@ const DEFAULT_CONFIG = {
     text: '© 2026 Matheus Zito. Todos os direitos reservados.',
   },
 
-  carousel: {
-    title: 'Vídeos em Destaque',
-    videos: [
-      { id: 'ch1', ytId: '194T0HeO7VM', title: 'Indústria Fox — 15 Anos',   desc: 'Cobertura cinematográfica do 15º aniversário da Indústria Fox, com narrativa emocional e produção de alto nível.', badge: 'Evento',    match: '98%', year: '2025' },
-      { id: 'ch2', ytId: 'oHrfwTFqsTg', title: 'WCEF 2025',                  desc: 'Cobertura completa do World Commerce & Contracting Event Forum 2025.', badge: 'Evento',    match: '96%', year: '2025' },
-      { id: 'ch3', ytId: '5ifoydf1FRM', title: 'Casamento',                  desc: 'Cobertura cinematográfica de casamento.', badge: 'Casamento', match: '97%', year: '2025' },
-      { id: 'ch4', ytId: 'iX6ks9MoClw', title: 'Evento Corporativo',         desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
-      { id: 'ch5', ytId: '5j5CPwguo6E', title: 'Evento Corporativo 2',       desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
-    ]
-  },
-
+  // Sections: first entry (id:'carousel') is the top featured carousel.
+  // The rest are portrait-card mini-carousels.
   sections: [
-    {
-      id: 'anuncios', title: 'Anúncios',
-      videos: [
-        { id: 'v1', ytId: 'vhwK4yhPBzA', title: 'Parceria Fox & TudoBônus', desc: 'Anúncio de parceria estratégica com identidade visual sofisticada.',    badge: 'Anúncio',      match: '98%', year: '2025', tags: ['Parceria', 'Motion'] },
-        { id: 'v2', ytId: 'KiRR4Upsbrg', title: 'Atendimento TudoBônus',   desc: 'Vídeo de atendimento ao cliente com narrativa envolvente.',             badge: 'Institucional', match: '97%', year: '2025', tags: ['Institucional', 'Edição'] },
-        { id: 'v3', ytId: 'txQJrrwfVHk', title: 'Entrega & Garantia',       desc: 'Comunicação visual sobre política de entrega e garantia da marca.',     badge: 'Campanha',     match: '95%', year: '2025', tags: ['Campanha', 'Motion'] },
-        { id: 'v4', ytId: 'TJBivra1fAg', title: 'Trade in TudoBônus',       desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.',       badge: 'Campanha',     match: '96%', year: '2025', tags: ['Campanha', 'Edição'] },
-        { id: 'v5', ytId: 'x1yuS8IHdYc', title: 'Trade in TudoBonus 2',     desc: 'Segunda versão da campanha com nova abordagem criativa.',               badge: 'Campanha',     match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
-      ]
-    },
-    {
-      id: 'eventos', title: 'Eventos',
-      videos: [
-        { id: 'v6', ytId: '15z7iaeOTRY', title: 'Evento Amcham Campinas', desc: 'Cobertura da Amcham Campinas.', badge: 'Evento', match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
-      ]
-    },
-    {
-      id: 'casamentos', title: 'Casamentos',
-      videos: []
-    }
-  ]
+    { id: 'carousel',   title: 'Vídeos em Destaque' },
+    { id: 'anuncios',   title: 'Anúncios' },
+    { id: 'eventos',    title: 'Eventos' },
+    { id: 'casamentos', title: 'Casamentos' },
+  ],
+
+  // Flat video pool — each video has a 'section' field that matches a section id.
+  videoPool: [
+    { id: 'ch1', ytId: '194T0HeO7VM', section: 'carousel',   title: 'Indústria Fox — 15 Anos',   desc: 'Cobertura cinematográfica do 15º aniversário da Indústria Fox, com narrativa emocional e produção de alto nível.', badge: 'Evento',    match: '98%', year: '2025' },
+    { id: 'ch2', ytId: 'oHrfwTFqsTg', section: 'carousel',   title: 'WCEF 2025',                  desc: 'Cobertura completa do World Commerce & Contracting Event Forum 2025.', badge: 'Evento',    match: '96%', year: '2025' },
+    { id: 'ch3', ytId: '5ifoydf1FRM', section: 'carousel',   title: 'Casamento',                  desc: 'Cobertura cinematográfica de casamento.', badge: 'Casamento', match: '97%', year: '2025' },
+    { id: 'ch4', ytId: 'iX6ks9MoClw', section: 'carousel',   title: 'Evento Corporativo',         desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
+    { id: 'ch5', ytId: '5j5CPwguo6E', section: 'carousel',   title: 'Evento Corporativo 2',       desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
+    { id: 'v1',  ytId: 'vhwK4yhPBzA', section: 'anuncios',   title: 'Parceria Fox & TudoBônus',   desc: 'Anúncio de parceria estratégica com identidade visual sofisticada.', badge: 'Anúncio',      match: '98%', year: '2025', tags: ['Parceria', 'Motion'] },
+    { id: 'v2',  ytId: 'KiRR4Upsbrg', section: 'anuncios',   title: 'Atendimento TudoBônus',     desc: 'Vídeo de atendimento ao cliente com narrativa envolvente.', badge: 'Institucional', match: '97%', year: '2025', tags: ['Institucional', 'Edição'] },
+    { id: 'v3',  ytId: 'txQJrrwfVHk', section: 'anuncios',   title: 'Entrega & Garantia',         desc: 'Comunicação visual sobre política de entrega e garantia da marca.', badge: 'Campanha',     match: '95%', year: '2025', tags: ['Campanha', 'Motion'] },
+    { id: 'v4',  ytId: 'TJBivra1fAg', section: 'anuncios',   title: 'Trade in TudoBônus',         desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.', badge: 'Campanha',     match: '96%', year: '2025', tags: ['Campanha', 'Edição'] },
+    { id: 'v5',  ytId: 'x1yuS8IHdYc', section: 'anuncios',   title: 'Trade in TudoBonus 2',       desc: 'Segunda versão da campanha com nova abordagem criativa.', badge: 'Campanha',     match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
+    { id: 'v6',  ytId: '15z7iaeOTRY', section: 'eventos',    title: 'Evento Amcham Campinas',     desc: 'Cobertura da Amcham Campinas.', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
+  ],
 };
 
 const STORAGE_KEY = 'mz-portfolio-config';
+
+// ===== MIGRATION (old format → new flat videoPool) =====
+function migrateConfig(cfg) {
+  if (cfg.videoPool) return cfg; // already new format
+
+  const videoPool = [];
+  const sections  = [];
+
+  if (cfg.carousel) {
+    sections.push({ id: 'carousel', title: cfg.carousel.title || 'Vídeos em Destaque' });
+    (cfg.carousel.videos || []).forEach(v => videoPool.push({ ...v, section: 'carousel' }));
+  }
+  (cfg.sections || []).forEach(sec => {
+    sections.push({ id: sec.id, title: sec.title });
+    (sec.videos || []).forEach(v => videoPool.push({ ...v, section: sec.id }));
+  });
+
+  const migrated = { ...cfg, sections, videoPool };
+  delete migrated.carousel;
+  return migrated;
+}
 
 function loadConfig() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return DEFAULT_CONFIG;
-    // Deep merge saved over defaults so new fields are always present
-    const parsed = JSON.parse(saved);
-    return deepMerge(DEFAULT_CONFIG, parsed);
+    const parsed   = JSON.parse(saved);
+    const migrated = migrateConfig(parsed);
+    return deepMerge(DEFAULT_CONFIG, migrated);
   } catch { return DEFAULT_CONFIG; }
 }
 
@@ -212,6 +223,13 @@ function applyContact() {
 
   const igEl = document.getElementById('contact-instagram');
   if (igEl && c.instagram) igEl.href = c.instagram;
+
+  // Floating buttons
+  const floatWa = document.getElementById('float-wa');
+  if (floatWa && c.whatsapp) floatWa.href = `https://wa.me/${c.whatsapp}`;
+
+  const floatIg = document.getElementById('float-ig');
+  if (floatIg && c.instagram) floatIg.href = c.instagram;
 }
 
 // ===== APPLY FOOTER =====
@@ -228,14 +246,17 @@ function setText(id, value) {
   if (el) el.textContent = value;
 }
 
-// ===== RENDER CAROUSEL =====
+// ===== RENDER CAROUSEL (top featured — 16:9) =====
 function renderCarousel() {
-  const track = document.getElementById('carousel-track');
+  const track   = document.getElementById('carousel-track');
   const titleEl = document.getElementById('carousel-title');
   if (!track) return;
-  if (titleEl) titleEl.textContent = CONFIG.carousel.title;
 
-  CONFIG.carousel.videos.filter(v => !v.hidden).forEach(v => {
+  const carouselSection = (CONFIG.sections || []).find(s => s.id === 'carousel');
+  if (titleEl) titleEl.textContent = carouselSection?.title || 'Vídeos em Destaque';
+
+  const videos = (CONFIG.videoPool || []).filter(v => v.section === 'carousel' && !v.hidden);
+  videos.forEach(v => {
     const slide = document.createElement('div');
     slide.className = 'carousel-slide carousel-yt';
     slide.onclick = () => openModal('modal-' + v.id);
@@ -254,55 +275,176 @@ function renderCarousel() {
   });
 }
 
-// ===== RENDER SECTION ROWS =====
+// ===== RENDER SECTION MINI-CAROUSELS (portrait 9×16) =====
 function renderSections() {
   const container = document.getElementById('rows-container');
   if (!container) return;
   container.innerHTML = '';
 
-  CONFIG.sections.forEach(section => {
-    const visibleVideos = (section.videos || []).filter(v => !v.hidden);
-    if (!visibleVideos.length) return;
+  // Skip 'carousel' section — it's rendered above separately
+  const sectionDefs = (CONFIG.sections || []).filter(s => s.id !== 'carousel');
+
+  sectionDefs.forEach(section => {
+    const visibleVideos = (CONFIG.videoPool || []).filter(v => v.section === section.id && !v.hidden);
 
     const sec = document.createElement('section');
     sec.className = 'row';
-    sec.innerHTML = `<h2 class="row-title">${section.title}</h2><div class="row-track" id="track-${section.id}"></div>`;
+    sec.dataset.sectionId = section.id;
+
+    const isEmpty = visibleVideos.length === 0;
+
+    sec.innerHTML = `
+      <h2 class="row-title">${section.title}</h2>
+      <div class="sec-carousel-wrapper">
+        <button class="sec-carousel-btn sec-prev" id="sec-prev-${section.id}" aria-label="Anterior"${isEmpty ? ' style="display:none"' : ''}>&#8249;</button>
+        <div class="sec-carousel-viewport">
+          <div class="sec-carousel-track" id="sec-track-${section.id}"></div>
+        </div>
+        <button class="sec-carousel-btn sec-next" id="sec-next-${section.id}" aria-label="Próximo"${isEmpty ? ' style="display:none"' : ''}>&#8250;</button>
+      </div>`;
     container.appendChild(sec);
 
-    const track = sec.querySelector('.row-track');
-    visibleVideos.forEach(v => {
-      const thumb = `https://i.ytimg.com/vi/${v.ytId}/hqdefault.jpg`;
-      const tagsHtml = (v.tags || []).map(t => `<span>${t}</span>`).join('');
+    const track = sec.querySelector('.sec-carousel-track');
 
-      const card = document.createElement('div');
-      card.className = 'card-story';
-      card.onclick = () => openModal('modal-' + v.id);
-      card.innerHTML = `
-        <div class="card-story-thumb-wrap">
-          <img src="${thumb}" alt="${v.title}" />
-        </div>
-        <div class="card-hover">
-          <img class="card-portrait-img" src="${thumb}" alt="${v.title}" />
-          <div class="card-hover-body">
-            <div class="card-hover-top">
-              <h3>${v.title}</h3>
-              <div class="card-meta">
-                <span class="match">${v.match}</span>
-                <span class="year">${v.year}</span>
-                <span class="duration">9×16</span>
-              </div>
+    if (isEmpty) {
+      // Placeholder card
+      const ph = document.createElement('div');
+      ph.className = 'sec-empty-card';
+      ph.innerHTML = `<div><div style="font-size:32px;margin-bottom:10px">🎬</div><span>Novas produções<br>em breve</span></div>`;
+      track.appendChild(ph);
+    } else {
+      visibleVideos.forEach(v => {
+        const thumb   = `https://i.ytimg.com/vi/${v.ytId}/hqdefault.jpg`;
+        const tagsHtml = (v.tags || []).map(t => `<span>${t}</span>`).join('');
+
+        const card = document.createElement('div');
+        card.className    = 'card-portrait';
+        card.dataset.ytid  = v.ytId;
+        card.dataset.modal = 'modal-' + v.id;
+
+        card.innerHTML = `
+          <div class="card-portrait-media">
+            <img src="${thumb}" alt="${v.title}" loading="lazy" />
+            <iframe class="card-preview-iframe" src="" allow="autoplay" frameborder="0" tabindex="-1"></iframe>
+          </div>
+          <div class="card-portrait-info">
+            <h3>${v.title}</h3>
+            <div class="card-meta" style="margin-bottom:5px">
+              <span class="match">${v.match}</span>
+              <span class="year">${v.year}</span>
             </div>
-            ${v.desc ? `<p>${v.desc}</p>` : ''}
-            ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
+            ${tagsHtml ? `<div class="card-tags" style="margin-bottom:8px">${tagsHtml}</div>` : ''}
             <div class="card-actions">
               <button class="btn-play" onclick="openModal('modal-${v.id}');event.stopPropagation()">▶</button>
-              <button class="btn-like">👍</button>
             </div>
-          </div>
-        </div>`;
-      track.appendChild(card);
+          </div>`;
+        track.appendChild(card);
+      });
+    }
+  });
+
+  // Delegate click on rows-container for card-portrait (works on clones too)
+  container.addEventListener('click', (e) => {
+    if (e.target.closest('.btn-play')) return; // let btn-play handle itself
+    const card = e.target.closest('.card-portrait[data-modal]');
+    if (card) openModal(card.dataset.modal);
+  });
+}
+
+// ===== HOVER MUTED PREVIEW =====
+function initCardHoverPreviews() {
+  // data-hover-init prevents double-binding after cloning
+  document.querySelectorAll('.card-portrait[data-ytid]:not([data-hover-init])').forEach(card => {
+    card.dataset.hoverInit = '1';
+    const iframe = card.querySelector('.card-preview-iframe');
+    if (!iframe) return;
+    const ytId = card.dataset.ytid;
+    let timer = null;
+
+    card.addEventListener('mouseenter', () => {
+      timer = setTimeout(() => {
+        iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${ytId}&rel=0&playsinline=1&enablejsapi=0`;
+      }, 700); // 700ms delay — avoids loading on fast cursor pass
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (timer) { clearTimeout(timer); timer = null; }
+      iframe.src = '';
     });
   });
+}
+
+// ===== SECTION MINI-CAROUSELS (infinite loop) =====
+function initSectionCarousels() {
+  const sectionDefs = (CONFIG.sections || []).filter(s => s.id !== 'carousel');
+
+  sectionDefs.forEach(section => {
+    const trackEl = document.getElementById('sec-track-' + section.id);
+    const prevBtn = document.getElementById('sec-prev-' + section.id);
+    const nextBtn = document.getElementById('sec-next-' + section.id);
+    if (!trackEl || !prevBtn || !nextBtn) return;
+
+    const originalSlides = Array.from(trackEl.querySelectorAll('.card-portrait'));
+    const total = originalSlides.length;
+    if (total === 0) return;
+
+    // Calculate how many cards are visible in the viewport
+    function cardsVisible() {
+      const vw  = trackEl.parentElement.getBoundingClientRect().width;
+      const gap = parseFloat(window.getComputedStyle(trackEl).gap) || 10;
+      const cw  = originalSlides[0] ? originalSlides[0].getBoundingClientRect().width + gap : 165;
+      return Math.max(1, Math.ceil(vw / cw));
+    }
+
+    const cloneCount = Math.max(cardsVisible(), 3);
+
+    // Clone last N before first, first N after last
+    originalSlides.slice(-cloneCount).forEach(s => trackEl.insertBefore(s.cloneNode(true), trackEl.firstChild));
+    originalSlides.slice(0, cloneCount).forEach(s => trackEl.appendChild(s.cloneNode(true)));
+
+    const allSlides = Array.from(trackEl.querySelectorAll('.card-portrait'));
+    let current    = cloneCount;
+    let animating  = false;
+
+    function getCardWidth() {
+      const gap = parseFloat(window.getComputedStyle(trackEl).gap) || 10;
+      return (allSlides[current] || allSlides[0]).getBoundingClientRect().width + gap;
+    }
+
+    function goTo(index, animate = true) {
+      if (animate && animating) return;
+      trackEl.style.transition = animate
+        ? 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)'
+        : 'none';
+      trackEl.style.transform = `translateX(-${index * getCardWidth()}px)`;
+      current = index;
+    }
+
+    trackEl.addEventListener('transitionstart', () => {
+      animating = true;
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+    });
+
+    trackEl.addEventListener('transitionend', () => {
+      animating = false;
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      const firstReal = cloneCount;
+      const lastReal  = cloneCount + total - 1;
+      if (current < firstReal) goTo(lastReal - (firstReal - current - 1), false);
+      else if (current > lastReal) goTo(firstReal + (current - lastReal - 1), false);
+    });
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    window.addEventListener('resize', () => goTo(current, false));
+
+    goTo(current, false);
+  });
+
+  // Re-run hover-preview binding to cover cloned cards
+  initCardHoverPreviews();
 }
 
 // ===== RENDER MODALS =====
@@ -311,34 +453,28 @@ function renderModals() {
   if (!container) return;
   container.innerHTML = '';
 
-  CONFIG.carousel.videos.forEach(v => {
-    const id = 'modal-' + v.id;
-    const el = document.createElement('div');
-    el.className = 'modal-backdrop';
-    el.id = id;
-    el.onclick = (e) => closeModal(e, id);
-    el.innerHTML = `
-      <div class="modal modal-wide">
-        <button class="modal-close" onclick="closeModal(null,'${id}')">✕</button>
-        <div class="modal-yt-container">
-          <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="modal-body">
-          <div class="modal-header"><h2>${v.title}</h2></div>
-          <div class="modal-meta"><span class="match">${v.match} match</span><span class="year">${v.year}</span></div>
-          <p class="modal-desc">${v.desc}</p>
-        </div>
-      </div>`;
-    container.appendChild(el);
-  });
+  (CONFIG.videoPool || []).forEach(v => {
+    const id          = 'modal-' + v.id;
+    const isCarousel  = v.section === 'carousel';
+    const el          = document.createElement('div');
+    el.className      = 'modal-backdrop';
+    el.id             = id;
+    el.onclick        = (e) => closeModal(e, id);
 
-  CONFIG.sections.forEach(section => {
-    (section.videos || []).forEach(v => {
-      const id = 'modal-' + v.id;
-      const el = document.createElement('div');
-      el.className = 'modal-backdrop';
-      el.id = id;
-      el.onclick = (e) => closeModal(e, id);
+    if (isCarousel) {
+      el.innerHTML = `
+        <div class="modal modal-wide">
+          <button class="modal-close" onclick="closeModal(null,'${id}')">✕</button>
+          <div class="modal-yt-container">
+            <iframe class="modal-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+          <div class="modal-body">
+            <div class="modal-header"><h2>${v.title}</h2></div>
+            <div class="modal-meta"><span class="match">${v.match} match</span><span class="year">${v.year}</span></div>
+            <p class="modal-desc">${v.desc}</p>
+          </div>
+        </div>`;
+    } else {
       el.innerHTML = `
         <div class="modal modal-vertical">
           <button class="modal-close" onclick="closeModal(null,'${id}')">✕</button>
@@ -351,22 +487,15 @@ function renderModals() {
             ${v.desc ? `<p class="modal-desc">${v.desc}</p>` : ''}
           </div>
         </div>`;
-      container.appendChild(el);
-    });
+    }
+    container.appendChild(el);
   });
 }
 
 // ===== FIND YT ID =====
 function findYtId(modalId) {
-  for (const v of CONFIG.carousel.videos) {
-    if ('modal-' + v.id === modalId) return v.ytId;
-  }
-  for (const section of CONFIG.sections) {
-    for (const v of (section.videos || [])) {
-      if ('modal-' + v.id === modalId) return v.ytId;
-    }
-  }
-  return null;
+  const vid = (CONFIG.videoPool || []).find(v => 'modal-' + v.id === modalId);
+  return vid?.ytId || null;
 }
 
 // ===== MODAL =====
@@ -410,9 +539,9 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-// ===== CAROUSEL =====
+// ===== MAIN CAROUSEL (featured 16:9) =====
 function initCarousel() {
-  const track = document.getElementById('carousel-track');
+  const track   = document.getElementById('carousel-track');
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
   if (!track || !prevBtn || !nextBtn) return;
@@ -442,12 +571,12 @@ function initCarousel() {
 
   function goTo(index, animate = true) {
     track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
-    track.style.transform = `translateX(-${index * getSlideWidth()}px)`;
+    track.style.transform  = `translateX(-${index * getSlideWidth()}px)`;
     current = index;
   }
 
   track.addEventListener('transitionend', () => {
-    const lastReal = cloneCount + total - 1;
+    const lastReal  = cloneCount + total - 1;
     const firstReal = cloneCount;
     if (current < firstReal) goTo(lastReal - (firstReal - current - 1), false);
     else if (current > lastReal) goTo(firstReal + (current - lastReal - 1), false);
@@ -472,30 +601,10 @@ function initScrollReveal() {
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.row, .carousel-section, .about-content, .contact-content').forEach(el => {
-    el.style.opacity = '0';
+    el.style.opacity   = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
-  });
-
-  document.querySelectorAll('.row').forEach(row => {
-    const cards = row.querySelectorAll('.card-story');
-    cards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    });
-    const rowObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          cards.forEach((card, i) => setTimeout(() => {
-            card.style.opacity = '1'; card.style.transform = 'translateY(0)';
-          }, i * 60));
-          rowObs.disconnect();
-        }
-      });
-    }, { threshold: 0.1 });
-    rowObs.observe(row);
   });
 }
 
@@ -511,4 +620,5 @@ renderCarousel();
 renderSections();
 renderModals();
 initCarousel();
+initSectionCarousels(); // clones cards then re-binds hover previews
 initScrollReveal();

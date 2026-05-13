@@ -54,6 +54,7 @@
     textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
     input[type=range] { width: 100%; accent-color: var(--red); cursor: pointer; }
     input[type=color] { width: 48px; height: 36px; padding: 2px 3px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg3); cursor: pointer; }
+    select { cursor: pointer; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
@@ -66,10 +67,20 @@
     .video-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
     .video-item-header { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
     .video-thumb { width: 80px; height: 45px; object-fit: cover; border-radius: 4px; background: #111; flex-shrink: 0; border: 1px solid var(--border); }
-    .video-fields { flex: 1; display: grid; grid-template-columns: 140px 1fr 100px 64px 64px; gap: 8px; }
+    .video-fields { flex: 1; display: grid; gap: 8px; }
     .video-footer { display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
     .hidden-toggle { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); cursor: pointer; }
     .hidden-toggle input { width: auto; cursor: pointer; }
+
+    /* Section badge */
+    .sec-badge {
+      display: inline-block;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+      padding: 3px 9px; border-radius: 20px;
+      background: rgba(229,9,20,0.15); color: var(--red);
+      border: 1px solid rgba(229,9,20,0.3);
+      margin-bottom: 6px;
+    }
 
     /* STATS LIST */
     .stat-item { display: grid; grid-template-columns: 80px 1fr; gap: 8px; margin-bottom: 8px; align-items: center; }
@@ -77,12 +88,10 @@
     /* NOTE */
     .note { background: rgba(70,211,105,0.08); border: 1px solid rgba(70,211,105,0.2); border-radius: var(--radius); padding: 10px 14px; font-size: 12px; color: var(--green); line-height: 1.6; margin-bottom: 20px; }
 
-    /* SECTION BLOCK */
-    .section-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
-    .section-header { padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
-    .section-header input { flex: 1; background: transparent; border: none; color: var(--text); font-size: 14px; font-weight: 700; font-family: inherit; padding: 0; }
-    .section-header input:focus { outline: none; }
-    .section-body { padding: 12px 16px 16px; }
+    /* SECTION TITLE ROWS */
+    .sec-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .sec-title-row .sec-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 60px; }
+    .sec-title-row input { flex: 1; }
 
     /* BUTTONS */
     .btn { display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; border-radius: var(--radius); font-family: inherit; font-weight: 600; transition: opacity 0.2s, transform 0.15s; }
@@ -134,7 +143,7 @@
 
   <div class="admin-body">
     <div class="note">
-      ✓ Clique <strong>Salvar</strong> para aplicar as alterações neste navegador. Para tornar permanente no ar, exporte o JSON e me envie para commitar.
+      ✓ Clique <strong>Salvar</strong> para aplicar as alterações neste navegador. Para tornar permanente no ar, exporte o JSON e envie para commitar no GitHub.
     </div>
 
     <!-- 🎨 CORES -->
@@ -353,33 +362,33 @@
       </div>
     </div>
 
-    <!-- ▶ CARROSSEL -->
-    <div class="acc-block" id="acc-carousel">
-      <div class="acc-header" onclick="toggleAcc('acc-carousel')">
-        <span class="acc-icon">▶</span>
-        <span class="acc-title">Carrossel em Destaque</span>
+    <!-- 📹 TODOS OS VÍDEOS (flat pool + section selector) -->
+    <div class="acc-block open" id="acc-videos">
+      <div class="acc-header" onclick="toggleAcc('acc-videos')">
+        <span class="acc-icon">📹</span>
+        <span class="acc-title">Todos os Vídeos</span>
         <span class="acc-chevron">▼</span>
       </div>
       <div class="acc-body">
-        <div class="field-group" style="margin-bottom:16px">
-          <label class="field-label">Título da seção</label>
-          <input type="text" id="carousel-title-input" placeholder="Vídeos em Destaque" style="max-width:320px" />
+        <div class="note" style="margin-bottom:16px">
+          Use o campo <strong>"Seção"</strong> em cada vídeo para definir onde ele aparece no site. A seção <em>Carrossel em Destaque</em> mostra o vídeo no topo em formato 16:9. As demais seções exibem em formato retrato 9×16.
         </div>
-        <div class="video-list" id="list-carousel"></div>
-        <button class="btn btn-ghost btn-sm" onclick="addVideo('carousel')">+ Adicionar vídeo</button>
+        <div class="video-list" id="video-pool-list"></div>
+        <button class="btn btn-ghost btn-sm" onclick="addPoolVideo()">+ Adicionar vídeo</button>
       </div>
     </div>
 
-    <!-- 📁 SEÇÕES -->
-    <div class="acc-block open" id="acc-sections">
+    <!-- 📁 SEÇÕES (renomear/reordenar) -->
+    <div class="acc-block" id="acc-sections">
       <div class="acc-header" onclick="toggleAcc('acc-sections')">
         <span class="acc-icon">📁</span>
-        <span class="acc-title">Seções de Vídeos</span>
+        <span class="acc-title">Seções (nomes e ordem)</span>
         <span class="acc-chevron">▼</span>
       </div>
       <div class="acc-body">
-        <div id="sections-container"></div>
-        <button class="btn btn-ghost btn-md" onclick="addSection()">+ Nova seção</button>
+        <div class="note" style="margin-bottom:16px">Renomeie ou reordene as seções. A primeira seção é sempre o Carrossel em Destaque (16:9).</div>
+        <div id="sections-list"></div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:4px" onclick="addSection()">+ Nova seção</button>
       </div>
     </div>
 
@@ -392,7 +401,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const ADMIN_PASS = 'port2025'; // ← Altere aqui para mudar a senha
+const ADMIN_PASS  = 'port2025'; // ← Altere aqui para mudar a senha
 const STORAGE_KEY = 'mz-portfolio-config';
 
 // ─── DEFAULT CONFIG (espelho do script.js) ───
@@ -406,26 +415,25 @@ const DEFAULT_CONFIG = {
   about: { tag: 'Sobre mim', heading: 'Por trás das câmeras', bio1: 'Sou editor de vídeo e motion designer especializado em conteúdo para redes sociais, campanhas publicitárias e vídeos institucionais. Já trabalhei com marcas, criadores e agências de todo o Brasil.', bio2: 'Minha especialidade está em unir técnica e criatividade — seja num hook que prende em 3 segundos ou numa campanha que fortalece uma marca.', stats: [{num:'150+',label:'Projetos entregues'},{num:'30+',label:'Clientes satisfeitos'},{num:'3+',label:'Anos de experiência'}], skills: ['After Effects','Premiere Pro','Photoshop','Illustrator','Motion Graphics','Color Grading','Sound Design'], photoUrl: 'assets/foto.jpg' },
   contact: { heading: 'Vamos trabalhar juntos?', subtitle: 'Aberto para projetos freelance, parcerias e colaborações criativas.', email: 'seu@email.com', whatsapp: '5511921962624', instagram: 'https://www.instagram.com/thebackstage.on/' },
   footer: { logo: 'MZ', text: '© 2026 Matheus Zito. Todos os direitos reservados.' },
-  carousel: { title: 'Vídeos em Destaque', videos: [
-    { id:'ch1', ytId:'194T0HeO7VM', title:'Indústria Fox — 15 Anos', desc:'Cobertura cinematográfica do 15º aniversário da Indústria Fox.', badge:'Evento', match:'98%', year:'2025' },
-    { id:'ch2', ytId:'oHrfwTFqsTg', title:'WCEF 2025', desc:'Cobertura do World Commerce & Contracting Event Forum 2025.', badge:'Evento', match:'96%', year:'2025' },
-    { id:'ch3', ytId:'5ifoydf1FRM', title:'Casamento', desc:'Cobertura cinematográfica de casamento.', badge:'Casamento', match:'97%', year:'2025' },
-    { id:'ch4', ytId:'iX6ks9MoClw', title:'Evento Corporativo', desc:'Cobertura audiovisual de evento corporativo.', badge:'Evento', match:'95%', year:'2025' },
-    { id:'ch5', ytId:'5j5CPwguo6E', title:'Evento Corporativo 2', desc:'Cobertura audiovisual de evento corporativo.', badge:'Evento', match:'95%', year:'2025' },
-  ]},
   sections: [
-    { id:'anuncios', title:'Anúncios', videos: [
-      { id:'v1', ytId:'vhwK4yhPBzA', title:'Parceria Fox & TudoBônus', desc:'Anúncio de parceria estratégica.', badge:'Anúncio', match:'98%', year:'2025', tags:['Parceria','Motion'] },
-      { id:'v2', ytId:'KiRR4Upsbrg', title:'Atendimento TudoBônus', desc:'Vídeo de atendimento ao cliente.', badge:'Institucional', match:'97%', year:'2025', tags:['Institucional','Edição'] },
-      { id:'v3', ytId:'txQJrrwfVHk', title:'Entrega & Garantia', desc:'Comunicação sobre política de entrega.', badge:'Campanha', match:'95%', year:'2025', tags:['Campanha','Motion'] },
-      { id:'v4', ytId:'TJBivra1fAg', title:'Trade in TudoBônus', desc:'Campanha de Trade-in.', badge:'Campanha', match:'96%', year:'2025', tags:['Campanha','Edição'] },
-      { id:'v5', ytId:'x1yuS8IHdYc', title:'Trade in TudoBonus 2', desc:'Segunda versão da campanha.', badge:'Campanha', match:'93%', year:'2025', tags:['Campanha','Social'] },
-    ]},
-    { id:'eventos', title:'Eventos', videos: [
-      { id:'v6', ytId:'15z7iaeOTRY', title:'Evento Amcham Campinas', desc:'Cobertura da Amcham Campinas.', badge:'Evento', match:'94%', year:'2025', tags:['Evento','Cobertura'] },
-    ]},
-    { id:'casamentos', title:'Casamentos', videos: [] },
-  ]
+    { id: 'carousel',   title: 'Vídeos em Destaque' },
+    { id: 'anuncios',   title: 'Anúncios' },
+    { id: 'eventos',    title: 'Eventos' },
+    { id: 'casamentos', title: 'Casamentos' },
+  ],
+  videoPool: [
+    { id:'ch1', ytId:'194T0HeO7VM', section:'carousel',   title:'Indústria Fox — 15 Anos',   desc:'Cobertura cinematográfica do 15º aniversário da Indústria Fox.', badge:'Evento',        match:'98%', year:'2025' },
+    { id:'ch2', ytId:'oHrfwTFqsTg', section:'carousel',   title:'WCEF 2025',                  desc:'Cobertura do World Commerce & Contracting Event Forum 2025.',   badge:'Evento',        match:'96%', year:'2025' },
+    { id:'ch3', ytId:'5ifoydf1FRM', section:'carousel',   title:'Casamento',                  desc:'Cobertura cinematográfica de casamento.',                        badge:'Casamento',     match:'97%', year:'2025' },
+    { id:'ch4', ytId:'iX6ks9MoClw', section:'carousel',   title:'Evento Corporativo',         desc:'Cobertura audiovisual de evento corporativo.',                   badge:'Evento',        match:'95%', year:'2025' },
+    { id:'ch5', ytId:'5j5CPwguo6E', section:'carousel',   title:'Evento Corporativo 2',       desc:'Cobertura audiovisual de evento corporativo.',                   badge:'Evento',        match:'95%', year:'2025' },
+    { id:'v1',  ytId:'vhwK4yhPBzA', section:'anuncios',   title:'Parceria Fox & TudoBônus',   desc:'Anúncio de parceria estratégica.',                               badge:'Anúncio',       match:'98%', year:'2025', tags:['Parceria','Motion'] },
+    { id:'v2',  ytId:'KiRR4Upsbrg', section:'anuncios',   title:'Atendimento TudoBônus',     desc:'Vídeo de atendimento ao cliente.',                               badge:'Institucional', match:'97%', year:'2025', tags:['Institucional','Edição'] },
+    { id:'v3',  ytId:'txQJrrwfVHk', section:'anuncios',   title:'Entrega & Garantia',         desc:'Comunicação sobre política de entrega.',                         badge:'Campanha',      match:'95%', year:'2025', tags:['Campanha','Motion'] },
+    { id:'v4',  ytId:'TJBivra1fAg', section:'anuncios',   title:'Trade in TudoBônus',         desc:'Campanha de Trade-in.',                                          badge:'Campanha',      match:'96%', year:'2025', tags:['Campanha','Edição'] },
+    { id:'v5',  ytId:'x1yuS8IHdYc', section:'anuncios',   title:'Trade in TudoBonus 2',       desc:'Segunda versão da campanha.',                                    badge:'Campanha',      match:'93%', year:'2025', tags:['Campanha','Social'] },
+    { id:'v6',  ytId:'15z7iaeOTRY', section:'eventos',    title:'Evento Amcham Campinas',     desc:'Cobertura da Amcham Campinas.',                                  badge:'Evento',        match:'94%', year:'2025', tags:['Evento','Cobertura'] },
+  ],
 };
 
 // ─── AUTH ───
@@ -442,11 +450,29 @@ function doLogin() {
 }
 
 // ─── CONFIG ───
+function migrateConfig(cfg) {
+  if (cfg.videoPool) return cfg;
+  const videoPool = [];
+  const sections  = [];
+  if (cfg.carousel) {
+    sections.push({ id: 'carousel', title: cfg.carousel.title || 'Vídeos em Destaque' });
+    (cfg.carousel.videos || []).forEach(v => videoPool.push({ ...v, section: 'carousel' }));
+  }
+  (cfg.sections || []).forEach(sec => {
+    sections.push({ id: sec.id, title: sec.title });
+    (sec.videos || []).forEach(v => videoPool.push({ ...v, section: sec.id }));
+  });
+  const m = { ...cfg, sections, videoPool };
+  delete m.carousel;
+  return m;
+}
+
 function loadCfg() {
   try {
     const s = localStorage.getItem(STORAGE_KEY);
     if (!s) return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-    return deepMerge(JSON.parse(JSON.stringify(DEFAULT_CONFIG)), JSON.parse(s));
+    const parsed = JSON.parse(s);
+    return deepMerge(JSON.parse(JSON.stringify(DEFAULT_CONFIG)), migrateConfig(parsed));
   } catch { return JSON.parse(JSON.stringify(DEFAULT_CONFIG)); }
 }
 function deepMerge(base, over) {
@@ -480,14 +506,12 @@ function exportCfg() {
 function importCfg(e) {
   const f = e.target.files[0]; if (!f) return;
   const r = new FileReader();
-  r.onload = ev => { try { CFG = JSON.parse(ev.target.result); localStorage.setItem(STORAGE_KEY, JSON.stringify(CFG)); initAdmin(); showToast('⬆ Importado!'); } catch { alert('JSON inválido'); } };
+  r.onload = ev => { try { CFG = migrateConfig(JSON.parse(ev.target.result)); localStorage.setItem(STORAGE_KEY, JSON.stringify(CFG)); initAdmin(); showToast('⬆ Importado!'); } catch { alert('JSON inválido'); } };
   r.readAsText(f); e.target.value = '';
 }
 
 // ─── ACCORDION ───
-function toggleAcc(id) {
-  document.getElementById(id).classList.toggle('open');
-}
+function toggleAcc(id) { document.getElementById(id).classList.toggle('open'); }
 
 // ─── INIT ───
 function initAdmin() {
@@ -540,14 +564,11 @@ function initAdmin() {
   val('footer-logo', CFG.footer?.logo);
   val('footer-text', CFG.footer?.text);
 
-  // Carousel title
-  val('carousel-title-input', CFG.carousel?.title);
-  renderVideoList('list-carousel', CFG.carousel?.videos||[], 'carousel');
+  // Video pool
+  renderVideoPool(CFG.videoPool || []);
 
   // Sections
-  const sc = document.getElementById('sections-container');
-  sc.innerHTML = '';
-  (CFG.sections||[]).forEach((sec,si) => renderSection(sec,si));
+  renderSectionsList(CFG.sections || []);
 }
 
 function val(id, v) { const e = document.getElementById(id); if (e && v !== undefined && v !== null) e.value = v; }
@@ -560,8 +581,8 @@ function syncColor(hex, pickerId) { if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) doc
 
 // ─── HERO PREVIEW ───
 function updateHeroPreview() {
-  const id = document.getElementById('hero-video-id').value.trim();
-  const link = document.getElementById('hero-yt-link');
+  const id   = document.getElementById('hero-video-id').value.trim();
+  const link  = document.getElementById('hero-yt-link');
   const thumb = document.getElementById('hero-thumb');
   if (id) { link.href = 'https://www.youtube.com/watch?v='+id; thumb.src = 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg'; }
   else { link.href='#'; thumb.src=''; }
@@ -594,177 +615,184 @@ function removeStat(i) {
   CFG = cfg; initAdmin();
 }
 
-// ─── VIDEO LIST ───
-function renderVideoList(containerId, videos, listKey) {
-  const el = document.getElementById(containerId);
+// ─── VIDEO POOL ───
+function renderVideoPool(videos) {
+  const el = document.getElementById('video-pool-list');
   el.innerHTML = '';
-  videos.forEach((v,vi) => el.appendChild(buildVideoItem(v, vi, listKey, videos.length)));
+  videos.forEach((v, vi) => el.appendChild(buildPoolVideoItem(v, vi, videos.length)));
 }
 
-function buildVideoItem(v, vi, listKey, total) {
-  const isCarousel = listKey === 'carousel';
+function buildPoolVideoItem(v, vi, total) {
   const item = document.createElement('div');
   item.className = 'video-item';
+  item.dataset.vid = v.id || uid();
+
+  // Build section options
+  const sections = CFG.sections || DEFAULT_CONFIG.sections;
+  const secOptions = sections.map(s =>
+    `<option value="${esc(s.id)}" ${v.section === s.id ? 'selected' : ''}>${esc(s.title)}</option>`
+  ).join('');
+
   item.innerHTML = `
     <div class="video-item-header">
-      <img class="video-thumb" src="https://i.ytimg.com/vi/${esc(v.ytId)}/hqdefault.jpg" alt="" onerror="this.src=''" />
-      <div class="video-fields">
-        <div><label class="field-label">YouTube ID</label><input type="text" class="f-ytid" value="${esc(v.ytId)}" oninput="updateVThumb(this)" /></div>
-        <div><label class="field-label">Título</label><input type="text" class="f-title" value="${esc(v.title)}" /></div>
-        <div><label class="field-label">Badge</label><input type="text" class="f-badge" value="${esc(v.badge||'')}" /></div>
-        <div><label class="field-label">Match</label><input type="text" class="f-match" value="${esc(v.match||'')}" /></div>
-        <div><label class="field-label">Ano</label><input type="text" class="f-year" value="${esc(v.year||'')}" /></div>
+      <img class="video-thumb" src="${v.ytId ? 'https://i.ytimg.com/vi/'+esc(v.ytId)+'/hqdefault.jpg' : ''}" alt="" onerror="this.src=''" />
+      <div class="video-fields" style="grid-template-columns: 130px 1fr 1fr; gap:8px; flex:1">
+        <div><label class="field-label">YouTube ID</label><input type="text" class="f-ytid" value="${esc(v.ytId||'')}" oninput="updateVThumb(this)" /></div>
+        <div><label class="field-label">Título</label><input type="text" class="f-title" value="${esc(v.title||'')}" /></div>
+        <div><label class="field-label">📂 Seção</label><select class="f-section">${secOptions}</select></div>
       </div>
     </div>
+    <div style="display:grid;grid-template-columns:100px 80px 80px;gap:8px;margin-bottom:8px">
+      <div><label class="field-label">Badge</label><input type="text" class="f-badge" value="${esc(v.badge||'')}" /></div>
+      <div><label class="field-label">Match %</label><input type="text" class="f-match" value="${esc(v.match||'')}" /></div>
+      <div><label class="field-label">Ano</label><input type="text" class="f-year" value="${esc(v.year||'')}" /></div>
+    </div>
     <div><label class="field-label">Descrição</label><textarea class="f-desc" style="min-height:44px">${esc(v.desc||'')}</textarea></div>
-    ${!isCarousel ? `<div style="margin-top:8px"><label class="field-label">Tags (vírgula)</label><input type="text" class="f-tags" value="${esc((v.tags||[]).join(', '))}" /></div>` : ''}
+    <div style="margin-top:8px"><label class="field-label">Tags (vírgula) — para vídeos 9×16</label><input type="text" class="f-tags" value="${esc((v.tags||[]).join(', '))}" /></div>
     <div class="video-footer">
       <label class="hidden-toggle"><input type="checkbox" class="f-hidden" ${v.hidden?'checked':''} /> Ocultar do site</label>
-      <a href="https://www.youtube.com/watch?v=${esc(v.ytId)}" target="_blank" class="yt-link">▶ YouTube</a>
+      <a href="https://www.youtube.com/watch?v=${esc(v.ytId||'')}" target="_blank" class="yt-link">▶ YouTube</a>
       <span style="flex:1"></span>
-      ${vi>0 ? `<button class="btn btn-ghost btn-sm" onclick="moveVideo('${listKey}',${vi},-1)">↑</button>` : ''}
-      ${vi<total-1 ? `<button class="btn btn-ghost btn-sm" onclick="moveVideo('${listKey}',${vi},1)">↓</button>` : ''}
-      <button class="btn btn-danger btn-sm" onclick="removeVideo('${listKey}',${vi})">✕ Remover</button>
+      ${vi > 0           ? `<button class="btn btn-ghost btn-sm" onclick="movePoolVideo(${vi},-1)">↑</button>` : ''}
+      ${vi < total - 1   ? `<button class="btn btn-ghost btn-sm" onclick="movePoolVideo(${vi},1)">↓</button>`  : ''}
+      <button class="btn btn-danger btn-sm" onclick="removePoolVideo(${vi})">✕ Remover</button>
     </div>`;
   return item;
 }
 
+function addPoolVideo() {
+  const cfg = readForm();
+  cfg.videoPool.push({ id: uid(), ytId: '', section: 'anuncios', title: 'Novo vídeo', desc: '', badge: 'Projeto', match: '95%', year: '2025', tags: [] });
+  CFG = cfg; initAdmin();
+}
+function removePoolVideo(vi) {
+  if (!confirm('Remover vídeo?')) return;
+  const cfg = readForm();
+  cfg.videoPool.splice(vi, 1);
+  CFG = cfg; initAdmin();
+}
+function movePoolVideo(vi, dir) {
+  const cfg = readForm();
+  const arr = cfg.videoPool;
+  const t = vi + dir;
+  if (t < 0 || t >= arr.length) return;
+  [arr[vi], arr[t]] = [arr[t], arr[vi]];
+  CFG = cfg; initAdmin();
+}
+
 function updateVThumb(input) {
-  const id = input.value.trim();
-  const item = input.closest('.video-item');
+  const id    = input.value.trim();
+  const item  = input.closest('.video-item');
   const thumb = item?.querySelector('.video-thumb');
   const link  = item?.querySelector('.yt-link');
   if (thumb) thumb.src = id ? 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg' : '';
-  if (link)  link.href  = id ? 'https://www.youtube.com/watch?v='+id : '#';
+  if (link)  link.href = id ? 'https://www.youtube.com/watch?v='+id : '#';
 }
 
-// ─── SECTIONS ───
-function renderSection(sec, si) {
-  const container = document.getElementById('sections-container');
-  const block = document.createElement('div');
-  block.className = 'section-block';
-  block.id = 'sec-block-'+si;
-  block.innerHTML = `
-    <div class="section-header">
-      <span class="tag">Seção ${si+1}</span>
-      <input type="text" class="sec-title" data-si="${si}" value="${esc(sec.title)}" placeholder="Nome da seção" />
-      ${si>0?`<button class="btn btn-ghost btn-sm" onclick="moveSection(${si},-1)">↑</button>`:''}
-      ${`<button class="btn btn-ghost btn-sm" onclick="moveSection(${si},1)">↓</button>`}
-      <button class="btn btn-danger btn-sm" onclick="removeSection(${si})">✕</button>
-    </div>
-    <div class="section-body">
-      <div class="video-list" id="list-sec-${si}"></div>
-      <button class="btn btn-ghost btn-sm" onclick="addVideo('sec-${si}')">+ Adicionar vídeo</button>
-    </div>`;
-  container.appendChild(block);
-  renderVideoList('list-sec-'+si, sec.videos||[], 'sec-'+si);
-}
-
-// ─── ADD / REMOVE / MOVE ───
-function uid() { return 'v'+Date.now()+Math.random().toString(36).slice(2,5); }
-const newVideo = (isC) => ({ id:uid(), ytId:'', title:'Novo vídeo', desc:'', badge:'Projeto', match:'95%', year:'2025', ...(isC?{}:{tags:[]}) });
-
-function addVideo(listKey) {
-  const cfg = readForm();
-  if (listKey==='carousel') cfg.carousel.videos.push(newVideo(true));
-  else cfg.sections[+listKey.replace('sec-','')].videos.push(newVideo(false));
-  CFG=cfg; initAdmin();
-}
-function removeVideo(listKey, vi) {
-  if (!confirm('Remover vídeo?')) return;
-  const cfg = readForm();
-  if (listKey==='carousel') cfg.carousel.videos.splice(vi,1);
-  else cfg.sections[+listKey.replace('sec-','')].videos.splice(vi,1);
-  CFG=cfg; initAdmin();
-}
-function moveVideo(listKey, vi, dir) {
-  const cfg = readForm();
-  const arr = listKey==='carousel' ? cfg.carousel.videos : cfg.sections[+listKey.replace('sec-','')].videos;
-  const t = vi+dir; if (t<0||t>=arr.length) return;
-  [arr[vi],arr[t]]=[arr[t],arr[vi]]; CFG=cfg; initAdmin();
+// ─── SECTIONS LIST ───
+function renderSectionsList(sections) {
+  const el = document.getElementById('sections-list');
+  el.innerHTML = '';
+  sections.forEach((sec, si) => {
+    const row = document.createElement('div');
+    row.className = 'sec-title-row';
+    row.innerHTML = `
+      <span class="sec-label">Seção ${si + 1}</span>
+      <input type="text" class="sec-title-input" data-secid="${esc(sec.id)}" value="${esc(sec.title)}" placeholder="Nome da seção" />
+      ${si > 0 ? `<button class="btn btn-ghost btn-sm" onclick="moveSectionAdmin(${si},-1)">↑</button>` : ''}
+      ${si < sections.length - 1 ? `<button class="btn btn-ghost btn-sm" onclick="moveSectionAdmin(${si},1)">↓</button>` : ''}
+      ${si > 0 ? `<button class="btn btn-danger btn-sm" onclick="removeSectionAdmin(${si})">✕</button>` : ''}`;
+    el.appendChild(row);
+  });
 }
 function addSection() {
   const cfg = readForm();
-  cfg.sections.push({id:uid(), title:'Nova Seção', videos:[]});
-  CFG=cfg; initAdmin(); showToast('Seção adicionada');
+  cfg.sections.push({ id: uid(), title: 'Nova Seção' });
+  CFG = cfg; initAdmin(); showToast('Seção adicionada');
 }
-function removeSection(si) {
-  if (!confirm('Remover esta seção?')) return;
+function removeSectionAdmin(si) {
+  if (!confirm('Remover esta seção? Os vídeos dela não serão exibidos até que você os mova para outra seção.')) return;
   const cfg = readForm();
-  cfg.sections.splice(si,1); CFG=cfg; initAdmin();
+  cfg.sections.splice(si, 1);
+  CFG = cfg; initAdmin();
 }
-function moveSection(si, dir) {
+function moveSectionAdmin(si, dir) {
   const cfg = readForm();
-  const t = si+dir; if (t<0||t>=cfg.sections.length) return;
-  [cfg.sections[si],cfg.sections[t]]=[cfg.sections[t],cfg.sections[si]]; CFG=cfg; initAdmin();
+  const arr = cfg.sections;
+  const t = si + dir;
+  if (t < 0 || t >= arr.length) return;
+  [arr[si], arr[t]] = [arr[t], arr[si]];
+  CFG = cfg; initAdmin();
 }
 
 // ─── READ FORM ───
 function readForm() {
-  const g = id => { const e=document.getElementById(id); return e?e.value.trim():undefined; };
-  const hex = id => { const v=g(id); return v&&/^#[0-9a-fA-F]{3,6}$/.test(v)?v:DEFAULT_CONFIG.theme[id]||undefined; };
+  const g = id => { const e = document.getElementById(id); return e ? e.value.trim() : undefined; };
 
   const stats = [];
   document.querySelectorAll('#stats-list .stat-item').forEach(row => {
     stats.push({ num: row.querySelector('.stat-num').value.trim(), label: row.querySelector('.stat-label').value.trim() });
   });
 
+  // Read sections (just id + title)
+  const sections = Array.from(document.querySelectorAll('.sec-title-input')).map(input => ({
+    id:    input.dataset.secid || uid(),
+    title: input.value.trim(),
+  }));
+
+  // Read flat video pool
+  const videoPool = Array.from(document.querySelectorAll('#video-pool-list .video-item')).map(item => {
+    const ytId = item.querySelector('.f-ytid')?.value.trim() || '';
+    return {
+      id:      item.dataset.vid || uid(),
+      ytId,
+      section: item.querySelector('.f-section')?.value || 'carousel',
+      title:   item.querySelector('.f-title')?.value.trim()  || '',
+      desc:    item.querySelector('.f-desc')?.value.trim()   || '',
+      badge:   item.querySelector('.f-badge')?.value.trim()  || '',
+      match:   item.querySelector('.f-match')?.value.trim()  || '',
+      year:    item.querySelector('.f-year')?.value.trim()   || '',
+      hidden:  item.querySelector('.f-hidden')?.checked      || false,
+      tags:    (item.querySelector('.f-tags')?.value || '').split(',').map(s => s.trim()).filter(Boolean),
+    };
+  }).filter(v => v.ytId);
+
   return {
     heroVideoId: g('hero-video-id'),
-    heroOpacity: (parseInt(document.getElementById('hero-opacity')?.value||20)/100),
+    heroOpacity: (parseInt(document.getElementById('hero-opacity')?.value || 20) / 100),
     theme: {
-      accentColor:    document.getElementById('c-accent')?.value || '#e50914',
-      bgColor:        document.getElementById('c-bg')?.value || '#141414',
-      titleColor:     document.getElementById('c-title')?.value || '#ffffff',
-      mutedColor:     document.getElementById('c-muted')?.value || '#b3b3b3',
-      btnPrimaryBg:   document.getElementById('c-btn-bg')?.value || '#ffffff',
+      accentColor:    document.getElementById('c-accent')?.value  || '#e50914',
+      bgColor:        document.getElementById('c-bg')?.value      || '#141414',
+      titleColor:     document.getElementById('c-title')?.value   || '#ffffff',
+      mutedColor:     document.getElementById('c-muted')?.value   || '#b3b3b3',
+      btnPrimaryBg:   document.getElementById('c-btn-bg')?.value  || '#ffffff',
       btnPrimaryText: document.getElementById('c-btn-txt')?.value || '#000000',
-      btnRedBg:       document.getElementById('c-accent')?.value || '#e50914',
+      btnRedBg:       document.getElementById('c-accent')?.value  || '#e50914',
       btnGreenBg:     '#25D366',
     },
-    seo: { title: g('seo-title'), description: g('seo-desc') },
-    navbar: { logo: g('navbar-logo') },
-    hero: { badge: g('hero-badge'), title1: g('hero-title1'), title2: g('hero-title2'), subtitle: g('hero-subtitle'), desc: g('hero-desc'), btn1Text: g('hero-btn1'), btn2Text: CFG.hero?.btn2Text },
+    seo:     { title: g('seo-title'), description: g('seo-desc') },
+    navbar:  { logo: g('navbar-logo') },
+    hero:    { badge: g('hero-badge'), title1: g('hero-title1'), title2: g('hero-title2'), subtitle: g('hero-subtitle'), desc: g('hero-desc'), btn1Text: g('hero-btn1'), btn2Text: CFG.hero?.btn2Text },
     about: {
       tag: g('about-tag'), heading: g('about-heading'),
       bio1: g('about-bio1'), bio2: g('about-bio2'),
       photoUrl: g('about-photo'),
       stats,
-      skills: (g('about-skills')||'').split(',').map(s=>s.trim()).filter(Boolean),
+      skills: (g('about-skills') || '').split(',').map(s => s.trim()).filter(Boolean),
     },
     contact: { heading: g('contact-heading'), subtitle: g('contact-subtitle'), email: g('contact-email'), whatsapp: g('contact-whatsapp'), instagram: g('contact-instagram') },
-    footer: { logo: g('footer-logo'), text: g('footer-text') },
-    carousel: {
-      title: g('carousel-title-input'),
-      videos: readVideoList('list-carousel', true),
-    },
-    sections: (() => {
-      const titles = document.querySelectorAll('.sec-title');
-      return Array.from(titles).map((t,si) => ({
-        id: CFG.sections[si]?.id || uid(),
-        title: t.value.trim(),
-        videos: readVideoList('list-sec-'+si, false),
-      }));
-    })(),
+    footer:  { logo: g('footer-logo'), text: g('footer-text') },
+    sections,
+    videoPool,
   };
 }
 
-function readVideoList(containerId, isCarousel) {
-  const el = document.getElementById(containerId); if (!el) return [];
-  return Array.from(el.querySelectorAll('.video-item')).map(item => {
-    const ytId = item.querySelector('.f-ytid')?.value.trim()||'';
-    const tags = isCarousel ? undefined : (item.querySelector('.f-tags')?.value||'').split(',').map(s=>s.trim()).filter(Boolean);
-    const v = { id:uid(), ytId, title:item.querySelector('.f-title')?.value.trim()||'', desc:item.querySelector('.f-desc')?.value.trim()||'', badge:item.querySelector('.f-badge')?.value.trim()||'', match:item.querySelector('.f-match')?.value.trim()||'', year:item.querySelector('.f-year')?.value.trim()||'', hidden:item.querySelector('.f-hidden')?.checked||false };
-    if (!isCarousel) v.tags = tags;
-    return v;
-  }).filter(v => v.ytId);
-}
-
 // ─── UTILS ───
+function uid() { return 'v' + Date.now() + Math.random().toString(36).slice(2, 5); }
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2800);
+  setTimeout(() => t.classList.remove('show'), 2800);
 }
 function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
 </script>
