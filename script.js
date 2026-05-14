@@ -1,7 +1,7 @@
 // ===== DEFAULT CONFIG =====
 const DEFAULT_CONFIG = {
   heroVideoId: 'oHrfwTFqsTg',
-  heroOpacity: 0.3,
+  heroOpacity: 0.36,
 
   theme: {
     accentColor:    '#990008',
@@ -42,7 +42,7 @@ const DEFAULT_CONFIG = {
       { num: '3+',   label: 'Anos de experiência' },
     ],
     skills:   ['After Effects', 'Premiere Pro', 'Photoshop', 'Illustrator', 'Motion Graphics', 'Color Grading', 'Sound Design'],
-    photoUrl: 'assets/foto.jpg',
+    photoUrl: 'assets/IMG_4592.JPG',
   },
 
   contact: {
@@ -80,6 +80,11 @@ const DEFAULT_CONFIG = {
     { id: 'v4',  ytId: 'TJBivra1fAg', section: 'anuncios',   title: 'Trade in TudoBônus',         desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.', badge: 'Campanha',     match: '96%', year: '2025', tags: ['Campanha', 'Edição'] },
     { id: 'v5',  ytId: 'x1yuS8IHdYc', section: 'anuncios',   title: 'Trade in TudoBonus 2',       desc: 'Segunda versão da campanha com nova abordagem criativa.', badge: 'Campanha',     match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
     { id: 'v6',  ytId: '15z7iaeOTRY', section: 'eventos',    title: 'Evento Amcham Campinas',     desc: 'Cobertura da Amcham Campinas.', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
+    { id: 'c1',  ytId: 'hhFOKayrlTs', section: 'casamentos', title: 'Casamento Monica & Hugo pt 1', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c2',  ytId: 'MyqpfW8QYnw', section: 'casamentos', title: 'Casamento Monica & Hugo pt 2', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c3',  ytId: 'SOcI2Oru3pQ', section: 'casamentos', title: 'Casamento Monica & Hugo pt 3', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c4',  ytId: 'J1J7x8-rmxY', section: 'casamentos', title: 'Casamento Monica & Hugo pt 4', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c5',  ytId: '4JyzwhOfmwA', section: 'casamentos', title: 'Casamento Monica & Hugo pt 5', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
   ],
 };
 
