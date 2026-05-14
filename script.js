@@ -48,7 +48,7 @@ const DEFAULT_CONFIG = {
   contact: {
     heading:   'Vamos trabalhar juntos?',
     subtitle:  'Aberto para projetos freelance, parcerias e colaborações criativas.',
-    email:     'seu@email.com',
+    email:     'kenni.fer@hotmail.com',
     whatsapp:  '5511921962624',
     instagram: 'https://www.instagram.com/thebackstage.on/',
   },
@@ -369,14 +369,59 @@ function initCardHoverPreviews() {
     card.addEventListener('mouseenter', () => {
       timer = setTimeout(() => {
         iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${ytId}&rel=0&playsinline=1&enablejsapi=0`;
-      }, 700); // 700ms delay — avoids loading on fast cursor pass
+        card.classList.add('preview-active'); // hides info overlay
+      }, 700);
     });
 
     card.addEventListener('mouseleave', () => {
       if (timer) { clearTimeout(timer); timer = null; }
       iframe.src = '';
+      card.classList.remove('preview-active');
     });
   });
+}
+
+// ===== DRAG / SWIPE SUPPORT =====
+function addDragSwipe(trackEl, prevFn, nextFn, reSnapFn) {
+  let startX = 0, startY = 0, baseX = 0;
+  let active = false, moved = false;
+
+  const getX = () => new DOMMatrix(window.getComputedStyle(trackEl).transform).m41;
+
+  trackEl.addEventListener('pointerdown', e => {
+    active = true; moved = false;
+    startX = e.clientX; startY = e.clientY;
+    baseX = getX();
+    trackEl.setPointerCapture(e.pointerId);
+  });
+
+  trackEl.addEventListener('pointermove', e => {
+    if (!active) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    // If scrolling vertically, abort horizontal drag
+    if (!moved && Math.abs(dy) > Math.abs(dx) + 5) { active = false; return; }
+    if (Math.abs(dx) > 6) {
+      moved = true;
+      e.preventDefault();
+      trackEl.style.transition = 'none';
+      trackEl.style.transform = `translateX(${baseX + dx}px)`;
+    }
+  }, { passive: false });
+
+  const onEnd = e => {
+    if (!active) return;
+    active = false;
+    if (!moved) return;
+    const dx = e.clientX - startX;
+    // Block the next click event if the user actually dragged
+    trackEl.addEventListener('click', ev => ev.stopPropagation(), { once: true, capture: true });
+    if (Math.abs(dx) > 40) { dx < 0 ? nextFn() : prevFn(); }
+    else { reSnapFn(); }
+  };
+
+  trackEl.addEventListener('pointerup',     onEnd);
+  trackEl.addEventListener('pointercancel', onEnd);
 }
 
 // ===== SECTION MINI-CAROUSELS (infinite loop) =====
@@ -444,6 +489,7 @@ function initSectionCarousels() {
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
     window.addEventListener('resize', () => goTo(current, false));
+    addDragSwipe(trackEl, () => goTo(current - 1), () => goTo(current + 1), () => goTo(current));
 
     goTo(current, false);
   });
@@ -592,6 +638,7 @@ function initCarousel() {
   track.addEventListener('transitionstart', () => { prevBtn.disabled = true; nextBtn.disabled = true; });
   track.addEventListener('transitionend',   () => { prevBtn.disabled = false; nextBtn.disabled = false; });
   window.addEventListener('resize', () => goTo(current, false));
+  addDragSwipe(track, () => goTo(current - 1), () => goTo(current + 1), () => goTo(current));
   goTo(current, false);
 }
 

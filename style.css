@@ -248,7 +248,11 @@ img { display: block; width: 100%; object-fit: cover; }
   display: flex; gap: 12px;
   transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
 }
+.carousel-track:active { cursor: grabbing; }
 
 .carousel-slide {
   flex: 0 0 calc((100% - 24px) / 3);
@@ -332,10 +336,15 @@ img { display: block; width: 100%; object-fit: cover; }
   gap: 10px;
   transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
 }
+.sec-carousel-track:active { cursor: grabbing; }
 
 .sec-carousel-btn {
   flex: 0 0 40px;
+  min-width: 40px; min-height: 40px;
   width: 40px; height: 40px;
   background: rgba(255,255,255,0.12);
   border: none; color: var(--text);
@@ -343,7 +352,8 @@ img { display: block; width: 100%; object-fit: cover; }
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   transition: background var(--transition), transform var(--transition);
-  flex-shrink: 0; z-index: 5;
+  flex-shrink: 0; align-self: center; z-index: 5;
+  padding: 0; line-height: 1;
 }
 .sec-carousel-btn:hover { background: rgba(255,255,255,0.25); transform: scale(1.1); }
 .sec-carousel-btn:disabled { opacity: 0.25; cursor: default; transform: none; }
@@ -395,7 +405,7 @@ img { display: block; width: 100%; object-fit: cover; }
 }
 .card-portrait:hover .card-preview-iframe { opacity: 1; }
 
-/* Info overlay (shown on hover) */
+/* Info overlay (shown on hover, hidden when preview plays) */
 .card-portrait-info {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -409,6 +419,11 @@ img { display: block; width: 100%; object-fit: cover; }
 .card-portrait:hover .card-portrait-info {
   opacity: 1;
   transform: translateY(0);
+}
+/* Hide info overlay once video preview is active */
+.card-portrait.preview-active .card-portrait-info {
+  opacity: 0 !important;
+  transform: translateY(6px) !important;
 }
 
 .card-portrait-info h3 {
@@ -666,12 +681,12 @@ img { display: block; width: 100%; object-fit: cover; }
   .carousel-btn { width: 36px; height: 36px; font-size: 22px; }
 
   .sec-carousel-wrapper { padding: 0 8px; }
-  .sec-carousel-btn { width: 32px; height: 32px; font-size: 20px; }
+  .sec-carousel-btn { width: 32px; height: 32px; min-width: 32px; min-height: 32px; font-size: 20px; flex: 0 0 32px; }
   .card-portrait { flex: 0 0 120px; height: 213px; }
 
   .about { padding: 60px 20px; }
-  .about-content { grid-template-columns: 1fr; gap: 40px; }
-  .about-photo { display: none; }
+  .about-content { grid-template-columns: 1fr; gap: 32px; }
+  .about-photo img { height: 320px; border-radius: 10px; }
   .about-stats { gap: 24px; }
 
   .contact { padding: 60px 20px; }
