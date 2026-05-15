@@ -67,31 +67,24 @@ const DEFAULT_CONFIG = {
     { id: 'casamentos', title: 'Casamentos' },
   ],
 
-  recap: {
-    enabled: true,
-    year:    '2025',
-    title:   'Recap Project',
-    badge:   'No AI',
-  },
-
   // Flat video pool — each video has a 'section' field that matches a section id.
   videoPool: [
-    { id: 'ch1', ytId: '194T0HeO7VM', section: 'carousel',   inRecap: true,  title: 'Indústria Fox — 15 Anos',     desc: 'Cobertura cinematográfica do 15º aniversário da Indústria Fox, com narrativa emocional e produção de alto nível.', badge: 'Evento',        match: '98%', year: '2025' },
-    { id: 'ch2', ytId: 'oHrfwTFqsTg', section: 'carousel',   inRecap: true,  title: 'WCEF 2025',                    desc: 'Cobertura completa do World Commerce & Contracting Event Forum 2025.',                                           badge: 'Evento',        match: '96%', year: '2025' },
-    { id: 'ch3', ytId: '5ifoydf1FRM', section: 'carousel',   inRecap: true,  title: 'Casamento',                    desc: 'Cobertura cinematográfica de casamento.',                                                                        badge: 'Casamento',     match: '97%', year: '2025' },
-    { id: 'ch4', ytId: 'iX6ks9MoClw', section: 'carousel',   inRecap: true,  title: 'Evento Corporativo',           desc: 'Cobertura audiovisual de evento corporativo.',                                                                   badge: 'Evento',        match: '95%', year: '2025' },
-    { id: 'ch5', ytId: '5j5CPwguo6E', section: 'carousel',   inRecap: true,  title: 'Evento Corporativo 2',         desc: 'Cobertura audiovisual de evento corporativo.',                                                                   badge: 'Evento',        match: '95%', year: '2025' },
-    { id: 'v1',  ytId: 'vhwK4yhPBzA', section: 'anuncios',   inRecap: true,  title: 'Parceria Fox & TudoBônus',     desc: 'Anúncio de parceria estratégica com identidade visual sofisticada.',                                             badge: 'Anúncio',       match: '98%', year: '2025', tags: ['Parceria', 'Motion'] },
-    { id: 'v2',  ytId: 'KiRR4Upsbrg', section: 'anuncios',   inRecap: true,  title: 'Atendimento TudoBônus',       desc: 'Vídeo de atendimento ao cliente com narrativa envolvente.',                                                      badge: 'Institucional', match: '97%', year: '2025', tags: ['Institucional', 'Edição'] },
-    { id: 'v3',  ytId: 'txQJrrwfVHk', section: 'anuncios',   inRecap: true,  title: 'Entrega & Garantia',           desc: 'Comunicação visual sobre política de entrega e garantia da marca.',                                             badge: 'Campanha',      match: '95%', year: '2025', tags: ['Campanha', 'Motion'] },
-    { id: 'v4',  ytId: 'TJBivra1fAg', section: 'anuncios',   inRecap: true,  title: 'Trade in TudoBônus',           desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.',                                               badge: 'Campanha',      match: '96%', year: '2025', tags: ['Campanha', 'Edição'] },
-    { id: 'v5',  ytId: 'x1yuS8IHdYc', section: 'anuncios',   inRecap: true,  title: 'Trade in TudoBonus 2',         desc: 'Segunda versão da campanha com nova abordagem criativa.',                                                       badge: 'Campanha',      match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
-    { id: 'v6',  ytId: '15z7iaeOTRY', section: 'eventos',    inRecap: true,  title: 'Evento Amcham Campinas',       desc: 'Cobertura da Amcham Campinas.',                                                                                 badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
-    { id: 'c1',  ytId: 'hhFOKayrlTs', section: 'casamentos', inRecap: true,  title: 'Casamento Monica & Hugo pt 1', desc: 'Cobertura casamento.',                                                                                           badge: 'Casamento',     match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c2',  ytId: 'MyqpfW8QYnw', section: 'casamentos', inRecap: true,  title: 'Casamento Monica & Hugo pt 2', desc: 'Cobertura casamento.',                                                                                           badge: 'Casamento',     match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c3',  ytId: 'SOcI2Oru3pQ', section: 'casamentos', inRecap: true,  title: 'Casamento Monica & Hugo pt 3', desc: 'Cobertura casamento.',                                                                                           badge: 'Casamento',     match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c4',  ytId: 'J1J7x8-rmxY', section: 'casamentos', inRecap: true,  title: 'Casamento Monica & Hugo pt 4', desc: 'Cobertura casamento.',                                                                                           badge: 'Casamento',     match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c5',  ytId: '4JyzwhOfmwA', section: 'casamentos', inRecap: true,  title: 'Casamento Monica & Hugo pt 5', desc: 'Cobertura casamento.',                                                                                           badge: 'Casamento',     match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'ch1', ytId: '194T0HeO7VM', section: 'carousel',   title: 'Indústria Fox — 15 Anos',   desc: 'Cobertura cinematográfica do 15º aniversário da Indústria Fox, com narrativa emocional e produção de alto nível.', badge: 'Evento',    match: '98%', year: '2025' },
+    { id: 'ch2', ytId: 'oHrfwTFqsTg', section: 'carousel',   title: 'WCEF 2025',                  desc: 'Cobertura completa do World Commerce & Contracting Event Forum 2025.', badge: 'Evento',    match: '96%', year: '2025' },
+    { id: 'ch3', ytId: '5ifoydf1FRM', section: 'carousel',   title: 'Casamento',                  desc: 'Cobertura cinematográfica de casamento.', badge: 'Casamento', match: '97%', year: '2025' },
+    { id: 'ch4', ytId: 'iX6ks9MoClw', section: 'carousel',   title: 'Evento Corporativo',         desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
+    { id: 'ch5', ytId: '5j5CPwguo6E', section: 'carousel',   title: 'Evento Corporativo 2',       desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
+    { id: 'v1',  ytId: 'vhwK4yhPBzA', section: 'anuncios',   title: 'Parceria Fox & TudoBônus',   desc: 'Anúncio de parceria estratégica com identidade visual sofisticada.', badge: 'Anúncio',      match: '98%', year: '2025', tags: ['Parceria', 'Motion'] },
+    { id: 'v2',  ytId: 'KiRR4Upsbrg', section: 'anuncios',   title: 'Atendimento TudoBônus',     desc: 'Vídeo de atendimento ao cliente com narrativa envolvente.', badge: 'Institucional', match: '97%', year: '2025', tags: ['Institucional', 'Edição'] },
+    { id: 'v3',  ytId: 'txQJrrwfVHk', section: 'anuncios',   title: 'Entrega & Garantia',         desc: 'Comunicação visual sobre política de entrega e garantia da marca.', badge: 'Campanha',     match: '95%', year: '2025', tags: ['Campanha', 'Motion'] },
+    { id: 'v4',  ytId: 'TJBivra1fAg', section: 'anuncios',   title: 'Trade in TudoBônus',         desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.', badge: 'Campanha',     match: '96%', year: '2025', tags: ['Campanha', 'Edição'] },
+    { id: 'v5',  ytId: 'x1yuS8IHdYc', section: 'anuncios',   title: 'Trade in TudoBonus 2',       desc: 'Segunda versão da campanha com nova abordagem criativa.', badge: 'Campanha',     match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
+    { id: 'v6',  ytId: '15z7iaeOTRY', section: 'eventos',    title: 'Evento Amcham Campinas',     desc: 'Cobertura da Amcham Campinas.', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
+    { id: 'c1',  ytId: 'hhFOKayrlTs', section: 'casamentos', title: 'Casamento Monica & Hugo pt 1', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c2',  ytId: 'MyqpfW8QYnw', section: 'casamentos', title: 'Casamento Monica & Hugo pt 2', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c3',  ytId: 'SOcI2Oru3pQ', section: 'casamentos', title: 'Casamento Monica & Hugo pt 3', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c4',  ytId: 'J1J7x8-rmxY', section: 'casamentos', title: 'Casamento Monica & Hugo pt 4', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c5',  ytId: '4JyzwhOfmwA', section: 'casamentos', title: 'Casamento Monica & Hugo pt 5', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
   ],
 };
 
@@ -507,64 +500,6 @@ function initSectionCarousels() {
   initCardHoverPreviews();
 }
 
-// ===== RENDER RECAP BENTO GRID =====
-function renderRecap() {
-  const container = document.getElementById('recap');
-  if (!container) return;
-
-  const rc = CONFIG.recap || {};
-  if (rc.enabled === false) { container.style.display = 'none'; return; }
-
-  const videos = (CONFIG.videoPool || []).filter(v => v.inRecap && !v.hidden);
-  container.innerHTML = '';
-  if (videos.length === 0) return;
-
-  const title = rc.title || 'Recap Project';
-  const year  = rc.year  || '2025';
-  const badge = rc.badge || '';
-
-  container.innerHTML = `
-    <div class="recap-header">
-      <h2 class="recap-title">
-        ${title}
-        <span class="recap-year">${year}</span>
-        ${badge ? `<span class="recap-badge">${badge}</span>` : ''}
-      </h2>
-    </div>
-    <div class="recap-grid" id="recap-grid"></div>`;
-
-  const grid = document.getElementById('recap-grid');
-
-  videos.forEach((v, i) => {
-    const cleanId     = extractYtId(v.ytId);
-    const isLandscape = v.section === 'carousel';
-    const isFeatured  = i === 0;
-
-    // Span assignment: featured=2×2, landscape=2×1, portrait=1×2
-    const colSpan = (isFeatured || isLandscape) ? 2 : 1;
-    const rowSpan = (isFeatured || !isLandscape) ? 2 : 1;
-
-    const item = document.createElement('div');
-    item.className = 'recap-item' + (isFeatured ? ' recap-featured' : '');
-    item.style.gridColumn = `span ${colSpan}`;
-    item.style.gridRow    = `span ${rowSpan}`;
-    item.dataset.modal    = 'modal-' + v.id;
-
-    item.innerHTML = `
-      <img src="https://i.ytimg.com/vi/${cleanId}/hqdefault.jpg"
-           alt="${v.title}" loading="lazy"
-           onerror="this.src='https://i.ytimg.com/vi/${cleanId}/mqdefault.jpg'" />
-      <div class="recap-item-overlay">
-        ${v.badge ? `<span class="recap-item-badge">${v.badge}</span>` : ''}
-        <h3>${v.title}</h3>
-      </div>
-      <div class="recap-item-play">▶</div>`;
-
-    item.addEventListener('click', () => openModal('modal-' + v.id));
-    grid.appendChild(item);
-  });
-}
-
 // ===== RENDER MODALS =====
 function renderModals() {
   const container = document.getElementById('modals-container');
@@ -751,7 +686,6 @@ applyContact();
 applyFooter();
 renderCarousel();
 renderSections();
-renderRecap();
 renderModals();
 initCarousel();
 initSectionCarousels(); // clones cards then re-binds hover previews

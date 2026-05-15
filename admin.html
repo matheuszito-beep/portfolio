@@ -362,39 +362,6 @@
       </div>
     </div>
 
-    <!-- 🎞 RECAP BENTO GRID -->
-    <div class="acc-block" id="acc-recap">
-      <div class="acc-header" onclick="toggleAcc('acc-recap')">
-        <span class="acc-icon">🎞</span>
-        <span class="acc-title">Recap — Mosaico de Projetos</span>
-        <span class="acc-chevron">▼</span>
-      </div>
-      <div class="acc-body">
-        <div class="note" style="margin-bottom:16px">
-          O mosaico exibe um bento grid misturando vídeos 16:9 e 9×16. Marque <strong>"Incluir no Recap"</strong> em cada vídeo na seção abaixo para controlar quais aparecem aqui.
-        </div>
-        <div class="grid-2">
-          <div class="field-group">
-            <label class="field-label">Título</label>
-            <input type="text" id="recap-title" placeholder="Recap Project" />
-          </div>
-          <div class="field-group">
-            <label class="field-label">Ano</label>
-            <input type="text" id="recap-year" placeholder="2025" />
-          </div>
-          <div class="field-group">
-            <label class="field-label">Badge (ex: No AI)</label>
-            <input type="text" id="recap-badge" placeholder="No AI" />
-          </div>
-          <div class="field-group" style="display:flex;align-items:center;gap:10px;padding-top:20px">
-            <label class="hidden-toggle" style="font-size:14px;color:var(--text)">
-              <input type="checkbox" id="recap-enabled" checked /> Exibir seção Recap no site
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- 📹 TODOS OS VÍDEOS (flat pool + section selector) -->
     <div class="acc-block open" id="acc-videos">
       <div class="acc-header" onclick="toggleAcc('acc-videos')">
@@ -454,24 +421,23 @@ const DEFAULT_CONFIG = {
     { id: 'eventos',    title: 'Eventos' },
     { id: 'casamentos', title: 'Casamentos' },
   ],
-  recap: { enabled: true, year: '2025', title: 'Recap Project', badge: 'No AI' },
   videoPool: [
-    { id:'ch1', ytId:'194T0HeO7VM', section:'carousel',   inRecap:true, title:'Indústria Fox — 15 Anos',     desc:'Cobertura cinematográfica do 15º aniversário da Indústria Fox.', badge:'Evento',        match:'98%', year:'2025' },
-    { id:'ch2', ytId:'oHrfwTFqsTg', section:'carousel',   inRecap:true, title:'WCEF 2025',                    desc:'Cobertura do World Commerce & Contracting Event Forum 2025.',   badge:'Evento',        match:'96%', year:'2025' },
-    { id:'ch3', ytId:'5ifoydf1FRM', section:'carousel',   inRecap:true, title:'Casamento',                    desc:'Cobertura cinematográfica de casamento.',                        badge:'Casamento',     match:'97%', year:'2025' },
-    { id:'ch4', ytId:'iX6ks9MoClw', section:'carousel',   inRecap:true, title:'Evento Corporativo',           desc:'Cobertura audiovisual de evento corporativo.',                   badge:'Evento',        match:'95%', year:'2025' },
-    { id:'ch5', ytId:'5j5CPwguo6E', section:'carousel',   inRecap:true, title:'Evento Corporativo 2',         desc:'Cobertura audiovisual de evento corporativo.',                   badge:'Evento',        match:'95%', year:'2025' },
-    { id:'v1',  ytId:'vhwK4yhPBzA', section:'anuncios',   inRecap:true, title:'Parceria Fox & TudoBônus',     desc:'Anúncio de parceria estratégica.',                               badge:'Anúncio',       match:'98%', year:'2025', tags:['Parceria','Motion'] },
-    { id:'v2',  ytId:'KiRR4Upsbrg', section:'anuncios',   inRecap:true, title:'Atendimento TudoBônus',       desc:'Vídeo de atendimento ao cliente.',                               badge:'Institucional', match:'97%', year:'2025', tags:['Institucional','Edição'] },
-    { id:'v3',  ytId:'txQJrrwfVHk', section:'anuncios',   inRecap:true, title:'Entrega & Garantia',           desc:'Comunicação sobre política de entrega.',                         badge:'Campanha',      match:'95%', year:'2025', tags:['Campanha','Motion'] },
-    { id:'v4',  ytId:'TJBivra1fAg', section:'anuncios',   inRecap:true, title:'Trade in TudoBônus',           desc:'Campanha de Trade-in.',                                          badge:'Campanha',      match:'96%', year:'2025', tags:['Campanha','Edição'] },
-    { id:'v5',  ytId:'x1yuS8IHdYc', section:'anuncios',   inRecap:true, title:'Trade in TudoBonus 2',         desc:'Segunda versão da campanha.',                                    badge:'Campanha',      match:'93%', year:'2025', tags:['Campanha','Social'] },
-    { id:'v6',  ytId:'15z7iaeOTRY', section:'eventos',    inRecap:true, title:'Evento Amcham Campinas',       desc:'Cobertura da Amcham Campinas.',                                  badge:'Evento',        match:'94%', year:'2025', tags:['Evento','Cobertura'] },
-    { id:'c1',  ytId:'hhFOKayrlTs', section:'casamentos', inRecap:true, title:'Casamento Monica & Hugo pt 1', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
-    { id:'c2',  ytId:'MyqpfW8QYnw', section:'casamentos', inRecap:true, title:'Casamento Monica & Hugo pt 2', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
-    { id:'c3',  ytId:'SOcI2Oru3pQ', section:'casamentos', inRecap:true, title:'Casamento Monica & Hugo pt 3', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
-    { id:'c4',  ytId:'J1J7x8-rmxY', section:'casamentos', inRecap:true, title:'Casamento Monica & Hugo pt 4', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
-    { id:'c5',  ytId:'4JyzwhOfmwA', section:'casamentos', inRecap:true, title:'Casamento Monica & Hugo pt 5', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
+    { id:'ch1', ytId:'194T0HeO7VM', section:'carousel',   title:'Indústria Fox — 15 Anos',   desc:'Cobertura cinematográfica do 15º aniversário da Indústria Fox.', badge:'Evento',        match:'98%', year:'2025' },
+    { id:'ch2', ytId:'oHrfwTFqsTg', section:'carousel',   title:'WCEF 2025',                  desc:'Cobertura do World Commerce & Contracting Event Forum 2025.',   badge:'Evento',        match:'96%', year:'2025' },
+    { id:'ch3', ytId:'5ifoydf1FRM', section:'carousel',   title:'Casamento',                  desc:'Cobertura cinematográfica de casamento.',                        badge:'Casamento',     match:'97%', year:'2025' },
+    { id:'ch4', ytId:'iX6ks9MoClw', section:'carousel',   title:'Evento Corporativo',         desc:'Cobertura audiovisual de evento corporativo.',                   badge:'Evento',        match:'95%', year:'2025' },
+    { id:'ch5', ytId:'5j5CPwguo6E', section:'carousel',   title:'Evento Corporativo 2',       desc:'Cobertura audiovisual de evento corporativo.',                   badge:'Evento',        match:'95%', year:'2025' },
+    { id:'v1',  ytId:'vhwK4yhPBzA', section:'anuncios',   title:'Parceria Fox & TudoBônus',   desc:'Anúncio de parceria estratégica.',                               badge:'Anúncio',       match:'98%', year:'2025', tags:['Parceria','Motion'] },
+    { id:'v2',  ytId:'KiRR4Upsbrg', section:'anuncios',   title:'Atendimento TudoBônus',     desc:'Vídeo de atendimento ao cliente.',                               badge:'Institucional', match:'97%', year:'2025', tags:['Institucional','Edição'] },
+    { id:'v3',  ytId:'txQJrrwfVHk', section:'anuncios',   title:'Entrega & Garantia',         desc:'Comunicação sobre política de entrega.',                         badge:'Campanha',      match:'95%', year:'2025', tags:['Campanha','Motion'] },
+    { id:'v4',  ytId:'TJBivra1fAg', section:'anuncios',   title:'Trade in TudoBônus',         desc:'Campanha de Trade-in.',                                          badge:'Campanha',      match:'96%', year:'2025', tags:['Campanha','Edição'] },
+    { id:'v5',  ytId:'x1yuS8IHdYc', section:'anuncios',   title:'Trade in TudoBonus 2',       desc:'Segunda versão da campanha.',                                    badge:'Campanha',      match:'93%', year:'2025', tags:['Campanha','Social'] },
+    { id:'v6',  ytId:'15z7iaeOTRY', section:'eventos',    title:'Evento Amcham Campinas',     desc:'Cobertura da Amcham Campinas.',                                  badge:'Evento',        match:'94%', year:'2025', tags:['Evento','Cobertura'] },
+    { id:'c1',  ytId:'hhFOKayrlTs', section:'casamentos', title:'Casamento Monica & Hugo pt 1', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
+    { id:'c2',  ytId:'MyqpfW8QYnw', section:'casamentos', title:'Casamento Monica & Hugo pt 2', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
+    { id:'c3',  ytId:'SOcI2Oru3pQ', section:'casamentos', title:'Casamento Monica & Hugo pt 3', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
+    { id:'c4',  ytId:'J1J7x8-rmxY', section:'casamentos', title:'Casamento Monica & Hugo pt 4', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
+    { id:'c5',  ytId:'4JyzwhOfmwA', section:'casamentos', title:'Casamento Monica & Hugo pt 5', desc:'Cobertura casamento.', badge:'Casamento', match:'97%', year:'2025', tags:['Casamento','Cobertura'] },
   ],
 };
 
@@ -603,14 +569,6 @@ function initAdmin() {
   val('footer-logo', CFG.footer?.logo);
   val('footer-text', CFG.footer?.text);
 
-  // Recap
-  const rc = CFG.recap || {};
-  val('recap-title', rc.title || 'Recap Project');
-  val('recap-year',  rc.year  || '2025');
-  val('recap-badge', rc.badge || 'No AI');
-  const recapEnabled = document.getElementById('recap-enabled');
-  if (recapEnabled) recapEnabled.checked = rc.enabled !== false;
-
   // Video pool
   renderVideoPool(CFG.videoPool || []);
 
@@ -698,7 +656,6 @@ function buildPoolVideoItem(v, vi, total) {
     <div style="margin-top:8px"><label class="field-label">Tags (vírgula) — para vídeos 9×16</label><input type="text" class="f-tags" value="${esc((v.tags||[]).join(', '))}" /></div>
     <div class="video-footer">
       <label class="hidden-toggle"><input type="checkbox" class="f-hidden" ${v.hidden?'checked':''} /> Ocultar do site</label>
-      <label class="hidden-toggle" style="color:#f0c040"><input type="checkbox" class="f-inrecap" ${v.inRecap?'checked':''} /> Incluir no Recap</label>
       <a href="https://www.youtube.com/watch?v=${esc(v.ytId||'')}" target="_blank" class="yt-link">▶ YouTube</a>
       <span style="flex:1"></span>
       ${vi > 0           ? `<button class="btn btn-ghost btn-sm" onclick="movePoolVideo(${vi},-1)">↑</button>` : ''}
@@ -801,7 +758,6 @@ function readForm() {
       match:   item.querySelector('.f-match')?.value.trim()  || '',
       year:    item.querySelector('.f-year')?.value.trim()   || '',
       hidden:  item.querySelector('.f-hidden')?.checked      || false,
-      inRecap: item.querySelector('.f-inrecap')?.checked     || false,
       tags:    (item.querySelector('.f-tags')?.value || '').split(',').map(s => s.trim()).filter(Boolean),
     };
   }).filter(v => v.ytId);
@@ -831,12 +787,6 @@ function readForm() {
     },
     contact: { heading: g('contact-heading'), subtitle: g('contact-subtitle'), email: g('contact-email'), whatsapp: g('contact-whatsapp'), instagram: g('contact-instagram') },
     footer:  { logo: g('footer-logo'), text: g('footer-text') },
-    recap: {
-      enabled: document.getElementById('recap-enabled')?.checked !== false,
-      title:   g('recap-title') || 'Recap Project',
-      year:    g('recap-year')  || '2025',
-      badge:   g('recap-badge') || '',
-    },
     sections,
     videoPool,
   };
