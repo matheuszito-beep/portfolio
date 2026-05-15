@@ -262,14 +262,15 @@ function renderCarousel() {
 
   const videos = (CONFIG.videoPool || []).filter(v => v.section === 'carousel' && !v.hidden);
   videos.forEach(v => {
+    const cleanId = extractYtId(v.ytId);
     const slide = document.createElement('div');
     slide.className = 'carousel-slide carousel-yt';
     slide.onclick = () => openModal('modal-' + v.id);
     slide.innerHTML = `
       <img class="carousel-thumb"
-           src="https://i.ytimg.com/vi/${v.ytId}/maxresdefault.jpg"
+           src="https://i.ytimg.com/vi/${cleanId}/maxresdefault.jpg"
            alt="${v.title}"
-           onerror="this.src='https://i.ytimg.com/vi/${v.ytId}/hqdefault.jpg'" />
+           onerror="this.src='https://i.ytimg.com/vi/${cleanId}/hqdefault.jpg'" />
       <div class="carousel-yt-play">▶</div>
       <div class="carousel-info">
         <span class="carousel-badge">${v.badge}</span>
@@ -319,12 +320,13 @@ function renderSections() {
       track.appendChild(ph);
     } else {
       visibleVideos.forEach(v => {
-        const thumb   = `https://i.ytimg.com/vi/${v.ytId}/hqdefault.jpg`;
+        const cleanId  = extractYtId(v.ytId);
+        const thumb    = `https://i.ytimg.com/vi/${cleanId}/hqdefault.jpg`;
         const tagsHtml = (v.tags || []).map(t => `<span>${t}</span>`).join('');
 
         const card = document.createElement('div');
         card.className    = 'card-portrait';
-        card.dataset.ytid  = v.ytId;
+        card.dataset.ytid  = cleanId;
         card.dataset.modal = 'modal-' + v.id;
 
         card.innerHTML = `
@@ -543,10 +545,24 @@ function renderModals() {
   });
 }
 
+// ===== EXTRACT CLEAN YT ID (handles full URLs stored in localStorage) =====
+function extractYtId(raw) {
+  if (!raw) return raw;
+  // Already a short ID (no slashes or dots)
+  if (!/[./]/.test(raw)) return raw;
+  // youtube.com/shorts/ID
+  let m = raw.match(/shorts\/([A-Za-z0-9_-]{6,20})/);
+  if (m) return m[1];
+  // youtube.com/watch?v=ID or youtu.be/ID
+  m = raw.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,20})/);
+  if (m) return m[1];
+  return raw;
+}
+
 // ===== FIND YT ID =====
 function findYtId(modalId) {
   const vid = (CONFIG.videoPool || []).find(v => 'modal-' + v.id === modalId);
-  return vid?.ytId || null;
+  return extractYtId(vid?.ytId) || null;
 }
 
 // ===== MODAL =====
