@@ -82,6 +82,7 @@ const DEFAULT_CONFIG = {
     { id: 'v5',  ytId: 'x1yuS8IHdYc', section: 'anuncios',   title: 'Trade in TudoBonus 2',       desc: 'Segunda versão da campanha com nova abordagem criativa.', badge: 'Campanha',     match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
     { id: 'v6',  ytId: '15z7iaeOTRY', section: 'eventos',    title: 'Evento Amcham Campinas',     desc: 'Cobertura da Amcham Campinas.', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
     { id: 'v7',  ytId: 'dr7vNgiEbiE', section: 'eventos',    title: 'Novo Evento',                desc: '', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
+    { id: 'v8',  ytId: 'ehcIkxzkTd8', section: 'eventos',    title: 'Novo Evento 2',              desc: '', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
     { id: 'c1',  ytId: 'hhFOKayrlTs', section: 'casamentos', title: 'Casamento Monica & Hugo pt 1', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
     { id: 'c2',  ytId: 'MyqpfW8QYnw', section: 'casamentos', title: 'Casamento Monica & Hugo pt 2', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
     { id: 'c3',  ytId: 'SOcI2Oru3pQ', section: 'casamentos', title: 'Casamento Monica & Hugo pt 3', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
