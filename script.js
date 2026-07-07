@@ -58,6 +58,8 @@ const DEFAULT_CONFIG = {
     text: '© 2026 Matheus Zito. Todos os direitos reservados.',
   },
 
+  ensaios: [], // álbuns fotográficos — gerenciados pelo admin
+
   // Sections: first entry (id:'carousel') is the top featured carousel.
   // The rest are portrait-card mini-carousels.
   sections: [
@@ -503,6 +505,125 @@ function initSectionCarousels() {
   initCardHoverPreviews();
 }
 
+// ===== RENDER ENSAIOS FOTOGRÁFICOS =====
+function renderEnsaios() {
+  const section = document.getElementById('ensaios');
+  if (!section) return;
+
+  const albums = (CONFIG.ensaios || []).filter(a => !a.hidden);
+  section.innerHTML = '';
+
+  if (albums.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+
+  section.innerHTML = `
+    <h2 class="row-title">Ensaios Fotográficos</h2>
+    <div class="ensaios-grid"></div>`;
+
+  const grid = section.querySelector('.ensaios-grid');
+
+  albums.forEach(album => {
+    const coverUrl = album.cover ? driveImg(album.cover, 600) : '';
+    const count    = (album.photos || []).length;
+
+    const card = document.createElement('div');
+    card.className = 'ensaio-card';
+    card.innerHTML = `
+      <div class="ensaio-cover"${coverUrl ? ` style="background-image:url('${coverUrl}')"` : ''}>
+        ${!coverUrl ? '<div class="ensaio-cover-ph">📷</div>' : ''}
+        <div class="ensaio-cover-overlay">
+          <span class="ensaio-count">${count} foto${count !== 1 ? 's' : ''}</span>
+        </div>
+      </div>
+      <div class="ensaio-info">
+        <h3>${album.title || 'Sem título'}</h3>
+        ${album.date ? `<span class="ensaio-date">${album.date}</span>` : ''}
+      </div>`;
+    card.addEventListener('click', () => openAlbum(album));
+    grid.appendChild(card);
+  });
+}
+
+// ===== ALBUM LIGHTBOX =====
+let _album     = null;
+let _viewerIdx = 0;
+
+function openAlbum(album) {
+  _album = album;
+  const photos = album.photos || [];
+
+  let backdrop = document.getElementById('album-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.id = 'album-backdrop';
+    backdrop.className = 'album-backdrop';
+    document.body.appendChild(backdrop);
+  }
+
+  backdrop.innerHTML = `
+    <div class="album-modal">
+      <div class="album-modal-hdr">
+        <div>
+          <h2 class="album-modal-title">${album.title || ''}</h2>
+          ${album.date ? `<span class="album-modal-date">${album.date}</span>` : ''}
+        </div>
+        <button class="album-modal-close" onclick="closeAlbum()">✕</button>
+      </div>
+      <div class="album-photos-grid">
+        ${photos.map((p, i) => `
+          <div class="album-photo-item" onclick="openViewer(${i})">
+            <img src="${driveImg(p.url || p, 800)}" loading="lazy" />
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="photo-viewer" id="photo-viewer" style="display:none">
+      <button class="viewer-btn viewer-close-btn" onclick="closeViewer()">✕</button>
+      <button class="viewer-btn viewer-prev-btn"  onclick="navViewer(-1)">&#8249;</button>
+      <div class="viewer-img-wrap"><img id="viewer-img" src="" /></div>
+      <button class="viewer-btn viewer-next-btn"  onclick="navViewer(1)">&#8250;</button>
+      <div class="viewer-counter" id="viewer-counter"></div>
+    </div>`;
+
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAlbum() {
+  const el = document.getElementById('album-backdrop');
+  if (el) el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openViewer(index) {
+  _viewerIdx = index;
+  const viewer = document.getElementById('photo-viewer');
+  if (viewer) { viewer.style.display = 'flex'; updateViewer(); }
+}
+
+function closeViewer() {
+  const viewer = document.getElementById('photo-viewer');
+  if (viewer) viewer.style.display = 'none';
+}
+
+function navViewer(dir) {
+  const photos = (_album || {}).photos || [];
+  _viewerIdx = (_viewerIdx + dir + photos.length) % photos.length;
+  updateViewer();
+}
+
+function updateViewer() {
+  const photos = (_album || {}).photos || [];
+  const p = photos[_viewerIdx];
+  if (!p) return;
+  const img = document.getElementById('viewer-img');
+  const ctr = document.getElementById('viewer-counter');
+  if (img) img.src = driveImg(p.url || p, 1600);
+  if (ctr) ctr.textContent = `${_viewerIdx + 1} / ${photos.length}`;
+}
+
 // ===== RENDER MODALS =====
 function renderModals() {
   const container = document.getElementById('modals-container');
@@ -546,6 +667,21 @@ function renderModals() {
     }
     container.appendChild(el);
   });
+}
+
+// ===== GOOGLE DRIVE HELPERS =====
+function extractDriveId(input) {
+  if (!input) return '';
+  const m = input.match(/\/d\/([a-zA-Z0-9_-]{20,})/);
+  if (m) return m[1];
+  if (/^[a-zA-Z0-9_-]{20,}$/.test(input.trim())) return input.trim();
+  return '';
+}
+
+function driveImg(idOrUrl, size) {
+  const id = extractDriveId(idOrUrl) || idOrUrl;
+  if (!id) return '';
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w${size || 800}`;
 }
 
 // ===== EXTRACT CLEAN YT ID (handles full URLs stored in localStorage) =====
@@ -594,6 +730,20 @@ function closeModal(event, id) {
 }
 
 document.addEventListener('keydown', (e) => {
+  // Album / photo viewer keyboard nav
+  const albumOpen  = document.getElementById('album-backdrop')?.classList.contains('open');
+  const viewerOpen = albumOpen && document.getElementById('photo-viewer')?.style.display !== 'none';
+
+  if (albumOpen) {
+    if (e.key === 'Escape') { viewerOpen ? closeViewer() : closeAlbum(); return; }
+    if (viewerOpen) {
+      if (e.key === 'ArrowLeft')  { navViewer(-1); return; }
+      if (e.key === 'ArrowRight') { navViewer(1);  return; }
+    }
+    return;
+  }
+
+  // Video modals ESC
   if (e.key !== 'Escape') return;
   document.querySelectorAll('.modal-backdrop.open').forEach(modal => {
     const iframe = modal.querySelector('.modal-yt-iframe');
@@ -689,6 +839,7 @@ applyContact();
 applyFooter();
 renderCarousel();
 renderSections();
+renderEnsaios();
 renderModals();
 initCarousel();
 initSectionCarousels(); // clones cards then re-binds hover previews

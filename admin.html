@@ -378,6 +378,23 @@
       </div>
     </div>
 
+    <!-- 📸 ENSAIOS FOTOGRÁFICOS -->
+    <div class="acc-block" id="acc-ensaios">
+      <div class="acc-header" onclick="toggleAcc('acc-ensaios')">
+        <span class="acc-icon">📸</span>
+        <span class="acc-title">Ensaios Fotográficos</span>
+        <span class="acc-chevron">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="note" style="margin-bottom:16px">
+          Adicione álbuns com fotos do <strong>Google Drive</strong>. Compartilhe cada foto como
+          <em>"Qualquer pessoa com o link pode ver"</em> e cole o link abaixo.
+        </div>
+        <div id="ensaios-list"></div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="addAlbum()">+ Novo álbum</button>
+      </div>
+    </div>
+
     <!-- 📁 SEÇÕES (renomear/reordenar) -->
     <div class="acc-block" id="acc-sections">
       <div class="acc-header" onclick="toggleAcc('acc-sections')">
@@ -415,6 +432,7 @@ const DEFAULT_CONFIG = {
   about: { tag: 'Sobre mim', heading: 'Por trás das câmeras', bio1: 'Sou editor de vídeo e motion designer especializado em conteúdo para redes sociais, campanhas publicitárias e vídeos institucionais. Já trabalhei com marcas, criadores e agências de todo o Brasil.', bio2: 'Minha especialidade está em unir técnica e criatividade — seja num hook que prende em 3 segundos ou numa campanha que fortalece uma marca.', stats: [{num:'150+',label:'Projetos entregues'},{num:'30+',label:'Clientes satisfeitos'},{num:'3+',label:'Anos de experiência'}], skills: ['After Effects','Premiere Pro','Photoshop','Illustrator','Motion Graphics','Color Grading','Sound Design'], photoUrl: 'assets/IMG_4592.JPG' },
   contact: { heading: 'Vamos trabalhar juntos?', subtitle: 'Aberto para projetos freelance, parcerias e colaborações criativas.', email: 'kenni.fer@hotmail.com', whatsapp: '5511921962624', instagram: 'https://www.instagram.com/thebackstage.on/' },
   footer: { logo: 'MZ', text: '© 2026 Matheus Zito. Todos os direitos reservados.' },
+  ensaios: [],
   sections: [
     { id: 'carousel',   title: 'Vídeos em Destaque' },
     { id: 'anuncios',   title: 'Anúncios' },
@@ -577,6 +595,9 @@ function initAdmin() {
 
   // Sections
   renderSectionsList(CFG.sections || []);
+
+  // Ensaios
+  renderEnsaiosList(CFG.ensaios || []);
 }
 
 function val(id, v) { const e = document.getElementById(id); if (e && v !== undefined && v !== null) e.value = v; }
@@ -792,7 +813,82 @@ function readForm() {
     footer:  { logo: g('footer-logo'), text: g('footer-text') },
     sections,
     videoPool,
+    ensaios: Array.from(document.querySelectorAll('#ensaios-list .album-item')).map(item => ({
+      id:     item.dataset.albumId || uid(),
+      title:  item.querySelector('.album-title')?.value.trim()  || '',
+      date:   item.querySelector('.album-date')?.value.trim()   || '',
+      cover:  item.querySelector('.album-cover')?.value.trim()  || '',
+      hidden: item.querySelector('.album-hidden')?.checked      || false,
+      photos: (item.querySelector('.album-photos')?.value || '')
+        .split('\n').map(s => s.trim()).filter(Boolean)
+        .map((url, i) => ({ id: 'p' + i, url })),
+    })),
   };
+}
+
+// ─── ENSAIOS ───
+function renderEnsaiosList(albums) {
+  const el = document.getElementById('ensaios-list');
+  if (!el) return;
+  el.innerHTML = '';
+  albums.forEach(a => el.appendChild(buildAlbumItem(a)));
+}
+
+function buildAlbumItem(album) {
+  const div = document.createElement('div');
+  div.className = 'album-item video-item';
+  div.dataset.albumId = album.id || uid();
+  const photos = (album.photos || []).map(p => p.url || p).join('\n');
+  div.innerHTML = `
+    <div class="video-item-header">
+      <span class="drag-handle">⠿</span>
+      <span class="video-item-title">${esc(album.title || 'Novo Álbum')}</span>
+      <button class="btn-remove" onclick="removeAlbum(this)" title="Remover álbum">✕</button>
+    </div>
+    <div class="video-item-fields">
+      <div class="grid-2">
+        <div class="field-group">
+          <label class="field-label">Título do ensaio</label>
+          <input type="text" class="album-title" value="${esc(album.title||'')}"
+            oninput="this.closest('.album-item').querySelector('.video-item-title').textContent=this.value||'Novo Álbum'" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Data / Ano</label>
+          <input type="text" class="album-date" value="${esc(album.date||'')}" placeholder="2025" />
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Foto de capa — link do Google Drive</label>
+        <input type="text" class="album-cover" value="${esc(album.cover||'')}"
+          placeholder="https://drive.google.com/file/d/…/view" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Fotos — um link do Google Drive por linha</label>
+        <textarea class="album-photos" rows="6"
+          placeholder="https://drive.google.com/file/d/…/view&#10;https://drive.google.com/file/d/…/view">${esc(photos)}</textarea>
+      </div>
+      <div class="video-footer">
+        <label class="hidden-toggle"><input type="checkbox" class="album-hidden" ${album.hidden?'checked':''} /> Ocultar álbum do site</label>
+      </div>
+    </div>`;
+  return div;
+}
+
+function addAlbum() {
+  const cfg = readForm();
+  cfg.ensaios.push({ id: uid(), title: 'Novo Álbum', date: '', cover: '', hidden: false, photos: [] });
+  CFG = cfg; initAdmin();
+  toggleAcc('acc-ensaios');
+  document.querySelector('#ensaios-list .album-item:last-child .album-title')?.focus();
+}
+
+function removeAlbum(btn) {
+  if (!confirm('Remover este álbum?')) return;
+  const cfg = readForm();
+  const idx = Array.from(document.querySelectorAll('#ensaios-list .album-item'))
+    .indexOf(btn.closest('.album-item'));
+  if (idx > -1) cfg.ensaios.splice(idx, 1);
+  CFG = cfg; initAdmin();
 }
 
 // ─── UTILS ───
