@@ -3,3 +3,10 @@ assets/*.mp4
 assets/*.mov
 assets/*.avi
 assets/*.webm
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
