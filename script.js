@@ -4,13 +4,13 @@ const DEFAULT_CONFIG = {
   heroOpacity: 0.36,
 
   theme: {
-    accentColor:    '#990008',
-    bgColor:        '#000000',
-    titleColor:     '#ffffff',
-    mutedColor:     '#b3b3b3',
-    btnPrimaryBg:   '#ffffff',
-    btnPrimaryText: '#000000',
-    btnRedBg:       '#990008',
+    accentColor:    '#0071e3',
+    bgColor:        '#ffffff',
+    titleColor:     '#1d1d1f',
+    mutedColor:     '#6e6e73',
+    btnPrimaryBg:   '#000000',
+    btnPrimaryText: '#f5f5f7',
+    btnRedBg:       '#000000',
     btnGreenBg:     '#25D366',
   },
 
@@ -27,8 +27,8 @@ const DEFAULT_CONFIG = {
     title2:   'Zito',
     subtitle: 'Motion Designer & Editor de Vídeo',
     desc:     'Transformo ideias em experiências visuais memoráveis. Especializado em motion graphics, edição cinematográfica e conteúdo digital.',
-    btn1Text: '▶ Ver Projetos',
-    btn2Text: '+ Sobre mim',
+    btn1Text: 'Ver Projetos',
+    btn2Text: 'Sobre mim',
   },
 
   about: {
