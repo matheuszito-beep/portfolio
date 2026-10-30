@@ -659,15 +659,16 @@ function renderProdutos() {
 
   const produtos = (CONFIG.produtos || []).filter(p => !p.hidden);
 
-  if (produtos.length === 0) {
-    section.style.display = 'none';
-    return;
-  }
   section.style.display = '';
 
   const grid = document.getElementById('produtos-grid');
   if (!grid) return;
   grid.innerHTML = '';
+
+  if (produtos.length === 0) {
+    grid.innerHTML = '<div class="produtos-empty"><p>Em breve — seus produtos aparecerão aqui.</p></div>';
+    return;
+  }
 
   produtos.forEach(p => {
     const card = document.createElement('div');
