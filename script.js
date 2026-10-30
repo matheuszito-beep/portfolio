@@ -22,13 +22,13 @@ const DEFAULT_CONFIG = {
   navbar: { logo: 'MZ' },
 
   hero: {
-    badge:    'Disponível para projetos',
-    title1:   'Matheus',
-    title2:   'Zito',
+    badge:    'IDEIAS GANHAM VIDA',
+    title1:   'EM MOVIMENTO',
+    title2:   'E EM IMAGENS',
     subtitle: 'Motion Designer & Editor de Vídeo',
-    desc:     'Transformo ideias em experiências visuais memoráveis. Especializado em motion graphics, edição cinematográfica e conteúdo digital.',
-    btn1Text: 'Ver Projetos',
-    btn2Text: 'Sobre mim',
+    desc:     'Motion Designer & Editor de Vídeo especializado em conteúdo que para o scroll e converte audiência em resultado.',
+    btn1Text: 'CONHEÇA MEU TRABALHO →',
+    btn2Text: '',
   },
 
   about: {
@@ -172,48 +172,53 @@ function applySeo() {
 
 // ===== APPLY NAVBAR =====
 function applyNavbar() {
-  // Fluid menu — logo label inside toggle button
-  const n = CONFIG.navbar || {};
-  const hamburger = document.querySelector('.hamburger-icon');
-  if (hamburger && n.logo) hamburger.textContent = n.logo;
+  // nothing dynamic needed for the horizontal navbar
 }
 
-// ===== FLUID CIRCULAR MENU =====
-function initFluidMenu() {
-  const menu   = document.getElementById('fluid-menu');
-  const toggle = document.getElementById('fluid-menu-toggle');
-  if (!menu || !toggle) return;
+// ===== HORIZONTAL NAVBAR =====
+function initNavbar() {
+  const navbar   = document.getElementById('navbar');
+  const hamburger = document.getElementById('navbar-hamburger');
+  const mobileMenu = document.getElementById('navbar-mobile');
+  if (!navbar) return;
 
-  toggle.addEventListener('click', () => menu.classList.toggle('open'));
-
-  // Close menu when clicking a nav link
-  menu.querySelectorAll('.fluid-menu-item').forEach(item => {
-    item.addEventListener('click', () => menu.classList.remove('open'));
+  // Scroll: add .scrolled
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!menu.contains(e.target)) menu.classList.remove('open');
-  });
+  // Mobile hamburger toggle
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('.navbar-mobile-link, .navbar-mobile-cta').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+  }
 }
 
 // ===== APPLY HERO =====
 function applyHero() {
   const h = CONFIG.hero || {};
-  setText('hero-badge',    h.badge);
-  setText('hero-title1',   h.title1);
-  setText('hero-title2',   h.title2);
-  setText('hero-subtitle', h.subtitle);
-  setText('hero-desc',     h.desc);
-  setText('hero-btn1',     h.btn1Text);
-  setText('hero-btn2',     h.btn2Text);
+  // new layout IDs
+  const eyebrowEl = document.querySelector('.hero-eyebrow');
+  if (eyebrowEl && h.badge) eyebrowEl.textContent = h.badge;
+  setText('hero-title1', h.title1);
+  setText('hero-title2', h.title2);
+  setText('hero-desc',   h.desc);
+  setText('hero-btn1',   h.btn1Text);
 
   const iframe = document.getElementById('hero-yt-iframe');
+  const ytBg   = document.querySelector('.hero-yt-bg');
+  const photoBg = document.getElementById('hero-photo-bg');
   if (iframe) {
-    iframe.style.opacity = CONFIG.heroOpacity ?? 0.2;
     const id = CONFIG.heroVideoId;
     if (id) {
       iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&controls=0&playlist=${id}&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1`;
+      iframe.style.opacity = CONFIG.heroOpacity ?? 0.3;
+      if (ytBg)   ytBg.classList.add('active');
+      if (photoBg) photoBg.style.display = 'none';
     }
   }
 }
@@ -248,7 +253,7 @@ function applyContact() {
   setText('contact-subtitle', c.subtitle);
 
   const emailEl = document.getElementById('contact-email');
-  if (emailEl && c.email) { emailEl.href = `mailto:${c.email}`; emailEl.textContent = `✉ ${c.email}`; }
+  if (emailEl && c.email) emailEl.href = `mailto:${c.email}`;
 
   const waEl = document.getElementById('contact-whatsapp');
   if (waEl && c.whatsapp) waEl.href = `https://wa.me/${c.whatsapp}`;
@@ -267,8 +272,9 @@ function applyContact() {
 // ===== APPLY FOOTER =====
 function applyFooter() {
   const f = CONFIG.footer || {};
-  setText('footer-logo', f.logo);
-  setText('footer-text', f.text);
+  // footer-text is a <p> in footer-bottom; don't touch footer-logo HTML
+  const footerTextEl = document.querySelector('.footer-bottom p');
+  if (footerTextEl && f.text) footerTextEl.textContent = f.text;
 }
 
 // ===== HELPER =====
@@ -813,11 +819,7 @@ document.addEventListener('keydown', (e) => {
   });
 });
 
-// ===== MENU SCROLL HIDE =====
-window.addEventListener('scroll', () => {
-  const menu = document.getElementById('fluid-menu');
-  if (menu) menu.classList.toggle('scrolled', window.scrollY > 60);
-});
+// (navbar scroll is handled inside initNavbar)
 
 // ===== MAIN CAROUSEL (featured 16:9) =====
 function initCarousel() {
@@ -881,7 +883,7 @@ function initScrollReveal() {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.row, .carousel-section, .about-content, .contact-content').forEach(el => {
+  document.querySelectorAll('.row, .portfolio-section, .services-section, .about, .contact-cta, .about-content').forEach(el => {
     el.style.opacity   = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -904,5 +906,5 @@ renderProdutos();
 renderModals();
 initCarousel();
 initSectionCarousels(); // clones cards then re-binds hover previews
-initFluidMenu();
+initNavbar();
 initScrollReveal();
