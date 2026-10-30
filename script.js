@@ -4,13 +4,13 @@ const DEFAULT_CONFIG = {
   heroOpacity: 0.36,
 
   theme: {
-    accentColor:    '#0071e3',
-    bgColor:        '#ffffff',
-    titleColor:     '#1d1d1f',
-    mutedColor:     '#6e6e73',
-    btnPrimaryBg:   '#000000',
-    btnPrimaryText: '#f5f5f7',
-    btnRedBg:       '#000000',
+    accentColor:    '#b81818',
+    bgColor:        '#000000',
+    titleColor:     '#ffffff',
+    mutedColor:     '#bababa',
+    btnPrimaryBg:   '#b81818',
+    btnPrimaryText: '#ffffff',
+    btnRedBg:       '#b81818',
     btnGreenBg:     '#25D366',
   },
 
@@ -59,6 +59,8 @@ const DEFAULT_CONFIG = {
   },
 
   ensaios: [], // álbuns fotográficos — gerenciados pelo admin
+
+  produtos: [], // produtos / links externos — gerenciados pelo admin
 
   // Sections: first entry (id:'carousel') is the top featured carousel.
   // The rest are portrait-card mini-carousels.
@@ -170,9 +172,29 @@ function applySeo() {
 
 // ===== APPLY NAVBAR =====
 function applyNavbar() {
+  // Fluid menu — logo label inside toggle button
   const n = CONFIG.navbar || {};
-  const el = document.getElementById('nav-logo');
-  if (el && n.logo) el.textContent = n.logo;
+  const hamburger = document.querySelector('.hamburger-icon');
+  if (hamburger && n.logo) hamburger.textContent = n.logo;
+}
+
+// ===== FLUID CIRCULAR MENU =====
+function initFluidMenu() {
+  const menu   = document.getElementById('fluid-menu');
+  const toggle = document.getElementById('fluid-menu-toggle');
+  if (!menu || !toggle) return;
+
+  toggle.addEventListener('click', () => menu.classList.toggle('open'));
+
+  // Close menu when clicking a nav link
+  menu.querySelectorAll('.fluid-menu-item').forEach(item => {
+    item.addEventListener('click', () => menu.classList.remove('open'));
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target)) menu.classList.remove('open');
+  });
 }
 
 // ===== APPLY HERO =====
@@ -624,6 +646,44 @@ function updateViewer() {
   if (ctr) ctr.textContent = `${_viewerIdx + 1} / ${photos.length}`;
 }
 
+// ===== RENDER PRODUTOS =====
+function renderProdutos() {
+  const section = document.getElementById('produtos');
+  if (!section) return;
+
+  const produtos = (CONFIG.produtos || []).filter(p => !p.hidden);
+
+  if (produtos.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+
+  const grid = document.getElementById('produtos-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  produtos.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'produto-card';
+    card.innerHTML = `
+      <div class="produto-cover"${p.coverUrl ? ` style="background-image:url('${p.coverUrl}');background-size:cover"` : ''}>
+        ${!p.coverUrl ? '<span>🛒</span>' : ''}
+      </div>
+      <div class="produto-body">
+        ${p.category ? `<span class="produto-badge">${p.category}</span>` : ''}
+        <h3>${p.title || 'Produto'}</h3>
+        ${p.desc ? `<p>${p.desc}</p>` : '<p></p>'}
+        ${p.price ? `<div class="produto-price">${p.price}</div>` : ''}
+        ${p.link
+          ? `<a class="btn-produto" href="${p.link}" target="_blank" rel="noopener">Ver produto ↗</a>`
+          : `<button class="btn-produto" disabled>Em breve</button>`
+        }
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
 // ===== RENDER MODALS =====
 function renderModals() {
   const container = document.getElementById('modals-container');
@@ -753,10 +813,10 @@ document.addEventListener('keydown', (e) => {
   });
 });
 
-// ===== NAVBAR SCROLL =====
-const navbar = document.getElementById('navbar');
+// ===== MENU SCROLL HIDE =====
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
+  const menu = document.getElementById('fluid-menu');
+  if (menu) menu.classList.toggle('scrolled', window.scrollY > 60);
 });
 
 // ===== MAIN CAROUSEL (featured 16:9) =====
@@ -840,7 +900,9 @@ applyFooter();
 renderCarousel();
 renderSections();
 renderEnsaios();
+renderProdutos();
 renderModals();
 initCarousel();
 initSectionCarousels(); // clones cards then re-binds hover previews
+initFluidMenu();
 initScrollReveal();

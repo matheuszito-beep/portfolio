@@ -11,19 +11,21 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar-inner">
-      <div class="nav-logo" id="nav-logo">MZ</div>
-      <ul class="nav-links">
-        <li><a href="#inicio">Início</a></li>
-        <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#ensaios">Ensaio</a></li>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#contato" class="btn-contact">Contato</a></li>
-      </ul>
+  <!-- FLUID CIRCULAR MENU -->
+  <div class="fluid-menu" id="fluid-menu">
+    <button class="fluid-menu-toggle" id="fluid-menu-toggle" aria-label="Menu">
+      <span class="hamburger-icon">MZ</span>
+      <span class="close-icon">✕</span>
+    </button>
+    <div class="fluid-menu-items">
+      <a href="#inicio"   class="fluid-menu-item">Início</a>
+      <a href="#projetos" class="fluid-menu-item">Vídeos</a>
+      <a href="#ensaios"  class="fluid-menu-item">Fotos</a>
+      <a href="#produtos" class="fluid-menu-item">Produtos</a>
+      <a href="#sobre"    class="fluid-menu-item">Sobre</a>
+      <a href="#contato"  class="fluid-menu-item">Contato</a>
     </div>
-  </nav>
+  </div>
 
   <!-- HERO -->
   <section class="hero" id="inicio">
@@ -69,6 +71,17 @@
 
   <!-- ENSAIOS FOTOGRÁFICOS -->
   <section class="ensaios-section" id="ensaios"></section>
+
+  <!-- PRODUTOS -->
+  <section class="produtos-section" id="produtos">
+    <p class="eyebrow">Loja</p>
+    <div class="section-head">
+      <h2 class="row-title">Produtos</h2>
+    </div>
+    <div class="produtos-grid" id="produtos-grid">
+      <!-- gerado pelo script.js -->
+    </div>
+  </section>
 
   <!-- SOBRE -->
   <section class="about" id="sobre">
