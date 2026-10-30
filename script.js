@@ -58,6 +58,14 @@ const DEFAULT_CONFIG = {
     text: '© 2026 Matheus Zito. Todos os direitos reservados.',
   },
 
+  services: [
+    { title: 'Filmes & Vídeos',      desc: 'Produção e edição de vídeos institucionais, publicitários e documentais com direção de arte consistente.' },
+    { title: 'Conteúdo para Redes',  desc: 'Reels, Shorts e stories que retêm atenção nos primeiros 3 segundos e engajam do início ao fim.' },
+    { title: 'Motion Graphics',      desc: 'Animações, títulos e elementos visuais que elevam a percepção de marca e profissionalizam seu conteúdo.' },
+    { title: 'Sites e Sistemas',     desc: 'Desenvolvimento web moderno, responsivo e focado em performance para negócios digitais.' },
+    { title: 'Automações Digitais',  desc: 'Fluxos automatizados que economizam tempo e escalam sua operação sem aumentar a equipe.' },
+  ],
+
   ensaios: [], // álbuns fotográficos — gerenciados pelo admin
 
   produtos: [], // produtos / links externos — gerenciados pelo admin
@@ -275,6 +283,17 @@ function applyFooter() {
   // footer-text is a <p> in footer-bottom; don't touch footer-logo HTML
   const footerTextEl = document.querySelector('.footer-bottom p');
   if (footerTextEl && f.text) footerTextEl.textContent = f.text;
+}
+
+// ===== APPLY SERVICES =====
+function applyServices() {
+  const services = CONFIG.services || [];
+  services.forEach((svc, i) => {
+    const titleEl = document.getElementById('svc-title-' + i);
+    const descEl  = document.getElementById('svc-desc-' + i);
+    if (titleEl && svc.title) titleEl.textContent = svc.title;
+    if (descEl  && svc.desc)  descEl.textContent  = svc.desc;
+  });
 }
 
 // ===== HELPER =====
@@ -898,6 +917,7 @@ applySeo();
 applyNavbar();
 applyHero();
 applyAbout();
+applyServices();
 applyContact();
 applyFooter();
 renderCarousel();
