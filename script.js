@@ -48,7 +48,7 @@ const DEFAULT_CONFIG = {
   contact: {
     heading:   'Vamos trabalhar juntos?',
     subtitle:  'Aberto para projetos freelance, parcerias e colaborações criativas.',
-    email:     'kenni.fer@hotmail.com',
+    email:     'contato@matheuszito.com.br',
     whatsapp:  '5511921962624',
     instagram: 'https://www.instagram.com/thebackstage.on/',
   },
