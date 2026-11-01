@@ -1,13 +1,13 @@
 /* ── TOKENS ────────────────────────────────────────────────── */
 :root {
-  --bg:           #0a0a0a;
-  --surface:      #141414;
-  --surface-2:    #1e1e1e;
+  --bg:           #000000;
+  --surface:      #0d0d0d;
+  --surface-2:    #141414;
   --accent:       #b81818;
   --accent-hover: #9e1414;
   --text:         #ffffff;
   --text-muted:   #888888;
-  --line:         #2a2a2a;
+  --line:         #1e1e1e;
   --live:         #30d158;
 
   --nav-h:        72px;
@@ -67,7 +67,7 @@ img { display: block; width: 100%; object-fit: cover; }
   border-bottom: 1px solid transparent;
 }
 .navbar.scrolled {
-  background: rgba(10,10,10,.92);
+  background: rgba(0,0,0,.95);
   backdrop-filter: blur(16px);
   border-bottom-color: var(--line);
 }
@@ -154,7 +154,7 @@ img { display: block; width: 100%; object-fit: cover; }
 .navbar-mobile {
   display: none;
   flex-direction: column;
-  background: rgba(10,10,10,.97);
+  background: rgba(0,0,0,.98);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--line);
   padding: 24px 40px 32px;
