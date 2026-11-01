@@ -3,6 +3,11 @@ const DEFAULT_CONFIG = {
   heroVideoId: 'oHrfwTFqsTg',
   heroOpacity: 0.36,
 
+  heroLayout: {
+    video: { x: 0, y: 0, width: 100, height: 100, objectFit: 'cover', opacity: 0.36 },
+    text:  { x: 2, y: 13, maxWidth: 61, align: 'left' },
+  },
+
   theme: {
     accentColor:    '#b81818',
     bgColor:        '#000000',
@@ -37,9 +42,9 @@ const DEFAULT_CONFIG = {
     bio1:     'Sou editor de vídeo e motion designer especializado em conteúdo para redes sociais, campanhas publicitárias e vídeos institucionais. Já trabalhei com marcas, criadores e agências de todo o Brasil.',
     bio2:     'Minha especialidade está em unir técnica e criatividade — seja num hook que prende em 3 segundos ou numa campanha que fortalece uma marca.',
     stats: [
-      { num: '150+', label: 'Projetos entregues' },
-      { num: '30+',  label: 'Clientes satisfeitos' },
-      { num: '3+',   label: 'Anos de experiência' },
+      { num: '+150', label: 'Projetos entregues' },
+      { num: '+30',  label: 'Clientes satisfeitos' },
+      { num: '+3',   label: 'Anos de experiência' },
     ],
     skills:   ['After Effects', 'Premiere Pro', 'Photoshop', 'Illustrator', 'Motion Graphics', 'Color Grading', 'Sound Design'],
     photoUrl: 'assets/IMG_4592.JPG',
@@ -73,7 +78,7 @@ const DEFAULT_CONFIG = {
   // Sections: first entry (id:'carousel') is the top featured carousel.
   // The rest are portrait-card mini-carousels.
   sections: [
-    { id: 'carousel',   title: 'Vídeos em Destaque' },
+    { id: 'carousel',   title: 'Projetos em Destaque' },
     { id: 'anuncios',   title: 'Anúncios' },
     { id: 'eventos',    title: 'Eventos' },
     { id: 'casamentos', title: 'Casamentos' },
@@ -227,6 +232,28 @@ function applyHero() {
       iframe.style.opacity = CONFIG.heroOpacity ?? 0.3;
       if (ytBg)   ytBg.classList.add('active');
       if (photoBg) photoBg.style.display = 'none';
+    }
+  }
+
+  // Apply heroLayout: position video layer and text block
+  const hl = CONFIG.heroLayout;
+  if (hl) {
+    const vl = hl.video || {};
+    if (ytBg) {
+      ytBg.style.left   = (vl.x      ?? 0)    + '%';
+      ytBg.style.top    = (vl.y      ?? 0)    + '%';
+      ytBg.style.width  = (vl.width  ?? 100)  + '%';
+      ytBg.style.height = (vl.height ?? 100)  + '%';
+      ytBg.style.backgroundSize = vl.objectFit === 'contain' ? 'contain' : vl.objectFit === 'none' ? 'auto' : 'cover';
+    }
+    const tl = hl.text || {};
+    const heroContent = document.querySelector('.hero-content') || document.querySelector('.hero-body');
+    if (heroContent && (tl.x !== undefined || tl.y !== undefined)) {
+      heroContent.style.position  = 'absolute';
+      heroContent.style.left      = (tl.x      ?? 8)  + '%';
+      heroContent.style.top       = (tl.y      ?? 35) + '%';
+      heroContent.style.maxWidth  = (tl.maxWidth ?? 55) + '%';
+      heroContent.style.textAlign = tl.align  || 'left';
     }
   }
 }
