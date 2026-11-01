@@ -430,6 +430,169 @@ img { display: block; width: 100%; object-fit: cover; }
   padding: 100px 40px;
 }
 .portfolio-inner { max-width: 1280px; margin: 0 auto; }
+
+/* ── FOLDER GRID ─────────────────────────────────────── */
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+  padding-top: 28px;
+}
+
+.folder-card {
+  position: relative;
+  cursor: pointer;
+  margin-top: 22px;
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+  outline: none;
+}
+.folder-card:hover { transform: translateY(-8px); }
+.folder-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 22px; }
+
+/* Folder tab — left notch above the body */
+.folder-tab {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  width: 88px;
+  height: 26px;
+  background: var(--surface-2);
+  border-radius: 10px 10px 0 0;
+  border: 1px solid rgba(255,255,255,.07);
+  border-bottom: none;
+  z-index: 2;
+  box-shadow: -2px -4px 14px rgba(0,0,0,.35);
+}
+
+/* Folder body */
+.folder-body {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 2px 4px rgba(0,0,0,.4),
+    0 20px 56px rgba(0,0,0,.65);
+  transition: box-shadow .45s cubic-bezier(.16,1,.3,1);
+}
+.folder-card:hover .folder-body {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 4px 8px rgba(0,0,0,.4),
+    0 40px 80px rgba(0,0,0,.75);
+}
+
+/* Thumbnail artwork */
+.folder-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .65s cubic-bezier(.16,1,.3,1), filter .4s ease;
+  filter: brightness(.8) saturate(1.1);
+}
+.folder-card:hover .folder-thumb {
+  transform: scale(1.06);
+  filter: brightness(1) saturate(1.15);
+}
+
+/* Play button — top right */
+.folder-play {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+  transition: background .2s, border-color .2s, transform .25s cubic-bezier(.34,1.5,.5,1);
+}
+.folder-card:hover .folder-play {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.12);
+}
+
+/* Glass panel — frosted bottom */
+.folder-glass {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 48px 18px 18px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.94) 0%,
+    rgba(0,0,0,.72) 45%,
+    rgba(0,0,0,.24) 75%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.folder-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(184,24,24,.18);
+  color: var(--accent);
+  border: 1px solid rgba(184,24,24,.28);
+  border-radius: 100px;
+  padding: 2px 9px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.folder-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.folder-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.012em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  margin: 0;
+}
+
+.folder-year {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace;
+  letter-spacing: .04em;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .folder-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+}
+@media (max-width: 600px) {
+  .folder-grid { grid-template-columns: 1fr; gap: 28px; }
+  .portfolio-section { padding: 72px 20px; }
+}
 .portfolio-header {
   display: flex;
   align-items: flex-end;

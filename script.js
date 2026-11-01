@@ -303,33 +303,38 @@ function setText(id, value) {
   if (el) el.textContent = value;
 }
 
-// ===== RENDER CAROUSEL (top featured — 16:9) =====
+// ===== RENDER FOLDER GRID (top featured — 16:9 folders) =====
 function renderCarousel() {
-  const track   = document.getElementById('carousel-track');
-  const titleEl = document.getElementById('carousel-title');
-  if (!track) return;
-
-  const carouselSection = (CONFIG.sections || []).find(s => s.id === 'carousel');
-  if (titleEl) titleEl.textContent = carouselSection?.title || 'Vídeos em Destaque';
+  const grid  = document.getElementById('carousel-track');
+  if (!grid) return;
 
   const videos = (CONFIG.videoPool || []).filter(v => v.section === 'carousel' && !v.hidden);
   videos.forEach(v => {
     const cleanId = extractYtId(v.ytId);
-    const slide = document.createElement('div');
-    slide.className = 'carousel-slide carousel-yt';
-    slide.onclick = () => openModal('modal-' + v.id);
-    slide.innerHTML = `
-      <img class="carousel-thumb"
-           src="https://i.ytimg.com/vi/${cleanId}/maxresdefault.jpg"
-           alt="${v.title}"
-           onerror="this.src='https://i.ytimg.com/vi/${cleanId}/hqdefault.jpg'" />
-      <div class="carousel-yt-play">▶</div>
-      <div class="carousel-info">
-        <span class="carousel-badge">${v.badge}</span>
-        <h3>${v.title}</h3>
-        <p>${v.desc}</p>
+    const card = document.createElement('div');
+    card.className  = 'folder-card';
+    card.tabIndex   = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', v.title);
+    card.onclick    = () => openModal('modal-' + v.id);
+    card.onkeydown  = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal('modal-' + v.id); } };
+    card.innerHTML  = `
+      <div class="folder-tab"></div>
+      <div class="folder-body">
+        <img class="folder-thumb"
+             src="https://i.ytimg.com/vi/${cleanId}/maxresdefault.jpg"
+             alt="${v.title}"
+             onerror="this.src='https://i.ytimg.com/vi/${cleanId}/hqdefault.jpg'" />
+        <div class="folder-play">▶</div>
+        <div class="folder-glass">
+          <span class="folder-badge">${v.badge || 'Vídeo'}</span>
+          <div class="folder-row">
+            <h3 class="folder-title">${v.title}</h3>
+            <span class="folder-year">${v.year || ''}</span>
+          </div>
+        </div>
       </div>`;
-    track.appendChild(slide);
+    grid.appendChild(card);
   });
 }
 
@@ -841,12 +846,14 @@ document.addEventListener('keydown', (e) => {
 
 // (navbar scroll is handled inside initNavbar)
 
-// ===== MAIN CAROUSEL (featured 16:9) =====
+// ===== MAIN CAROUSEL (featured 16:9) — now a folder grid, no nav needed =====
 function initCarousel() {
   const track   = document.getElementById('carousel-track');
+  if (!track) return;
+  // folder grid — no prev/next buttons needed
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
-  if (!track || !prevBtn || !nextBtn) return;
+  if (!prevBtn || !nextBtn) return;
 
   const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
   const total = originalSlides.length;
