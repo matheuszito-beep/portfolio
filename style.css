@@ -98,8 +98,9 @@ img { display: block; width: 100%; object-fit: cover; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 900;
+  letter-spacing: -.04em;
   color: #fff;
   flex-shrink: 0;
 }

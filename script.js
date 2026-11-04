@@ -28,10 +28,10 @@ const DEFAULT_CONFIG = {
 
   hero: {
     badge:    'IDEIAS GANHAM VIDA',
-    title1:   'EM MOVIMENTO',
-    title2:   'E EM IMAGENS',
+    title1:   'MOVIMENTO',
+    title2:   'EM IMAGENS',
     subtitle: 'Motion Designer & Editor de Vídeo',
-    desc:     'Motion Designer & Editor de Vídeo especializado em conteúdo que para o scroll e converte audiência em resultado.',
+    desc:     'Motion Designer & Editor de Vídeo especializado em conteúdo para empresas e marcas que converte audiência em resultado.',
     btn1Text: 'CONHEÇA MEU TRABALHO →',
     btn2Text: '',
   },
@@ -66,7 +66,7 @@ const DEFAULT_CONFIG = {
   services: [
     { title: 'Filmes & Vídeos',      desc: 'Produção e edição de vídeos institucionais, publicitários e documentais com direção de arte consistente.' },
     { title: 'Conteúdo para Redes',  desc: 'Reels, Shorts e stories que retêm atenção nos primeiros 3 segundos e engajam do início ao fim.' },
-    { title: 'Motion Graphics',      desc: 'Animações, títulos e elementos visuais que elevam a percepção de marca e profissionalizam seu conteúdo.' },
+    { title: 'Identidade Visual',     desc: 'Animações, títulos e elementos visuais que elevam a percepção de marca e profissionalizam seu conteúdo.' },
     { title: 'Sites e Sistemas',     desc: 'Desenvolvimento web moderno, responsivo e focado em performance para negócios digitais.' },
     { title: 'Automações Digitais',  desc: 'Fluxos automatizados que economizam tempo e escalam sua operação sem aumentar a equipe.' },
   ],
