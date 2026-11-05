@@ -200,6 +200,25 @@ function initNavbar() {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   });
 
+  // Active nav link via IntersectionObserver
+  const navLinks = document.querySelectorAll('.navbar-links a');
+  const sections = Array.from(navLinks)
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  };
+
+  if (sections.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => io.observe(s));
+  }
+
   // Mobile hamburger toggle
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
