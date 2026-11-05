@@ -927,6 +927,120 @@ function initCarousel() {
   goTo(current, false);
 }
 
+// ===== TAB LABELS =====
+const TAB_LABELS = {
+  carousel:   'DESTAQUES',
+  anuncios:   'ANÚNCIOS',
+  eventos:    'EVENTOS',
+  casamentos: 'CASAMENTOS',
+};
+
+// ===== RENDER VIDEO GRID (folder-card style for all sections) =====
+function renderVideoGrid(sectionId) {
+  const grid = document.getElementById('portfolio-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const videos = (CONFIG.videoPool || []).filter(v => v.section === sectionId && !v.hidden);
+
+  if (videos.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:60px 24px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--text-muted);font-size:14px"><div style="font-size:36px;margin-bottom:12px">🎬</div>Novas produções em breve</div>`;
+    return;
+  }
+
+  videos.forEach(v => {
+    const cleanId = extractYtId(v.ytId);
+    const card = document.createElement('div');
+    card.className = 'folder-card';
+    card.tabIndex  = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', v.title);
+    card.onclick   = () => openModal('modal-' + v.id);
+    card.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal('modal-' + v.id); } };
+    card.innerHTML = `
+      <div class="folder-tab"></div>
+      <div class="folder-body">
+        <img class="folder-thumb"
+             src="https://i.ytimg.com/vi/${cleanId}/maxresdefault.jpg"
+             alt="${v.title}"
+             onerror="this.src='https://i.ytimg.com/vi/${cleanId}/hqdefault.jpg'" />
+        <div class="folder-play">▶</div>
+        <div class="folder-glass">
+          <span class="folder-badge">${v.badge || 'Vídeo'}</span>
+          <div class="folder-row">
+            <h3 class="folder-title">${v.title}</h3>
+            <span class="folder-year">${v.year || ''}</span>
+          </div>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ===== RENDER PORTFOLIO TABS (Vercel-style animated) =====
+function renderPortfolioTabs() {
+  const nav = document.getElementById('portfolio-tabs');
+  if (!nav) return;
+
+  const sectionDefs = (CONFIG.sections || []);
+  if (!sectionDefs.length) return;
+
+  const inner = document.createElement('div');
+  inner.className = 'ptabs-inner';
+
+  const hoverBg    = document.createElement('div');
+  hoverBg.className = 'ptab-hover-bg';
+  const activeLine  = document.createElement('div');
+  activeLine.className = 'ptab-active-line';
+
+  inner.appendChild(hoverBg);
+  inner.appendChild(activeLine);
+
+  let activeId = sectionDefs[0].id;
+
+  const titleEl = document.getElementById('portfolio-section-title');
+
+  function activateTab(tabEl, sectionId) {
+    activeId = sectionId;
+    inner.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+
+    // slide underline
+    activeLine.style.left  = tabEl.offsetLeft + 'px';
+    activeLine.style.width = tabEl.offsetWidth + 'px';
+
+    renderVideoGrid(sectionId);
+
+    // update section heading
+    const sec = sectionDefs.find(s => s.id === sectionId);
+    if (titleEl && sec) titleEl.textContent = sec.title.toUpperCase();
+  }
+
+  sectionDefs.forEach(sec => {
+    const btn = document.createElement('button');
+    btn.className   = 'ptab';
+    btn.textContent = TAB_LABELS[sec.id] || sec.title.toUpperCase();
+    btn.dataset.sectionId = sec.id;
+
+    // hover background tracking
+    btn.addEventListener('mouseenter', () => {
+      hoverBg.style.left   = btn.offsetLeft + 'px';
+      hoverBg.style.width  = btn.offsetWidth + 'px';
+    });
+
+    btn.addEventListener('click', () => activateTab(btn, sec.id));
+    inner.appendChild(btn);
+  });
+
+  nav.appendChild(inner);
+
+  // Activate first tab after DOM settle
+  requestAnimationFrame(() => {
+    const firstTab = inner.querySelector('.ptab');
+    if (firstTab) activateTab(firstTab, sectionDefs[0].id);
+  });
+}
+
 // ===== SCROLL REVEAL =====
 function initScrollReveal() {
   const style = document.createElement('style');
@@ -954,12 +1068,9 @@ applyAbout();
 applyServices();
 applyContact();
 applyFooter();
-renderCarousel();
-renderSections();
+renderPortfolioTabs();
 renderEnsaios();
 renderProdutos();
 renderModals();
-initCarousel();
-initSectionCarousels(); // clones cards then re-binds hover previews
 initNavbar();
 initScrollReveal();

@@ -1025,6 +1025,96 @@ img { display: block; width: 100%; object-fit: cover; }
 .viewer-next-btn  { right: 16px; top: 50%; transform: translateY(-50%); }
 .viewer-counter   { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 13px; color: rgba(255,255,255,.5); }
 
+/* ── SVG LOGO / ICONS ─────────────────────────────────────── */
+.navbar-logo-svg {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+.footer-logo-svg {
+  height: 36px;
+  width: auto;
+  display: block;
+  opacity: 0.85;
+}
+.service-icon-svg {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── PORTFOLIO TABS (Vercel-style) ───────────────────────── */
+.portfolio-tabs {
+  position: relative;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+.ptabs-inner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+.ptab-hover-bg {
+  position: absolute;
+  top: 0; bottom: 0;
+  border-radius: 6px 6px 0 0;
+  background: rgba(255,255,255,.06);
+  transition: left .2s var(--ease-out-expo), width .2s var(--ease-out-expo), opacity .15s;
+  pointer-events: none;
+  opacity: 0;
+}
+.ptabs-inner:hover .ptab-hover-bg { opacity: 1; }
+.ptab-active-line {
+  position: absolute;
+  bottom: -1px; height: 2px;
+  background: #fff;
+  border-radius: 2px 2px 0 0;
+  transition: left .28s var(--ease-out-expo), width .28s var(--ease-out-expo);
+  pointer-events: none;
+}
+.ptab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color .15s;
+  white-space: nowrap;
+  user-select: none;
+}
+.ptab:hover { color: var(--text); }
+.ptab.active { color: var(--text); }
+
+/* ── HOVER REVEAL GRID ───────────────────────────────────── */
+.hover-reveal-grid .folder-card {
+  transition:
+    opacity .3s ease,
+    filter .3s ease,
+    transform .3s var(--ease-out-expo),
+    box-shadow .3s var(--ease-out-expo),
+    border-color .2s;
+}
+.hover-reveal-grid:hover .folder-card {
+  opacity: 0.55;
+  filter: blur(1.2px);
+  transform: scale(0.97);
+}
+.hover-reveal-grid .folder-card:hover {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: scale(1.0) translateY(-8px) !important;
+  box-shadow: var(--shadow-float);
+  border-color: rgba(184,24,24,.35);
+}
+
 /* ── FLOATING CONTACT ─────────────────────────────────────── */
 .float-contact { position: fixed; bottom: 24px; right: 24px; z-index: 150; display: flex; flex-direction: column; gap: 10px; }
 .float-contact-btn { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lift); transition: transform .2s var(--ease-out-expo); }

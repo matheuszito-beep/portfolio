@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matheus Zito — Portfólio</title>
   <meta name="description" content="Motion Designer & Editor de Vídeo. Portfólio de Matheus Zito." />
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=6" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
 </head>
@@ -15,8 +15,7 @@
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
       <a href="#inicio" class="navbar-logo" id="nav-logo">
-        <span class="navbar-logo-icon">//</span>
-        MATHEUS ZITO
+        <img src="assets/SVG/logo negativo.svg" alt="Matheus Zito" class="navbar-logo-svg" />
       </a>
       <div class="navbar-links">
         <a href="#inicio">INÍCIO</a>
@@ -80,35 +79,35 @@
       <div class="services-grid">
         <div class="service-card" data-svc="0">
           <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="13" height="10" rx="2"/><path d="M15 11l7-4v10l-7-4"/></svg>
+            <img src="assets/SVG/filmes e videos.svg" alt="Filmes e Vídeos" class="service-icon-svg" />
           </div>
           <h3 id="svc-title-0">Filmes & Vídeos</h3>
           <p id="svc-desc-0">Produção e edição de vídeos institucionais, publicitários e documentais com direção de arte consistente.</p>
         </div>
         <div class="service-card" data-svc="1">
           <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+            <img src="assets/SVG/conteudo.svg" alt="Conteúdo" class="service-icon-svg" />
           </div>
           <h3 id="svc-title-1">Conteúdo para Redes</h3>
           <p id="svc-desc-1">Reels, Shorts e stories que retêm atenção nos primeiros 3 segundos e engajam do início ao fim.</p>
         </div>
         <div class="service-card" data-svc="2">
           <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <img src="assets/SVG/identidade visual.svg" alt="Identidade Visual" class="service-icon-svg" />
           </div>
           <h3 id="svc-title-2">Motion Graphics</h3>
           <p id="svc-desc-2">Animações, títulos e elementos visuais que elevam a percepção de marca e profissionalizam seu conteúdo.</p>
         </div>
         <div class="service-card" data-svc="3">
           <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <img src="assets/SVG/sites e sistemas.svg" alt="Sites e Sistemas" class="service-icon-svg" />
           </div>
           <h3 id="svc-title-3">Sites e Sistemas</h3>
           <p id="svc-desc-3">Desenvolvimento web moderno, responsivo e focado em performance para negócios digitais.</p>
         </div>
         <div class="service-card" data-svc="4">
           <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <img src="assets/SVG/automaçõe digitais.svg" alt="Automações Digitais" class="service-icon-svg" />
           </div>
           <h3 id="svc-title-4">Automações Digitais</h3>
           <p id="svc-desc-4">Fluxos automatizados que economizam tempo e escalam sua operação sem aumentar a equipe.</p>
@@ -123,17 +122,15 @@
       <div class="portfolio-header">
         <div>
           <p class="eyebrow">PORTFÓLIO</p>
-          <h2 class="section-title">PROJETOS EM DESTAQUE</h2>
+          <h2 class="section-title" id="portfolio-section-title">PROJETOS EM DESTAQUE</h2>
         </div>
-        <a href="#ensaios" class="section-link">VER TODOS OS PROJETOS →</a>
       </div>
-      <!-- folder grid -->
-      <div class="folder-grid" id="carousel-track"></div>
+      <!-- Vercel-style animated tabs -->
+      <nav class="portfolio-tabs" id="portfolio-tabs" aria-label="Categorias do portfólio"></nav>
+      <!-- Unified video grid -->
+      <div class="folder-grid hover-reveal-grid" id="portfolio-grid"></div>
     </div>
   </section>
-
-  <!-- SEÇÕES VERTICAIS — geradas pelo script.js -->
-  <main class="rows-container" id="rows-container"></main>
 
   <!-- ENSAIOS FOTOGRÁFICOS -->
   <section class="ensaios-section" id="ensaios"></section>
@@ -188,8 +185,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo" id="footer-logo">
-        <span class="footer-logo-icon">//</span>
-        MATHEUS ZITO
+        <img src="assets/SVG/logo negativo.svg" alt="Matheus Zito" class="footer-logo-svg" />
       </div>
       <div class="footer-socials">
         <a id="contact-instagram" href="https://www.instagram.com/thebackstage.on/" target="_blank" rel="noopener" aria-label="Instagram">
@@ -226,6 +222,6 @@
     </a>
   </div>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
