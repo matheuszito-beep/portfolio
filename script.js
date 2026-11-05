@@ -92,19 +92,19 @@ const DEFAULT_CONFIG = {
     { id: 'ch4', ytId: 'iX6ks9MoClw', section: 'carousel',   title: 'Evento Corporativo',         desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
     { id: 'ch5', ytId: '5j5CPwguo6E', section: 'carousel',   title: 'Evento Corporativo 2',       desc: 'Cobertura audiovisual de evento corporativo.', badge: 'Evento',    match: '95%', year: '2025' },
     { id: 'ch6', ytId: '0ZbTC1q7FCk', section: 'carousel',   title: 'Novo Vídeo',                 desc: '', badge: 'Evento',    match: '95%', year: '2025' },
-    { id: 'v1',  ytId: 'vhwK4yhPBzA', section: 'anuncios',   title: 'Parceria Fox & TudoBônus',   desc: 'Anúncio de parceria estratégica com identidade visual sofisticada.', badge: 'Anúncio',      match: '98%', year: '2025', tags: ['Parceria', 'Motion'] },
-    { id: 'v2',  ytId: 'KiRR4Upsbrg', section: 'anuncios',   title: 'Atendimento TudoBônus',     desc: 'Vídeo de atendimento ao cliente com narrativa envolvente.', badge: 'Institucional', match: '97%', year: '2025', tags: ['Institucional', 'Edição'] },
-    { id: 'v3',  ytId: 'txQJrrwfVHk', section: 'anuncios',   title: 'Entrega & Garantia',         desc: 'Comunicação visual sobre política de entrega e garantia da marca.', badge: 'Campanha',     match: '95%', year: '2025', tags: ['Campanha', 'Motion'] },
-    { id: 'v4',  ytId: 'TJBivra1fAg', section: 'anuncios',   title: 'Trade in TudoBônus',         desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.', badge: 'Campanha',     match: '96%', year: '2025', tags: ['Campanha', 'Edição'] },
-    { id: 'v5',  ytId: 'x1yuS8IHdYc', section: 'anuncios',   title: 'Trade in TudoBonus 2',       desc: 'Segunda versão da campanha com nova abordagem criativa.', badge: 'Campanha',     match: '93%', year: '2025', tags: ['Campanha', 'Social'] },
+    { id: 'v1',  ytId: 'vhwK4yhPBzA', section: 'anuncios',   title: 'Parceria Fox & TudoBônus',   desc: 'Anúncio de parceria estratégica com identidade visual sofisticada.', badge: 'Anúncio',      match: '98%', year: '2025', vertical: true, tags: ['Parceria', 'Motion'] },
+    { id: 'v2',  ytId: 'KiRR4Upsbrg', section: 'anuncios',   title: 'Atendimento TudoBônus',     desc: 'Vídeo de atendimento ao cliente com narrativa envolvente.', badge: 'Institucional', match: '97%', year: '2025', vertical: true, tags: ['Institucional', 'Edição'] },
+    { id: 'v3',  ytId: 'txQJrrwfVHk', section: 'anuncios',   title: 'Entrega & Garantia',         desc: 'Comunicação visual sobre política de entrega e garantia da marca.', badge: 'Campanha',     match: '95%', year: '2025', vertical: true, tags: ['Campanha', 'Motion'] },
+    { id: 'v4',  ytId: 'TJBivra1fAg', section: 'anuncios',   title: 'Trade in TudoBônus',         desc: 'Campanha de Trade-in com call-to-action direto e produção ágil.', badge: 'Campanha',     match: '96%', year: '2025', vertical: true, tags: ['Campanha', 'Edição'] },
+    { id: 'v5',  ytId: 'x1yuS8IHdYc', section: 'anuncios',   title: 'Trade in TudoBonus 2',       desc: 'Segunda versão da campanha com nova abordagem criativa.', badge: 'Campanha',     match: '93%', year: '2025', vertical: true, tags: ['Campanha', 'Social'] },
     { id: 'v6',  ytId: '15z7iaeOTRY', section: 'eventos',    title: 'Evento Amcham Campinas',     desc: 'Cobertura da Amcham Campinas.', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
     { id: 'v7',  ytId: 'dr7vNgiEbiE', section: 'eventos',    title: 'Novo Evento',                desc: '', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
     { id: 'v8',  ytId: 'ehcIkxzkTd8', section: 'eventos',    title: 'Novo Evento 2',              desc: '', badge: 'Evento',        match: '94%', year: '2025', tags: ['Evento', 'Cobertura'] },
-    { id: 'c1',  ytId: 'hhFOKayrlTs', section: 'casamentos', title: 'Casamento Monica & Hugo pt 1', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c2',  ytId: 'MyqpfW8QYnw', section: 'casamentos', title: 'Casamento Monica & Hugo pt 2', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c3',  ytId: 'SOcI2Oru3pQ', section: 'casamentos', title: 'Casamento Monica & Hugo pt 3', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c4',  ytId: 'J1J7x8-rmxY', section: 'casamentos', title: 'Casamento Monica & Hugo pt 4', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
-    { id: 'c5',  ytId: '4JyzwhOfmwA', section: 'casamentos', title: 'Casamento Monica & Hugo pt 5', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', tags: ['Casamento', 'Cobertura'] },
+    { id: 'c1',  ytId: 'hhFOKayrlTs', section: 'casamentos', title: 'Casamento Monica & Hugo pt 1', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', vertical: true, tags: ['Casamento', 'Cobertura'] },
+    { id: 'c2',  ytId: 'MyqpfW8QYnw', section: 'casamentos', title: 'Casamento Monica & Hugo pt 2', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', vertical: true, tags: ['Casamento', 'Cobertura'] },
+    { id: 'c3',  ytId: 'SOcI2Oru3pQ', section: 'casamentos', title: 'Casamento Monica & Hugo pt 3', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', vertical: true, tags: ['Casamento', 'Cobertura'] },
+    { id: 'c4',  ytId: 'J1J7x8-rmxY', section: 'casamentos', title: 'Casamento Monica & Hugo pt 4', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', vertical: true, tags: ['Casamento', 'Cobertura'] },
+    { id: 'c5',  ytId: '4JyzwhOfmwA', section: 'casamentos', title: 'Casamento Monica & Hugo pt 5', desc: 'Cobertura casamento.', badge: 'Casamento', match: '97%', year: '2025', vertical: true, tags: ['Casamento', 'Cobertura'] },
   ],
 };
 
@@ -970,7 +970,7 @@ function renderVideoGrid(sectionId) {
   videos.forEach(v => {
     const cleanId = extractYtId(v.ytId);
     const card = document.createElement('div');
-    card.className = 'folder-card';
+    card.className = 'folder-card' + (v.vertical ? ' folder-card--vertical' : '');
     card.tabIndex  = 0;
     card.setAttribute('role', 'button');
     card.setAttribute('aria-label', v.title);

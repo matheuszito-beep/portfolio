@@ -454,6 +454,7 @@ img { display: block; width: 100%; object-fit: cover; }
   grid-template-columns: repeat(3, 1fr);
   gap: 32px 24px;
   padding-top: 28px;
+  align-items: start;
 }
 
 .folder-card {
@@ -476,6 +477,11 @@ img { display: block; width: 100%; object-fit: cover; }
   overflow: hidden;
   aspect-ratio: 4/3;
   background: var(--surface);
+}
+
+/* Vertical (9:16) card */
+.folder-card--vertical .folder-body {
+  aspect-ratio: 9/16;
   border: 1px solid rgba(255,255,255,.06);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.05),
@@ -1028,12 +1034,12 @@ img { display: block; width: 100%; object-fit: cover; }
 
 /* ── SVG LOGO / ICONS ─────────────────────────────────────── */
 .navbar-logo-svg {
-  height: 58px;
+  height: 174px;
   width: auto;
   display: block;
 }
 .footer-logo-svg {
-  height: 48px;
+  height: 174px;
   width: auto;
   display: block;
   opacity: 0.85;
