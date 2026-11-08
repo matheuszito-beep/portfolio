@@ -73,7 +73,17 @@ const DEFAULT_CONFIG = {
 
   ensaios: [], // álbuns fotográficos — gerenciados pelo admin
 
-  produtos: [], // produtos / links externos — gerenciados pelo admin
+  produtos: [
+    {
+      id: 'teleprompter-remoto',
+      title: 'Teleprompter Remoto',
+      category: 'FERRAMENTA',
+      desc: 'Leia seu roteiro olhando para a lente. Controle com a mão livre usando outro celular como controle remoto.',
+      price: 'R$ 11,90',
+      coverUrl: 'assets/teleprompter-remoto.webp',
+      link: 'https://pay.hotmart.com/V108368987Q',
+    },
+  ], // produtos / links externos — gerenciados pelo admin
 
   // Sections: first entry (id:'carousel') is the top featured carousel.
   // The rest are portrait-card mini-carousels.
