@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matheus Zito — Portfólio</title>
   <meta name="description" content="Motion Designer & Editor de Vídeo. Portfólio de Matheus Zito." />
-  <link rel="stylesheet" href="style.css?v=11" />
+  <link rel="stylesheet" href="style.css?v=12" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
 </head>
@@ -127,19 +127,15 @@
           <h2 class="section-title" id="portfolio-section-title">PROJETOS EM DESTAQUE</h2>
         </div>
       </div>
-      <!-- Category group cards -->
-      <div id="portfolio-groups" class="portfolio-groups"></div>
-      <!-- Carousel view (shown after clicking a group) -->
-      <div id="portfolio-carousel-view" class="portfolio-carousel-view" style="display:none">
-        <button class="portfolio-back-btn" onclick="closeGroupCarousel()">← Voltar</button>
-        <h2 class="section-title" id="portfolio-carousel-title"></h2>
-        <div class="pcarousel-wrap">
-          <button class="pcarousel-btn pcarousel-prev" id="pcarousel-prev">&#8249;</button>
-          <div class="pcarousel-viewport">
-            <div class="pcarousel-track" id="pcarousel-track"></div>
-          </div>
-          <button class="pcarousel-btn pcarousel-next" id="pcarousel-next">&#8250;</button>
+      <!-- Tab navigation -->
+      <div id="portfolio-tabs"></div>
+      <!-- Inline carousel for selected tab -->
+      <div class="pcarousel-wrap" style="margin-top:32px">
+        <button class="pcarousel-btn" id="pcarousel-prev">&#8249;</button>
+        <div class="pcarousel-viewport">
+          <div class="pcarousel-track" id="pcarousel-track"></div>
         </div>
+        <button class="pcarousel-btn" id="pcarousel-next">&#8250;</button>
       </div>
     </div>
   </section>
@@ -228,6 +224,6 @@
     </a>
   </div>
 
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

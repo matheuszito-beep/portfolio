@@ -1006,53 +1006,76 @@ function renderVideoGrid(sectionId) {
   });
 }
 
-// ===== PORTFOLIO GROUPS + INFINITE CAROUSEL =====
-function renderPortfolioGroups() {
-  const container = document.getElementById('portfolio-groups');
-  if (!container) return;
-  container.innerHTML = '';
+// ===== PORTFOLIO TABS + INLINE CAROUSEL =====
+function renderPortfolioTabs() {
+  const nav = document.getElementById('portfolio-tabs');
+  if (!nav) return;
 
-  const secs = CONFIG.sections || [];
-  secs.forEach(sec => {
-    const videos = (CONFIG.videoPool || []).filter(v => v.section === sec.id && !v.hidden);
-    if (!videos.length) return;
+  const sectionDefs = CONFIG.sections || [];
+  if (!sectionDefs.length) return;
 
-    const cleanId = extractYtId(videos[0].ytId);
-    const thumb   = `https://i.ytimg.com/vi/${cleanId}/maxresdefault.jpg`;
-    const label   = TAB_LABELS[sec.id] || sec.title.toUpperCase();
+  nav.innerHTML = '';
+  const inner = document.createElement('div');
+  inner.className = 'ptabs-inner';
 
-    const card = document.createElement('div');
-    card.className = 'pgroup-card';
-    card.onclick = () => openGroupCarousel(sec.id, label);
-    card.innerHTML = `
-      <div class="pgroup-bg" style="background-image:url(${thumb})"></div>
-      <div class="pgroup-overlay"></div>
-      <div class="pgroup-info">
-        <span class="pgroup-count">${videos.length} vídeo${videos.length !== 1 ? 's' : ''}</span>
-        <span class="pgroup-title">${label}</span>
-      </div>`;
-    container.appendChild(card);
+  const hoverBg   = document.createElement('div');
+  hoverBg.className = 'ptab-hover-bg';
+  const activeLine = document.createElement('div');
+  activeLine.className = 'ptab-active-line';
+  inner.appendChild(hoverBg);
+  inner.appendChild(activeLine);
+
+  const titleEl = document.getElementById('portfolio-section-title');
+
+  function activateTab(tabEl, sec) {
+    inner.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+    activeLine.style.left  = tabEl.offsetLeft + 'px';
+    activeLine.style.width = tabEl.offsetWidth + 'px';
+    if (titleEl) titleEl.textContent = sec.title.toUpperCase();
+    populatePortfolioCarousel(sec.id);
+  }
+
+  sectionDefs.forEach(sec => {
+    const btn = document.createElement('button');
+    btn.className   = 'ptab';
+    btn.textContent = TAB_LABELS[sec.id] || sec.title.toUpperCase();
+    btn.addEventListener('mouseenter', () => {
+      hoverBg.style.left  = btn.offsetLeft + 'px';
+      hoverBg.style.width = btn.offsetWidth + 'px';
+    });
+    btn.addEventListener('click', () => activateTab(btn, sec));
+    inner.appendChild(btn);
   });
+
+  nav.appendChild(inner);
+
+  // Activate the first tab synchronously; re-position the active line after paint
+  const firstTab = inner.querySelector('.ptab');
+  if (firstTab) {
+    activateTab(firstTab, sectionDefs[0]);
+    requestAnimationFrame(() => {
+      activeLine.style.left  = firstTab.offsetLeft + 'px';
+      activeLine.style.width = firstTab.offsetWidth + 'px';
+    });
+  }
 }
 
-function openGroupCarousel(sectionId, title) {
-  const groups = document.getElementById('portfolio-groups');
-  const view   = document.getElementById('portfolio-carousel-view');
-  if (!groups || !view) return;
-
-  groups.style.display = 'none';
-  view.style.display   = 'block';
-
-  const titleEl = document.getElementById('portfolio-carousel-title');
-  if (titleEl) titleEl.textContent = title;
-
+function populatePortfolioCarousel(sectionId) {
   const track = document.getElementById('pcarousel-track');
   if (!track) return;
+
   track.innerHTML = '';
   track.style.transition = 'none';
   track.style.transform  = 'translateX(0)';
 
   const videos = (CONFIG.videoPool || []).filter(v => v.section === sectionId && !v.hidden);
+
+  if (!videos.length) {
+    track.innerHTML = `<div style="padding:60px 24px;text-align:center;color:var(--text-muted);font-size:14px">🎬 Novas produções em breve</div>`;
+    return;
+  }
+
   videos.forEach(v => {
     const cleanId = extractYtId(v.ytId);
     const slide = document.createElement('div');
@@ -1082,13 +1105,6 @@ function openGroupCarousel(sectionId, title) {
   });
 
   requestAnimationFrame(() => initGroupCarousel());
-}
-
-function closeGroupCarousel() {
-  const groups = document.getElementById('portfolio-groups');
-  const view   = document.getElementById('portfolio-carousel-view');
-  if (groups) groups.style.display = '';
-  if (view)   view.style.display   = 'none';
 }
 
 function initGroupCarousel() {
@@ -1179,7 +1195,7 @@ applyAbout();
 applyServices();
 applyContact();
 applyFooter();
-renderPortfolioGroups();
+renderPortfolioTabs();
 renderEnsaios();
 renderProdutos();
 renderModals();
