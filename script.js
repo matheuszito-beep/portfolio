@@ -1006,68 +1006,150 @@ function renderVideoGrid(sectionId) {
   });
 }
 
-// ===== RENDER PORTFOLIO TABS (Vercel-style animated) =====
-function renderPortfolioTabs() {
-  const nav = document.getElementById('portfolio-tabs');
-  if (!nav) return;
+// ===== PORTFOLIO GROUPS + INFINITE CAROUSEL =====
+function renderPortfolioGroups() {
+  const container = document.getElementById('portfolio-groups');
+  if (!container) return;
+  container.innerHTML = '';
 
-  const sectionDefs = (CONFIG.sections || []);
-  if (!sectionDefs.length) return;
+  const secs = CONFIG.sections || [];
+  secs.forEach(sec => {
+    const videos = (CONFIG.videoPool || []).filter(v => v.section === sec.id && !v.hidden);
+    if (!videos.length) return;
 
-  const inner = document.createElement('div');
-  inner.className = 'ptabs-inner';
+    const cleanId = extractYtId(videos[0].ytId);
+    const thumb   = `https://i.ytimg.com/vi/${cleanId}/maxresdefault.jpg`;
+    const label   = TAB_LABELS[sec.id] || sec.title.toUpperCase();
 
-  const hoverBg    = document.createElement('div');
-  hoverBg.className = 'ptab-hover-bg';
-  const activeLine  = document.createElement('div');
-  activeLine.className = 'ptab-active-line';
+    const card = document.createElement('div');
+    card.className = 'pgroup-card';
+    card.onclick = () => openGroupCarousel(sec.id, label);
+    card.innerHTML = `
+      <div class="pgroup-bg" style="background-image:url(${thumb})"></div>
+      <div class="pgroup-overlay"></div>
+      <div class="pgroup-info">
+        <span class="pgroup-count">${videos.length} vídeo${videos.length !== 1 ? 's' : ''}</span>
+        <span class="pgroup-title">${label}</span>
+      </div>`;
+    container.appendChild(card);
+  });
+}
 
-  inner.appendChild(hoverBg);
-  inner.appendChild(activeLine);
+function openGroupCarousel(sectionId, title) {
+  const groups = document.getElementById('portfolio-groups');
+  const view   = document.getElementById('portfolio-carousel-view');
+  if (!groups || !view) return;
 
-  let activeId = sectionDefs[0].id;
+  groups.style.display = 'none';
+  view.style.display   = 'block';
 
-  const titleEl = document.getElementById('portfolio-section-title');
+  const titleEl = document.getElementById('portfolio-carousel-title');
+  if (titleEl) titleEl.textContent = title;
 
-  function activateTab(tabEl, sectionId) {
-    activeId = sectionId;
-    inner.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
-    tabEl.classList.add('active');
+  const track = document.getElementById('pcarousel-track');
+  if (!track) return;
+  track.innerHTML = '';
+  track.style.transition = 'none';
+  track.style.transform  = 'translateX(0)';
 
-    // slide underline
-    activeLine.style.left  = tabEl.offsetLeft + 'px';
-    activeLine.style.width = tabEl.offsetWidth + 'px';
+  const videos = (CONFIG.videoPool || []).filter(v => v.section === sectionId && !v.hidden);
+  videos.forEach(v => {
+    const cleanId = extractYtId(v.ytId);
+    const slide = document.createElement('div');
+    slide.className = 'pcarousel-slide';
+    slide.innerHTML = `
+      <div class="folder-card${v.vertical ? ' folder-card--vertical' : ''}"
+           tabindex="0" role="button" aria-label="${v.title}"
+           onclick="openModal('modal-${v.id}')"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-${v.id}')}">
+        <div class="folder-tab"></div>
+        <div class="folder-body">
+          <img class="folder-thumb"
+               src="https://i.ytimg.com/vi/${cleanId}/maxresdefault.jpg"
+               alt="${v.title}"
+               onerror="this.src='https://i.ytimg.com/vi/${cleanId}/hqdefault.jpg'" />
+          <div class="folder-play">▶</div>
+          <div class="folder-glass">
+            <span class="folder-badge">${v.badge || 'Vídeo'}</span>
+            <div class="folder-row">
+              <h3 class="folder-title">${v.title}</h3>
+              <span class="folder-year">${v.year || ''}</span>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    track.appendChild(slide);
+  });
 
-    renderVideoGrid(sectionId);
+  requestAnimationFrame(() => initGroupCarousel());
+}
 
-    // update section heading
-    const sec = sectionDefs.find(s => s.id === sectionId);
-    if (titleEl && sec) titleEl.textContent = sec.title.toUpperCase();
+function closeGroupCarousel() {
+  const groups = document.getElementById('portfolio-groups');
+  const view   = document.getElementById('portfolio-carousel-view');
+  if (groups) groups.style.display = '';
+  if (view)   view.style.display   = 'none';
+}
+
+function initGroupCarousel() {
+  const track   = document.getElementById('pcarousel-track');
+  const prevBtn = document.getElementById('pcarousel-prev');
+  const nextBtn = document.getElementById('pcarousel-next');
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const realSlides = Array.from(track.children);
+  const N = realSlides.length;
+  if (!N) return;
+
+  const CLONES = Math.min(3, N);
+
+  // Prepend clones of last CLONES slides
+  for (let i = CLONES - 1; i >= 0; i--) {
+    const clone = realSlides[N - 1 - (CLONES - 1 - i)].cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.insertBefore(clone, track.firstChild);
+  }
+  // Append clones of first CLONES slides
+  for (let i = 0; i < CLONES; i++) {
+    const clone = realSlides[i].cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
   }
 
-  sectionDefs.forEach(sec => {
-    const btn = document.createElement('button');
-    btn.className   = 'ptab';
-    btn.textContent = TAB_LABELS[sec.id] || sec.title.toUpperCase();
-    btn.dataset.sectionId = sec.id;
+  let current = CLONES;
 
-    // hover background tracking
-    btn.addEventListener('mouseenter', () => {
-      hoverBg.style.left   = btn.offsetLeft + 'px';
-      hoverBg.style.width  = btn.offsetWidth + 'px';
-    });
+  function stepWidth() {
+    const allChildren = track.children;
+    if (allChildren.length < 2) return allChildren[0]?.offsetWidth || 300;
+    return allChildren[1].offsetLeft - allChildren[0].offsetLeft;
+  }
 
-    btn.addEventListener('click', () => activateTab(btn, sec.id));
-    inner.appendChild(btn);
+  function goTo(idx, animate) {
+    track.style.transition = animate
+      ? 'transform 0.5s cubic-bezier(0.16,1,0.3,1)'
+      : 'none';
+    track.style.transform = `translateX(${-idx * stepWidth()}px)`;
+  }
+
+  goTo(current, false);
+
+  track.addEventListener('transitionend', () => {
+    if (current <= CLONES - 1) {
+      current = current + N;
+      goTo(current, false);
+    } else if (current >= CLONES + N) {
+      current = current - N;
+      goTo(current, false);
+    }
   });
 
-  nav.appendChild(inner);
+  const prev = () => { current--; goTo(current, true); };
+  const next = () => { current++; goTo(current, true); };
 
-  // Activate first tab after DOM settle
-  requestAnimationFrame(() => {
-    const firstTab = inner.querySelector('.ptab');
-    if (firstTab) activateTab(firstTab, sectionDefs[0].id);
-  });
+  prevBtn.onclick = prev;
+  nextBtn.onclick = next;
+
+  addDragSwipe(track, prev, next, () => goTo(current, true));
 }
 
 // ===== SCROLL REVEAL =====
@@ -1097,7 +1179,7 @@ applyAbout();
 applyServices();
 applyContact();
 applyFooter();
-renderPortfolioTabs();
+renderPortfolioGroups();
 renderEnsaios();
 renderProdutos();
 renderModals();
