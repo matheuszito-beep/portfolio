@@ -789,7 +789,8 @@ img { display: block; width: 100%; object-fit: cover; }
 .ensaio-date { font-size: 12px; color: var(--text-muted); margin-top: 3px; display: block; }
 
 /* ── PRODUTOS ─────────────────────────────────────────────── */
-.produtos-section { padding: 56px 40px; background: var(--bg); }
+.produtos-section { padding: 56px 0; background: var(--bg); }
+.produtos-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
 .produtos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-top: 28px; }
 .produtos-empty {
   grid-column: 1 / -1;
@@ -1289,7 +1290,8 @@ img { display: block; width: 100%; object-fit: cover; }
   .carousel-slide { flex: 0 0 100%; }
   .about-text { padding: 40px 20px; }
   .footer { padding-left: 20px; padding-right: 20px; }
-  .rows-container .row, .ensaios-section, .produtos-section { padding-left: 20px; padding-right: 20px; }
+  .rows-container .row, .ensaios-section { padding-left: 20px; padding-right: 20px; }
+  .produtos-inner { padding-left: 20px; padding-right: 20px; }
   .card-portrait-info { max-height: 160px; opacity: 1; }
   .carousel-info { opacity: 1; pointer-events: auto; }
   .pcarousel-slide { flex: 0 0 100%; }

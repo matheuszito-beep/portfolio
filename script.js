@@ -277,12 +277,8 @@ function applyHero() {
     }
     const tl = hl.text || {};
     const heroContent = document.querySelector('.hero-content') || document.querySelector('.hero-body');
-    if (heroContent && (tl.x !== undefined || tl.y !== undefined)) {
-      heroContent.style.position  = 'absolute';
-      heroContent.style.left      = (tl.x      ?? 8)  + '%';
-      heroContent.style.top       = (tl.y      ?? 35) + '%';
-      heroContent.style.maxWidth  = (tl.maxWidth ?? 55) + '%';
-      heroContent.style.textAlign = tl.align  || 'left';
+    if (heroContent && tl.align) {
+      heroContent.style.textAlign = tl.align;
     }
   }
 }
